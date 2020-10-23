@@ -32,7 +32,7 @@ class SearchBar extends Component {
             const options = {
                 radius: 10000, 
                 location: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
-                type: ['restaurant']
+                type: ['museum']
             }
 
             new google.maps.places.PlacesService(map).nearbySearch(options, this.searchResults)            
@@ -60,7 +60,7 @@ class SearchBar extends Component {
                         value={this.state.searchCriteria}
                     />
                 </form>
-                <Link to='/results'>Search</Link>
+                <Link to='/results/restaurants'>Search</Link>
                 <div id='map'>
 
                 </div>
