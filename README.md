@@ -21,6 +21,7 @@ Google Place API (https://developers.google.com/places/web-service/overview)
 
 
 ## Stretch Goals
+* Implement Google Firebase
 * User can create multiple trips
 * User can create multi-location trips
 * Implementing auth so there can be multiple users
