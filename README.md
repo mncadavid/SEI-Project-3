@@ -7,12 +7,17 @@ This app will serve as a trip planner where you can organizes places you would l
 ## API
 Google Place API (https://developers.google.com/places/web-service/overview)
 
+![Place API Example Response](https://i.imgur.com/qWIkM6b.png)
+![Place API Example Response](https://i.imgur.com/1InMcJU.png)
+
 
 ## MVP
 * User input of trip location
 * App displays list of places(restaurants, museums, etc.) in that location
 * User can add/remove places in the trip
-* User can filter on place type
+* User can select between restaurant, park and museum categories
+* App deployed on Surge
+* Use React Router to move between Restaurant/Park/Museum displays
 
 
 ## Stretch Goals
@@ -21,6 +26,10 @@ Google Place API (https://developers.google.com/places/web-service/overview)
 * Implementing auth so there can be multiple users
 * Add more place types
 * Add days tab to trip
+* Incorporate Google Maps visual into the selection screen
+* Utilize styling library
+* Draggable - add places to trip
+* Details page for each place
 
 
 
