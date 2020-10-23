@@ -27,10 +27,10 @@ Google Place API (https://developers.google.com/places/web-service/overview)
 ## Wireframes
 
 Homepage:
-[Imgur](https://i.imgur.com/RS63u8U.jpg)
+![Homepage](https://i.imgur.com/RS63u8U.jpg)
 
 Results Page:
-[Imgur](https://i.imgur.com/3WZlHA3.jpg)
+![Results Page](https://i.imgur.com/3WZlHA3.jpg)
 
 
 
