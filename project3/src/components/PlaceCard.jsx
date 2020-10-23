@@ -5,15 +5,16 @@ function PlaceCard(props){
     for(let i=0; i<dollars.length; i++){
         dollars[i] = i;
     }
+
     return(
         <div className="place-card">
-            {/* <img src={props.place.photos[0].photo_reference} alt={props.place.name}></img> */}
             <h3 className="rating">&#9733;{props.place.rating}</h3>
             <div className="place-card-inner">
                 <h4 className="place-name">{props.place.name}</h4>
                 {dollars.forEach(dollar => <p key={dollar}>$</p>)}
             </div>
             <p className="description">{props.place.description}</p>
+            <img className="learn-more" src="https://www.flaticon.com/svg/static/icons/svg/32/32339.svg" alt="Learn More" onClick={() => props.handleDetailsClick(props.place)}/>
         </div>
     )
 }

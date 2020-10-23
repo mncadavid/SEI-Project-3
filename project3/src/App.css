@@ -36,3 +36,12 @@
 .description{
   width: 50%;
 }
+.learn-more{
+  width: 5%;
+}
+.details-card{
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  
+}
