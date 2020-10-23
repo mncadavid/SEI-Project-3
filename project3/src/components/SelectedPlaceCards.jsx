@@ -1,21 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SelectedPlaceCards extends Component {
-    constructor(props) {
-        super(props); 
+const SelectedPlaceCards = (props) => {
 
-        this.state = {
+    return(
+        <div>
 
-        }
-    }
-
-    render() {
-        return(
-            <div>
-
-            </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default SelectedPlaceCards;
