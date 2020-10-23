@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SelectedPlaceCards from './SelectedPlaceCards';
 
-const TripContainer = () => {
-    return(
-        <div>
-            <SelectedPlaceCards />
-        </div>
-    )
+class TripContainer extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            selected: []
+        }
+    }
+    render() {
+        return(
+            <div>
+                <h3>Planned Trip</h3>
+                <div>
+                    {props.selected.map((selected, id) => {
+                        return <SelectedPlaceCards selected={selected} key={id}/>
+                    })}
+                </div>
+            </div>
+        )
+    }
 }
 
 export default TripContainer;
