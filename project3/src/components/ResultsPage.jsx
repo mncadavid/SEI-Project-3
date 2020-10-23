@@ -3,7 +3,7 @@ import ResultsContainer from './ResultsContainer';
 
 function ResultsPage(){
     return(
-        <div>
+        <div className="results-page">
             <ResultsContainer />
         </div>
     )

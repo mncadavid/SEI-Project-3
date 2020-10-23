@@ -3,7 +3,7 @@ import PlaceCard from './PlaceCard';
 
 function PlaceCardContainer(props){
     return(
-        <div>
+        <div className="place-card-container">
             {props.results.map(place => {
                 return <div>
                     <PlaceCard place={place} />
