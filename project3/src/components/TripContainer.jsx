@@ -14,7 +14,7 @@ class TripContainer extends Component {
             <div>
                 <h3>Planned Trip</h3>
                 <div>
-                    {props.selected.map((selected, id) => {
+                    {this.state.selected.map((selected, id) => {
                         return <SelectedPlaceCards selected={selected} key={id}/>
                     })}
                 </div>
