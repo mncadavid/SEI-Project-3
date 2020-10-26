@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, {keyframes} from 'styled-components';
 import { zoomIn } from 'react-animations';
+import Icon from'@material-ui/core/Icon';
 const slideAnimation = keyframes`${zoomIn}`;
 
 
@@ -49,41 +50,73 @@ function DetailedPlaceCard(props){
         }
     }
 
-    let [photo, setPhoto] = useState({
+    let [photos, setPhotos] = useState({
         received: false,
-        src: null
+        srcs: null
     })
 
-    const getPhoto = (reference) => {
-        if(!photo.received){
+    let [details, setDetails] = useState({
+        received: false,
+        details: null
+    })
 
-            let photos = props.place.photos;
+    const getPhoto = (place) => {
+        if(!photos.received){
+
+            let photos = place.photos;
             if(photos.length === 0){
-                setPhoto({
+                setPhotos({
                     received: true,
                     src: null
                 })
                 return
             }
-            let url = photos[0].getUrl({maxWidth: 500, maxHeight: 500});
-            setPhoto({
+            let urls = []; 
+            for(let i = 0; i< photos.length; i++){
+                let url = photos[i].getUrl({maxWidth: 500, maxHeight: 500});
+                urls.push(url);
+            }
+            setPhotos({
                 received: true,
-                src: url
+                srcs: urls
             })
         }
     }
 
-    useEffect(() => {getPhoto(props.place.photos[0].photo_reference);})
+    // const getDetails = (place) => {
+    //     if(!details.received){
+    //         /*global google*/
+    //         let request = {
+    //             placeId: `${place.place_id}`
+    //           };
+    //         let map = document.querySelector('#map');
+    //         console.log(map);
+    //         new google.maps.places.PlacesService(map).getDetails(request, callback)
+              
+    //           function callback(place, status) {
+    //             if (status == google.maps.places.PlacesServiceStatus.OK) {
+    //                 console.log(place);
+    //             }
+    //           }
+    //     }
+    // }
+
+    useEffect(() => {
+        getPhoto(props.place);
+        // getDetails(props.place);
+    })
     
+    let dollars = new Array(props.place.price_level).fill("$");
     return(
         <ModalBackground onClick={(e) => localCloseCard(e)}>
             <DetailedCard>
                 <button className="close" onClick={(e) => props.closeDetailsCard(e)}>X</button>
                 <h2>{props.place.name}</h2>
                 <h3>&#9733;{props.place.rating}</h3>
-                <h4>{props.place.price_level}</h4>
+                {dollars.map(dollar => <Icon>attach_money</Icon>)}
                 {/* <p>{props.place.opening_hours.open_now && "Open Now"}</p> */}
-                {photo.received && <img src={photo.src} alt={props.place.name}></img>}
+                {photos.received && photos.srcs.map(src => {
+                        return <img key={src} src={src} alt={props.place.name}></img>})}
             </DetailedCard>
         </ModalBackground>
     )
