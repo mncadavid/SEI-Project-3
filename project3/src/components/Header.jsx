@@ -10,7 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 function Header(){
-    const classes = classStyles;
+    const classes = classStyles();
+    console.log(classes);
 
     return(
         <div className={classes.root}>

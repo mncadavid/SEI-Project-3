@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.css';
 import {Route,Link} from 'react-router-dom';
 import Header from './components/Header';
@@ -6,18 +6,14 @@ import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+import Container from '@material-ui/core/Container';
+import classStyles from './components/Style/classStyle';
 
-    this.state = {
-      searchResults:{}
-    }
-  }
-
+function App(props) {
   
+  const [searchResults,setSearchResults] = useState({})
 
-  componentDidMount = () => {
+  useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
     console.log(!existingScript)
 
@@ -44,12 +40,12 @@ class App extends Component {
 
         document.querySelector('#map').style.display = 'none';
 
-        autocomplete.addListener('place_changed',()=>this.findNearby(map,autocomplete,['restaurant','park','museum']))
+        autocomplete.addListener('place_changed',()=>findNearby(map,autocomplete,['restaurant','park','museum']))
       }
     }
-  }
+  })
 
-  findNearby = (mapObj,autocompleteObj,typeArray) => {
+  const findNearby = (mapObj,autocompleteObj,typeArray) => {
     const place = autocompleteObj.getPlace();
 
     typeArray.forEach(type => {
@@ -59,30 +55,30 @@ class App extends Component {
           type: [type]
       }
 
-      new google.maps.places.PlacesService(mapObj).nearbySearch(options, (results,status) => this.updateSearchResults(results,status,type))
-      })
+      new google.maps.places.PlacesService(mapObj).nearbySearch(options, (results,status) => updateSearchResults(results,status,type))
+    })
     
   }
 
-  updateSearchResults = (results,status,type) => {
-    const currentState = this.state.searchResults;
+  const updateSearchResults = (results,status,type) => {
+    const currentState = searchResults;
     currentState[type] = results;
 
-    this.setState({
-      searchResults: currentState
-    })
+    setSearchResults(currentState);
   }
 
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Route exact path='/' render={()=><SearchBar updateSearchResults={this.updateSearchResults} />} />
-        <Route path='/results' render={()=><ResultsPage results={this.state.searchResults} />} />
-         <Footer />
+  const styles = classStyles();
+
+  return (
+    <div className={styles.mainWrapper}>
+      <Header />
+      <div className={styles.homePageWrapper}>
+        <Route exact path='/' render={()=><SearchBar />} />
+        <Route path='/results' render={()=><ResultsPage results={searchResults} />} />
       </div>
-    );
-  }
+        <Footer />
+    </div>
+  );
 }
 
 
