@@ -19,6 +19,7 @@ class App extends Component {
 
   componentDidMount = () => {
     const existingScript = document.querySelector('#googleMaps');
+    console.log(!existingScript)
 
     if (!existingScript) {
       const script = document.createElement('script');
@@ -41,7 +42,7 @@ class App extends Component {
             }
         );
 
-        // document.querySelector('#map').style.display = 'none';
+        document.querySelector('#map').style.display = 'none';
 
         autocomplete.addListener('place_changed',()=>{
             const place = autocomplete.getPlace();
