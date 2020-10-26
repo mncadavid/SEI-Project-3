@@ -58,14 +58,14 @@ function DetailedPlaceCard(props){
         if(!photo.received){
 
             let photos = props.place.photos;
-            if(!photos){
+            if(photos.length === 0){
                 setPhoto({
                     received: true,
                     src: null
                 })
                 return
             }
-            let url = photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+            let url = photos[0].getUrl({maxWidth: 500, maxHeight: 500});
             setPhoto({
                 received: true,
                 src: url
