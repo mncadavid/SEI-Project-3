@@ -56,7 +56,7 @@ function DetailedPlaceCard(props){
                 <h2>{props.place.name}</h2>
                 <h3>&#9733;{props.place.rating}</h3>
                 <h4>{props.place.price_level}</h4>
-                <p>{props.place.opening_hours.open_now && "Open Now"}</p>
+                {/* <p>{props.place.opening_hours.open_now && "Open Now"}</p> */}
                 <img src={props.place.photos[0].photo_reference} alt={props.place.name}></img>
             </DetailedCard>
         </ModalBackground>
