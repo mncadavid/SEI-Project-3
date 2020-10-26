@@ -11,7 +11,7 @@ class TripContainer extends Component {
         }
     }
 
-    handleRemove = () => {
+    handleRemove = (id) => {
         alert("Remove button connected")
     }
 

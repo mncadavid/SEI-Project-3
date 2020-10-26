@@ -8,7 +8,7 @@ const SelectedPlaceCards = (props) => {
         <Card variant="outlined" className="selected-place-card">
             <img src={props.selected.icon} />
             <p>{props.selected.name}</p>
-            <Button onClick={props.handleRemove} variant="contained" color="primary">Remove</Button>
+            <Button onClick={() => props.handleRemove(props.selected.id)} variant="contained" color="primary">Remove</Button>
         </Card>
     )
 }
