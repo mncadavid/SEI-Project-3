@@ -50,3 +50,12 @@
   padding: 10px 10px;
 }
 
+.conditional-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.price-level{
+  display: flex;
+}

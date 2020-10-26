@@ -28,8 +28,6 @@ function SearchBar(props) {
                     >Search</Button>
                 </Link>
             </div>
-            
-            <div id='map' style={{display: 'none'}}></div>
         </>
     )
 }

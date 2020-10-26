@@ -57,7 +57,7 @@ function DetailedPlaceCard(props){
 
     let [details, setDetails] = useState({
         received: false,
-        details: null
+        placeDetails: null
     })
 
     const getPhoto = (place) => {
@@ -83,27 +83,30 @@ function DetailedPlaceCard(props){
         }
     }
 
-    // const getDetails = (place) => {
-    //     if(!details.received){
-    //         /*global google*/
-    //         let request = {
-    //             placeId: `${place.place_id}`
-    //           };
-    //         let map = document.querySelector('#map');
-    //         console.log(map);
-    //         new google.maps.places.PlacesService(map).getDetails(request, callback)
+    const getDetails = (place) => {
+        if(!details.received){
+            /*global google*/
+            let request = {
+                placeId: `${place.place_id}`
+              };
+            let map = document.querySelector('#map');
+            new google.maps.places.PlacesService(map).getDetails(request, callback)
               
-    //           function callback(place, status) {
-    //             if (status == google.maps.places.PlacesServiceStatus.OK) {
-    //                 console.log(place);
-    //             }
-    //           }
-    //     }
-    // }
+            function callback(place, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    console.log(place);
+                    setDetails({
+                        received: true,
+                        placeDetails: place
+                    })
+                }
+            }
+        }
+    }
 
     useEffect(() => {
         getPhoto(props.place);
-        // getDetails(props.place);
+        getDetails(props.place);
     })
     
     let dollars = new Array(props.place.price_level).fill("$");
@@ -112,8 +115,17 @@ function DetailedPlaceCard(props){
             <DetailedCard>
                 <button className="close" onClick={(e) => props.closeDetailsCard(e)}>X</button>
                 <h2>{props.place.name}</h2>
+                {details.placeDetails !== null &&
+                    <div className="conditional-content">
+                        <p>{details.placeDetails.formatted_address}</p>
+                        <p>{details.placeDetails.formatted_phone_number}</p>
+                        <a target="_blank" href={details.placeDetails.website}>Website</a> 
+                    </div> 
+                    }
                 <h3>&#9733;{props.place.rating}</h3>
-                {dollars.map(dollar => <Icon>attach_money</Icon>)}
+                <div className="price-level">
+                    {dollars.map(dollar => <Icon>attach_money</Icon>)}
+                </div>
                 {/* <p>{props.place.opening_hours.open_now && "Open Now"}</p> */}
                 {photos.received && photos.srcs.map(src => {
                         return <img key={src} src={src} alt={props.place.name}></img>})}

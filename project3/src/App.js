@@ -78,6 +78,7 @@ function App(props) {
         <Route path='/results' render={()=><ResultsPage results={searchResults} />} />
       </div>
         <Footer />
+        <div id='map' style={{display: 'none'}}></div>
     </div>
   );
 }
