@@ -8,6 +8,10 @@ function ResultsPage(props){
     const handleDetailsClick = (place) => {
         setDetails({clicked: true, place: place})
     }
+    const closeDetailsCard = (e) => {
+        e.preventDefault();
+        setDetails({clicked: false, place: null});
+    }
     const [newPlace, setNew] = useState(null);
     const handleAddToTrip = (place) => {
         setNew(place)
@@ -17,7 +21,7 @@ function ResultsPage(props){
         <div className="results-page">
             <TripContainer place={newPlace}/>
             <ResultsContainer handleAddToTrip={handleAddToTrip} handleDetailsClick={handleDetailsClick} results={props.results}/>
-            {details.clicked && <DetailedPlaceCard place={details.place}/>}
+            {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
         </div>
     )
 }

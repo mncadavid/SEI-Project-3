@@ -11,6 +11,7 @@
     "firebase-tools": "^8.13.1",
     "google-maps-react": "^2.0.6",
     "react": "^17.0.1",
+    "react-animations": "^1.0.0",
     "react-dom": "^17.0.1",
     "react-load-script": "0.0.6",
     "react-router": "^5.2.0",
