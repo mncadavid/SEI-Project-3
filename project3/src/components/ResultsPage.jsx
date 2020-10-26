@@ -19,7 +19,7 @@ function ResultsPage(props){
 
     return(
         <div className="results-page">
-            <TripContainer place={newPlace}/>
+            <TripContainer place={newPlace} />
             <ResultsContainer handleAddToTrip={handleAddToTrip} handleDetailsClick={handleDetailsClick} results={props.results}/>
             {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
         </div>
