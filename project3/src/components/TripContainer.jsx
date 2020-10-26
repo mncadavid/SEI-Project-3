@@ -11,6 +11,10 @@ class TripContainer extends Component {
         }
     }
 
+    handleRemove = () => {
+        alert("Remove button connected")
+    }
+
     render() {
         if(this.props.place != null && !this.state.selected.includes(this.props.place)) {
             let selectedPlaces = this.state.selected
@@ -24,7 +28,7 @@ class TripContainer extends Component {
                     <h3>Planned Trip</h3>
                     <div>
                         {this.state.selected.map((selected, id) => {
-                            return <SelectedPlaceCards selected={selected} key={id} />
+                            return <SelectedPlaceCards selected={selected} key={id} handleRemove={this.handleRemove}/>
                         })}
                     </div>
             </Paper>
