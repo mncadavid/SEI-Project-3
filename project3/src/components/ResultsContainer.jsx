@@ -42,8 +42,8 @@ import Paper from '@material-ui/core/Paper';
             </nav>
             <Route path="/results/restaurants" 
                 render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={filteredResults.restaurantResults} handleDetailsClick={props.handleDetailsClick}/>)} />
-            <Route path="/results/parks" render={routerProps => (<PlaceCardContainer results={filteredResults.parkResults}/>)} />
-            <Route path="/results/museums" render={routerProps => (<PlaceCardContainer results={filteredResults.museumResults}/>)} />
+            <Route path="/results/parks" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={filteredResults.parkResults}/>)} />
+            <Route path="/results/museums" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={filteredResults.museumResults}/>)} />
         </Paper>
     )
 }
