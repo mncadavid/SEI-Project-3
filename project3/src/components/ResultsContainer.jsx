@@ -29,7 +29,7 @@ import Paper from '@material-ui/core/Paper';
         }
     }
 
-    useEffect(() => {filterResults(props.results);})
+    // useEffect(() => {filterResults(props.results);})
 
     return(
         <Paper elevation={3} >

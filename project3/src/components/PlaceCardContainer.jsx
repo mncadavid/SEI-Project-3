@@ -2,6 +2,7 @@ import React from 'react';
 import PlaceCard from './PlaceCard';
 import Box from '@material-ui/core/Box';
 function PlaceCardContainer(props){
+    console.log(props);
     return(
         <Box className="place-card-container">
             {props.results.map(place => {
