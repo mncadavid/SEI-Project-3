@@ -60,7 +60,7 @@ class SearchBar extends Component {
                         value={this.state.searchCriteria}
                     />
                 </form>
-                <Link to='/results'>Search</Link>
+                <Link to='/results/restaurants'>Search</Link>
                 <div id='map'>
 
                 </div>
