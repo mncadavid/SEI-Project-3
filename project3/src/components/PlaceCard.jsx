@@ -8,6 +8,7 @@ function PlaceCard(props){
 
     return(
         <div className="place-card">
+            <button onClick={() => props.handleAddToTrip(props.place)}>Add To Trip</button>
             <h3 className="rating">&#9733;{props.place.rating}</h3>
             <div className="place-card-inner">
                 <h4 className="place-name">{props.place.name}</h4>
