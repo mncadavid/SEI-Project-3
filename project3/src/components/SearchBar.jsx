@@ -1,12 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classStyles from './Style/classStyle'
-import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 
 function SearchBar(props) {
+    console.log('Search bar is loading')
     const styles = classStyles();
+
+    const map = document.querySelector('#map');
+
+    const [queriedSearchResults,setQueriedSearchResults] = useState({})
+    const history = useHistory();
+
+    useEffect(()=>{
+        const autocomplete = new window.google.maps.places.Autocomplete(document.querySelector('#searchBox'));
+        
+        autocomplete.addListener('place_changed',()=>findNearby(map,autocomplete,['restaurant','park','museum']));
+    })
+
+    const findNearby = (mapObj,autocompleteObj,typeArray) => {
+        setQueriedSearchResults({})
+        const place = autocompleteObj.getPlace();
+    
+        typeArray.forEach(type => {
+          const options = {
+              radius: 10000, 
+              location: new window.google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
+              type: [type]
+          }
+    
+          new window.google.maps.places.PlacesService(mapObj).nearbySearch(options, (results,status) => updateSearchResults(results,status,type))
+        })
+        
+    }
+
+    const updateSearchResults = (results,status,type) => {
+        const currentState = queriedSearchResults;
+        currentState[type] = results;
+    
+        setQueriedSearchResults(currentState);
+    }
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        props.setSearchResults(queriedSearchResults);
+        history.push('/results');
+    }
 
     return (
         <>
@@ -20,16 +61,13 @@ function SearchBar(props) {
                 id='searchBox'
                 name='searchCriteria' 
                 />
-                <Link to='/results/restaurants' style={{textDecoration: 'none'}}>
-                    <Button 
-                        variant="contained" 
-                        color="primary"
-                        disabled={!props.validInput}
-                    >Search</Button>
-                </Link>
+                <Button 
+                    variant="contained" 
+                    color="primary"
+                    disabled={Object.keys(queriedSearchResults).length === 0}
+                    onClick={(e)=>handleClick(e)}
+                >Search</Button>
             </div>
-            
-            <div id='map' style={{display: 'none'}}></div>
         </>
     )
 }

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, Route} from 'react-router-dom';
 import PlaceCardContainer from './PlaceCardContainer';
 import Tabs from '@material-ui/core/Tabs';
-import ToolBar from '@material-ui/core/Toolbar';
+// import ToolBar from '@material-ui/core/Toolbar';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
 
