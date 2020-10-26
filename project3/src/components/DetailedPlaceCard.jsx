@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, {keyframes} from 'styled-components';
 import { zoomIn } from 'react-animations';
 const slideAnimation = keyframes`${zoomIn}`;
@@ -48,6 +48,29 @@ function DetailedPlaceCard(props){
             props.closeDetailsCard(e);
         }
     }
+
+    let [photo, setPhoto] = useState({
+        received: false,
+        src: null
+    })
+
+    const getPhoto = (reference) => {
+        if(!photo.received){
+            const script = document.createElement('script');
+            script.src=`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`;
+            script.id = 'googleMaps';
+            document.body.appendChild(script);
+            script.onload =() => {
+                let map = document.querySelector('#map');
+                const options = {
+                    photo_reference: reference
+                }
+            new google.maps.places.PlacesService(map).photo(options, console.log("Hello"))            
+            }
+        }
+    }
+
+    useEffect(() => {getPhoto(props.place.photos[0].photo_reference);})
     
     return(
         <ModalBackground onClick={(e) => localCloseCard(e)}>
@@ -57,7 +80,7 @@ function DetailedPlaceCard(props){
                 <h3>&#9733;{props.place.rating}</h3>
                 <h4>{props.place.price_level}</h4>
                 {/* <p>{props.place.opening_hours.open_now && "Open Now"}</p> */}
-                <img src={props.place.photos[0].photo_reference} alt={props.place.name}></img>
+                {photo.received && <img src={photo.src} alt={props.place.name}></img>}
             </DetailedCard>
         </ModalBackground>
     )
