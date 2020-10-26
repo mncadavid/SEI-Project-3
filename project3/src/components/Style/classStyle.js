@@ -9,6 +9,7 @@ const classStyles = makeStyles((theme) => ({
     },
     title: {
       flexGrow: 1,
+      color: 'white'
     },
     homePageWrapper: {
         display: 'flex',
