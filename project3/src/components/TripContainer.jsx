@@ -10,13 +10,20 @@ class TripContainer extends Component {
         }
     }
     render() {
+        if(this.props.place != null && !this.state.selected.includes(this.props.place)) {
+            let selectedPlaces = this.state.selected
+            selectedPlaces.push(this.props.place)
+            this.setState({
+                selected: selectedPlaces
+            })
+        }
         return(
             <div>
                 <h3>Planned Trip</h3>
                 <div>
-                    {/* {this.state.selected.map((selected, id) => {
+                    {this.state.selected.map((selected, id) => {
                         return <SelectedPlaceCards selected={selected} key={id}/>
-                    })} */}
+                    })}
                 </div>
             </div>
         )

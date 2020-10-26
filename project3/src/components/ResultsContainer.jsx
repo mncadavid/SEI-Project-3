@@ -35,7 +35,7 @@ import PlaceCardContainer from './PlaceCardContainer';
                 <Link className="nav-link" to="/results/museums" style={{textDecoration: 'none'}}>Museums</Link>
             </nav>
             <Route path="/results/restaurants" 
-                render={routerProps => (<PlaceCardContainer results={filteredResults.restaurantResults} handleDetailsClick={props.handleDetailsClick}/>)} />
+                render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={filteredResults.restaurantResults} handleDetailsClick={props.handleDetailsClick}/>)} />
             <Route path="/results/parks" render={routerProps => (<PlaceCardContainer results={filteredResults.parkResults}/>)} />
             <Route path="/results/museums" render={routerProps => (<PlaceCardContainer results={filteredResults.museumResults}/>)} />
         </div>
