@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Route} from 'react-router-dom';
 import PlaceCardContainer from './PlaceCardContainer';
+import Tabs from '@material-ui/core/Tabs';
+import ToolBar from '@material-ui/core/Toolbar';
+import Tab from '@material-ui/core/Tab';
+import Paper from '@material-ui/core/Paper';
 
 
  function ResultsContainer(props){
@@ -28,17 +32,19 @@ import PlaceCardContainer from './PlaceCardContainer';
     useEffect(() => {filterResults(props.results);})
 
     return(
-        <div className="results-container">
+        <Paper elevation={3} >
             <nav className="nav-bar">
-                <Link className="nav-link" to="/results/restaurants" style={{textDecoration: 'none'}}>Restaurants</Link>
-                <Link className="nav-link" to="/results/parks" style={{textDecoration: 'none'}}>Parks</Link>
-                <Link className="nav-link" to="/results/museums" style={{textDecoration: 'none'}}>Museums</Link>
+                <Tabs>
+                <Link className="nav-link" to="/results/restaurants" style={{textDecoration: 'none'}}><Tab label="Restaurants"/></Link>
+                <Link className="nav-link" to="/results/parks" style={{textDecoration: 'none'}}><Tab label="Parks"/></Link>
+                <Link className="nav-link" to="/results/museums" style={{textDecoration: 'none'}}><Tab label="Museums"/></Link>
+                </Tabs>
             </nav>
             <Route path="/results/restaurants" 
                 render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={filteredResults.restaurantResults} handleDetailsClick={props.handleDetailsClick}/>)} />
-            <Route path="/results/parks" render={routerProps => (<PlaceCardContainer results={filteredResults.parkResults}/>)} />
-            <Route path="/results/museums" render={routerProps => (<PlaceCardContainer results={filteredResults.museumResults}/>)} />
-        </div>
+            <Route path="/results/parks" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={filteredResults.parkResults}/>)} />
+            <Route path="/results/museums" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={filteredResults.museumResults}/>)} />
+        </Paper>
     )
 }
 

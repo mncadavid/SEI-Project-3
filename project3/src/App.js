@@ -11,7 +11,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      searchResults:{}
+      searchResults:
+        []
     }
   }
 
@@ -44,32 +45,24 @@ class App extends Component {
 
         document.querySelector('#map').style.display = 'none';
 
-        autocomplete.addListener('place_changed',()=>this.findNearby(map,autocomplete,['restaurant','park','museum']))
+        autocomplete.addListener('place_changed',()=>{
+            const place = autocomplete.getPlace();
+
+            const options = {
+                radius: 10000, 
+                location: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
+                type: ['restaurant']
+            }
+
+            new google.maps.places.PlacesService(map).nearbySearch(options, this.updateSearchResults)            
+        })
       }
     }
   }
 
-  findNearby = (mapObj,autocompleteObj,typeArray) => {
-    const place = autocompleteObj.getPlace();
-
-    typeArray.forEach(type => {
-      const options = {
-          radius: 10000, 
-          location: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
-          type: [type]
-      }
-
-      new google.maps.places.PlacesService(mapObj).nearbySearch(options, (results,status) => this.updateSearchResults(results,status,type))
-      })
-    
-  }
-
-  updateSearchResults = (results,status,type) => {
-    const currentState = this.state.searchResults;
-    currentState[type] = results;
-
+  updateSearchResults = (results,status) => {
     this.setState({
-      searchResults: currentState
+      searchResults: results
     })
   }
 

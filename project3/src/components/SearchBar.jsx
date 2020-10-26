@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Script from 'react-load-script';
 import {Link} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 class SearchBar extends Component {
     constructor(props){
@@ -15,16 +18,15 @@ class SearchBar extends Component {
         return (
             <div>
                 <h2>Where do you wanna go?</h2>
-                <form>
-                    <input 
-                        type='text' 
-                        id='searchBox'
-                        name='searchCriteria' 
-                        placeholder='Search' 
-                        value={this.state.searchCriteria}
-                    />
-                </form>
-                <Link to='/results/restaurants'>Search</Link>
+                <TextField
+                    label="Search"
+                    variant="outlined"
+                    type='text' 
+                    id='searchBox'
+                    name='searchCriteria' 
+                    value={this.state.searchCriteria}
+                />
+                <Link to='/results/restaurants' style={{textDecoration: 'none'}}><Button variant="contained" color="primary">Search</Button></Link>
                 <div id='map'>
 
                 </div>
