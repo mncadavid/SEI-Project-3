@@ -14,7 +14,8 @@ function PlaceCard(props){
                 {dollars.forEach(dollar => <p key={dollar}>$</p>)}
             </div>
             <p className="description">{props.place.description}</p>
-            <img className="learn-more" src="https://www.flaticon.com/svg/static/icons/svg/32/32339.svg" alt="Learn More" onClick={() => props.handleDetailsClick(props.place)}/>
+            <img className="learn-more" src="https://www.flaticon.com/svg/static/icons/svg/32/32339.svg" alt="Learn More" 
+                onClick={() => props.handleDetailsClick(props.place)}/>
         </div>
     )
 }
