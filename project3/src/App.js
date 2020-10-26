@@ -16,7 +16,6 @@ function App(props) {
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
-    console.log(!existingScript)
 
     if (!existingScript) {
       const script = document.createElement('script');

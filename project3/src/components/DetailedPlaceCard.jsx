@@ -56,17 +56,20 @@ function DetailedPlaceCard(props){
 
     const getPhoto = (reference) => {
         if(!photo.received){
-            const script = document.createElement('script');
-            script.src=`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`;
-            script.id = 'googleMaps';
-            document.body.appendChild(script);
-            script.onload =() => {
-                let map = document.querySelector('#map');
-                const options = {
-                    photo_reference: reference
-                }
-            new google.maps.places.PlacesService(map).photo(options, console.log("Hello"))            
+
+            let photos = props.place.photos;
+            if(!photos){
+                setPhoto({
+                    received: true,
+                    src: null
+                })
+                return
             }
+            let url = photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+            setPhoto({
+                received: true,
+                src: url
+            })
         }
     }
 
