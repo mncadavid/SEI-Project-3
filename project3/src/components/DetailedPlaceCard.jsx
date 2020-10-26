@@ -48,7 +48,7 @@ function DetailedPlaceCard(props){
             props.closeDetailsCard(e);
         }
     }
-
+    
     return(
         <ModalBackground onClick={(e) => localCloseCard(e)}>
             <DetailedCard>
@@ -58,8 +58,6 @@ function DetailedPlaceCard(props){
                 <h4>{props.place.price_level}</h4>
                 <p>{props.place.opening_hours.open_now && "Open Now"}</p>
                 <img src={props.place.photos[0].photo_reference} alt={props.place.name}></img>
-
-
             </DetailedCard>
         </ModalBackground>
     )
