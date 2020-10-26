@@ -12,8 +12,7 @@ function PlaceCard(props){
             <h3 className="rating">&#9733;{props.place.rating}</h3>
             <div className="place-card-inner">
                 <h4 className="place-name">{props.place.name}</h4>
-                {dollars.forEach(dollar => <p>{dollar}</p>)}
-                <Icon>attach_money</Icon>
+                {dollars.map(dollar => <Icon>attach_money</Icon>)}
             </div>
             <Icon color="primary"
                 onClick={() => props.handleDetailsClick(props.place)}>zoom_in</Icon>
