@@ -127,7 +127,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Route exact path='/' render={()=><SearchBar updateSearchResults={this.updateSearchResults} />} />
-        <Route exact path='/results' render={()=><ResultsPage results={this.state.searchResults} />} />
+        <Route path='/results' render={()=><ResultsPage results={this.state.searchResults} />} />
          <Footer />
       </div>
     );
