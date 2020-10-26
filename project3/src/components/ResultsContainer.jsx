@@ -5,10 +5,10 @@ import PlaceCardContainer from './PlaceCardContainer';
 
  function ResultsContainer(props){
     const [filteredResults, setFilteredResults] = useState({
-        restaurantResults: [],
-        parkResults: [],
-        museumResults: [],
-        filtered: false
+        restaurantResults: props.results.restaurant,
+        parkResults: props.results.park,
+        museumResults: props.results.museum,
+        filtered: true
     })
 
     const filterResults = (results) => {
