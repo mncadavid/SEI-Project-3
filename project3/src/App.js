@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.css';
 import {Route,Link} from 'react-router-dom';
 import Header from './components/Header';
@@ -6,19 +6,15 @@ import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+import Container from '@material-ui/core/Container';
+import classStyles from './components/Style/classStyle';
 
-    this.state = {
-      searchResults:
-        []
-    }
-  }
-
+function App(props) {
   
+  const [searchResults,setSearchResults] = useState({})
+  const [searchValidity,setSearchValidity] = useState(false)
 
-  componentDidMount = () => {
+  useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
     console.log(!existingScript)
 
@@ -45,37 +41,46 @@ class App extends Component {
 
         document.querySelector('#map').style.display = 'none';
 
-        autocomplete.addListener('place_changed',()=>{
-            const place = autocomplete.getPlace();
-
-            const options = {
-                radius: 10000, 
-                location: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
-                type: ['restaurant']
-            }
-
-            new google.maps.places.PlacesService(map).nearbySearch(options, this.updateSearchResults)            
-        })
+        autocomplete.addListener('place_changed',()=>findNearby(map,autocomplete,['restaurant','park','museum']))
       }
     }
-  }
+  })
 
-  updateSearchResults = (results,status) => {
-    this.setState({
-      searchResults: results
+  const findNearby = (mapObj,autocompleteObj,typeArray) => {
+    const place = autocompleteObj.getPlace();
+
+    typeArray.forEach(type => {
+      const options = {
+          radius: 10000, 
+          location: new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng()),
+          type: [type]
+      }
+
+      new google.maps.places.PlacesService(mapObj).nearbySearch(options, (results,status) => updateSearchResults(results,status,type))
     })
+    
   }
 
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Route exact path='/' render={()=><SearchBar updateSearchResults={this.updateSearchResults} />} />
-        <Route path='/results' render={()=><ResultsPage results={this.state.searchResults} />} />
-         <Footer />
-      </div>
-    );
+  const updateSearchResults = (results,status,type) => {
+    const currentState = searchResults;
+    currentState[type] = results;
+
+    setSearchResults(currentState);
+    setSearchValidity(true);
   }
+
+  const styles = classStyles();
+
+  return (
+    <div className={styles.mainWrapper}>
+      <Header />
+      <div className={styles.homePageWrapper}>
+        <Route exact path='/' render={()=><SearchBar validInput={searchValidity}/>} />
+        <Route path='/results' render={()=><ResultsPage results={searchResults} />} />
+      </div>
+        <Footer />
+    </div>
+  );
 }
 
 
