@@ -12,6 +12,7 @@ import classStyles from './components/Style/classStyle';
 function App(props) {
   
   const [searchResults,setSearchResults] = useState({})
+  const [searchValidity,setSearchValidity] = useState(false)
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -65,6 +66,7 @@ function App(props) {
     currentState[type] = results;
 
     setSearchResults(currentState);
+    setSearchValidity(true);
   }
 
   const styles = classStyles();
@@ -73,7 +75,7 @@ function App(props) {
     <div className={styles.mainWrapper}>
       <Header />
       <div className={styles.homePageWrapper}>
-        <Route exact path='/' render={()=><SearchBar />} />
+        <Route exact path='/' render={()=><SearchBar validInput={searchValidity}/>} />
         <Route path='/results' render={()=><ResultsPage results={searchResults} />} />
       </div>
         <Footer />

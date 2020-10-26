@@ -24,7 +24,7 @@ function SearchBar(props) {
                     <Button 
                         variant="contained" 
                         color="primary"
-                        {props.ready ? '' : 'disabled'} 
+                        disabled={!props.validInput}
                     >Search</Button>
                 </Link>
             </div>
