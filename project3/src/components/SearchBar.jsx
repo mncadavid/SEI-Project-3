@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
-import Script from 'react-load-script';
+import React from 'react';
+import classStyles from './Style/classStyle'
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 
-class SearchBar extends Component {
-    constructor(props){
-        super(props);
+function SearchBar(props) {
+    const styles = classStyles();
 
-        this.state = {
-            nearbySearchResults: []
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                <h2>Where do you wanna go?</h2>
+    return (
+        <>
+            <h2 className={styles.searchTitle}>Where do you wanna go?</h2>
+            <div className={styles.searchBarWrapper}>
                 <TextField
-                    label="Search"
-                    variant="outlined"
-                    type='text' 
-                    id='searchBox'
-                    name='searchCriteria' 
-                    value={this.state.searchCriteria}
+                className={styles.searchBox}
+                label="Search"
+                variant="outlined"
+                type='text' 
+                id='searchBox'
+                name='searchCriteria' 
                 />
-                <Link to='/results/restaurants' style={{textDecoration: 'none'}}><Button variant="contained" color="primary">Search</Button></Link>
-                <div id='map'>
-
-                </div>
+                <Link to='/results/restaurants' style={{textDecoration: 'none'}}>
+                    <Button 
+                        variant="contained" 
+                        color="primary"
+                        disabled={!props.validInput}
+                    >Search</Button>
+                </Link>
             </div>
-        )
-    }
+            
+            <div id='map' style={{display: 'none'}}></div>
+        </>
+    )
 }
 
 export default SearchBar;
