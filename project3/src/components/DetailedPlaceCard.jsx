@@ -42,8 +42,15 @@ const DetailedCard = styled.div`
 `
 
 function DetailedPlaceCard(props){
+
+    const localCloseCard = (e) => {
+        if (e.currentTarget === e.target) {
+            props.closeDetailsCard(e);
+        }
+    }
+
     return(
-        <ModalBackground>
+        <ModalBackground onClick={(e) => localCloseCard(e)}>
             <DetailedCard>
                 <button className="close" onClick={(e) => props.closeDetailsCard(e)}>X</button>
                 <h2>{props.place.name}</h2>
