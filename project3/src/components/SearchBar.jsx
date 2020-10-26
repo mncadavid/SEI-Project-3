@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 
 
 function SearchBar(props) {
-    console.log('Search bar is loading')
     const styles = classStyles();
 
     const map = document.querySelector('#map');

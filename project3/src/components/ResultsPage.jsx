@@ -17,9 +17,6 @@ function ResultsPage(props){
         setNew(place)
     }
 
-
-    console.log(props);
-
     return(
         <div className="results-page">
             <TripContainer place={newPlace} />

@@ -33,7 +33,6 @@ function App(props) {
               zoom: 4
           }
         );
-        console.log('map has finished loading')
         setMapLoaded(true);
       }
     }
