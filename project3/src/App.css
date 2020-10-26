@@ -15,7 +15,6 @@
   justify-content: space-between;
 }
 .nav-link{
-  border: solid grey;
   width: 33%;
 }
 .place-card-container{
@@ -25,7 +24,6 @@
 }
 .place-card{
   display: flex;
-  border: solid red;
   align-items: center;
   min-height: 135px;
 }
