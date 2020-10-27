@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Route} from 'react-router-dom';
+import {Link, Route, Redirect} from 'react-router-dom';
 import PlaceCardContainer from './PlaceCardContainer';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -16,10 +16,16 @@ import Paper from '@material-ui/core/Paper';
                 <Link className="nav-link" to="/results/museums" style={{textDecoration: 'none'}}><Tab label="Museums"/></Link>
                 </Tabs>
             </nav>
-            <Route path="/results/restaurants" 
-                render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.restaurant} handleDetailsClick={props.handleDetailsClick}/>)} />
-            <Route path="/results/parks" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.park}/>)} />
-            <Route path="/results/museums" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.museum}/>)} />
+                <Route path="/results/restaurants" 
+                    render={routerProps => { <PlaceCardContainer 
+                                handleAddToTrip={props.handleAddToTrip} 
+                                results={props.results.restaurant} 
+                                handleDetailsClick={props.handleDetailsClick}
+                            />
+                    }}
+                />
+                <Route path="/results/parks" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.park}/>)} />
+                <Route path="/results/museums" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.museum}/>)} />
         </Paper>
     )
 }
