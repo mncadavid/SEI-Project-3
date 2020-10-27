@@ -13,6 +13,7 @@ function App(props) {
   const [searchResults,setSearchResults] = useState({});
   const [mapLoaded,setMapLoaded] = useState(false);
   const [currentTripSelections,setCurrentTripSelections] = useState([]);
+  const [currentSearchPlace,setCurrentSearchPlace] = useState({});
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -52,6 +53,9 @@ function App(props) {
             render={()=>
               <SearchBar 
                 setSearchResults={setSearchResults}
+                setCurrentSearchPlace={setCurrentSearchPlace}
+                setCurrentTripSelections={setCurrentTripSelections}
+                currentTripSelections={currentTripSelections} 
               />
             } 
           />
@@ -64,6 +68,7 @@ function App(props) {
                   results={searchResults} 
                   currentTripSelections={currentTripSelections} 
                   setCurrentTripSelections={setCurrentTripSelections}
+                  currentSearchPlace={currentSearchPlace}
                 />
               :
                 <Redirect to="/" />
