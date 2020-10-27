@@ -5,8 +5,8 @@ import { AppBar, Typography, Tabs, Tab } from '@material-ui/core';
 
 function a11yProps(index) {
     return {
-        id: `simple-tab-${index}`,
-        'aria-controls':`simple-tabpanel-${index}`
+        id: `scrollable-auto-tab-${index}`,
+        'aria-controls':`scrollable-auto-tabpanel-${index}`
     }
 }
 
@@ -28,7 +28,7 @@ function TripContainer(props) {
             >
                 {value === index && (
                     props.currentTripSelections[index].selections.map((selection,id) => {
-                        <SelectedPlaceCards 
+                        return <SelectedPlaceCards 
                             selection={selection} 
                             key={id} 
                             handleRemove={handleRemove}
@@ -53,14 +53,20 @@ function TripContainer(props) {
         <Paper elevation={3} className="trip-container">
             <AppBar position='static'>
                 <Typography variant='h6'>My Trip</Typography>
-                <Tabs value={value} onChange={handleChange} aria-label='Trip tabs'>
+                <Tabs 
+                    value={value} 
+                    onChange={handleChange} 
+                    aria-label='Trip tabs'
+                    variant='scrollable'
+                    scrollable='auto'
+                >
                     {props.currentTripSelections.map((trip,index) => {
                         return <Tab label={trip.placeName} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
             {props.currentTripSelections.map((trip,index) => {
-                return <TabPanel label={trip.placeName} {...a11yProps(index)} index={index}/>
+                return <TabPanel value={value} {...a11yProps(index)} index={index}/>
             })}
                 {/* <h3>Planned Trip</h3>
                 <div>
