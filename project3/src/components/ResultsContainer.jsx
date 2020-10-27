@@ -20,6 +20,7 @@ import Paper from '@material-ui/core/Paper';
             <Route path="/results/restaurants" 
                 render={routerProps => 
                     (<PlaceCardContainer 
+                        key="restaurants"
                         handleAddToTrip={props.handleAddToTrip} 
                         results={props.results.restaurant} 
                         handleDetailsClick={props.handleDetailsClick}
@@ -30,7 +31,8 @@ import Paper from '@material-ui/core/Paper';
             <Route 
                 path="/results/parks" 
                 render={routerProps => 
-                    (<PlaceCardContainer 
+                    (<PlaceCardContainer
+                        key="parks" 
                         handleAddToTrip={props.handleAddToTrip} 
                         results={props.results.park}
                         handleDetailsClick={props.handleDetailsClick}
@@ -41,6 +43,7 @@ import Paper from '@material-ui/core/Paper';
                 path="/results/museums" 
                 render={routerProps => 
                     (<PlaceCardContainer 
+                        key="museums"
                         handleAddToTrip={props.handleAddToTrip} 
                         results={props.results.museum}
                         handleDetailsClick={props.handleDetailsClick}

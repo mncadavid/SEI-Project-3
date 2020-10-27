@@ -5,15 +5,14 @@ function PlaceCardContainer(props){
     return(
         <Box className="place-card-container">
             {props.results.map(place => {
-                return <div>
-                            <PlaceCard 
-                                key={place.name}
-                                place={place} 
-                                handleDetailsClick={props.handleDetailsClick} 
-                                handleAddToTrip={props.handleAddToTrip}
-                                currentTripSelections={props.currentTripSelections}
-                            />
-                        </div>
+                return <PlaceCard 
+                            key={place.place_id}
+                            place={place} 
+                            handleDetailsClick={props.handleDetailsClick} 
+                            handleAddToTrip={props.handleAddToTrip}
+                            currentTripSelections={props.currentTripSelections}
+                        />
+                        
             })}
         </Box>
     )
