@@ -28,6 +28,7 @@ function ResultsPage(props){
                 handleAddToTrip={handleAddToTrip} 
                 handleDetailsClick={handleDetailsClick} 
                 results={props.results}
+                currentTripSelections={props.currentTripSelections}
             />
             {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
         </div>
