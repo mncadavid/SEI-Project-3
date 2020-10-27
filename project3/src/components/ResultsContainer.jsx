@@ -1,89 +1,68 @@
 import React, { useState } from 'react';
-import {Link, Route} from 'react-router-dom';
 import PlaceCardContainer from './PlaceCardContainer';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
+import { AppBar, Typography, Paper, Tabs, Tab } from '@material-ui/core';
 import classStyles from './Style/classStyle';
 
+function a11yProps(index) {
+    return {
+        id: `scrollable-auto-tab-${index}`,
+        'aria-controls':`scrollable-auto-tabpanel-${index}`
+    }
+}
 
- function ResultsContainer(props){
-    const [currentTab, setCurrentTab] = useState(0);
+
+function ResultsContainer(props){
+    const [value,setValue] = useState(0);
+
+    const TabPanel = (tabProps) => {
+        const {value,index} = tabProps;
+
+        return (
+            <div
+                role='tabpanel'
+                hidden={value!==index}
+                id={`scrollable-auto-tabpanel-${index}`}    
+                aria-labelledby={`scrollable-auto-tab-${index}`}
+            >
+                {value === index && (
+                    <PlaceCardContainer 
+                        setCurrentTripSelections={props.setCurrentTripSelections}  
+                        currentTripSelections={props.currentTripSelections}
+                        results={props.results[tabProps.type]}
+                        handleDetailsClick={props.handleDetailsClick}
+                        currentSearchPlace={props.currentSearchPlace}
+                    />
+                )}
+            </div>
+        )
+        
+    }
     
+    const handleChange = (e,value) => {
+        setValue(value);
+    }
+
     const styles = classStyles();
 
     return(
         <Paper elevation={3} className={styles.selectionPane}>
-            <Typography className={styles.centerTitle} variant='h6'>{props.currentSearchPlace.formatted_address}</Typography>
-            <nav className="nav-bar">
+            <AppBar position='sticky'>
+                <Typography className={styles.centerTitle} variant='h6'>{props.currentSearchPlace.formatted_address}</Typography>
                 <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label='Results tabs'
                     centered
                 >
-                    <Link 
-                        className="nav-link" 
-                        to="/results/restaurants" 
-                        style={{textDecoration: 'none'}}
-                    >
-                        <Tab label="Restaurants"
-                          onClick={() => setCurrentTab(0)}/>  
-                    </Link>
-                    <Link 
-                        className="nav-link" 
-                        to="/results/parks" 
-                        style={{textDecoration: 'none'}}
-                    >
-                        <Tab label="Parks"
-                          onClick={() => setCurrentTab(1)}/>
-                    </Link>
-                    <Link 
-                        className="nav-link" 
-                        to="/results/museums" 
-                        style={{textDecoration: 'none'}}
-                    >
-                        <Tab label="Museums"
-                          onClick={() => setCurrentTab(2)}/>
-                    </Link>
+                    <Tab label='Restaurant' {...a11yProps(0)} />
+                    <Tab label='Park' {...a11yProps(1)} />
+                    <Tab label='Museum' {...a11yProps(2)} />
                 </Tabs>
-            </nav>
+            </AppBar>
 
-            <Route 
-                path="/results/restaurants" 
-                render={routerProps => (
-                    <PlaceCardContainer 
-                        setCurrentTripSelections={props.setCurrentTripSelections}
-                        currentTripSelections={props.currentTripSelections} 
-                        results={props.results.restaurant} 
-                        handleDetailsClick={props.handleDetailsClick}
-                        currentSearchPlace={props.currentSearchPlace}
-                    />
-                )} 
-            />
-            <Route 
-                path="/results/parks" 
-
-                render={routerProps => (
-                    <PlaceCardContainer 
-                        setCurrentTripSelections={props.setCurrentTripSelections} 
-                        currentTripSelections={props.currentTripSelections}
-                        results={props.results.park}
-                        handleDetailsClick={props.handleDetailsClick}
-                        currentSearchPlace={props.currentSearchPlace}
-                    />
-                )} 
-            />
-            <Route 
-                path="/results/museums" 
-                render={routerProps => (
-                    <PlaceCardContainer 
-                        setCurrentTripSelections={props.setCurrentTripSelections}  
-                        currentTripSelections={props.currentTripSelections}
-                        results={props.results.museum}
-                        handleDetailsClick={props.handleDetailsClick}
-                        currentSearchPlace={props.currentSearchPlace}
-                    />
-                )} 
-            />
+            <TabPanel value={value} index={0} type='restaurant' />
+            <TabPanel value={value} index={1} type='park' />
+            <TabPanel value={value} index={2} type='museum' />
         </Paper>
     )
 }

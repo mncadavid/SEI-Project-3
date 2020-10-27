@@ -46,7 +46,7 @@ function TripContainer(props) {
         alert("Remove button connected")
     }
 
-    const [value,setValue] = useState(0);
+    const [value,setValue] = useState(props.currentTripSelections.length-1);
 
     const handleChange = (event,value) => {
         setValue(value);

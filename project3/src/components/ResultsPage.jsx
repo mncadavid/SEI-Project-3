@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
-import { Typography,Paper } from '@material-ui/core';
 
 import classStyles from './Style/classStyle'
 
