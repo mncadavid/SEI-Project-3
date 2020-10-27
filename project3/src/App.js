@@ -38,7 +38,23 @@ function App(props) {
         setMapLoaded(true);
       }
     }
+
+    var firebaseConfig = {
+      apiKey: process.env.REACT_APP_API_KEY,
+      authDomain: "sei-project-3-293415.firebaseapp.com",
+      databaseURL: "https://sei-project-3-293415.firebaseio.com",
+      projectId: "sei-project-3-293415",
+      storageBucket: "sei-project-3-293415.appspot.com",
+      messagingSenderId: "519447256644",
+      appId: "1:519447256644:web:ec07eda7b35ea5b67ce611",
+      measurementId: "G-CP90FNSPE0"
+    };
+    // Initialize Firebase
     
+    /*global firebase*/
+    if(!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
   })
 
   const styles = classStyles();
