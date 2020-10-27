@@ -23,6 +23,7 @@ function ResultsPage(props){
                 place={newPlace} 
                 currentTripSelections={props.currentTripSelections}
                 setCurrentTripSelections={props.setCurrentTripSelections}
+                handleDetailsClick={handleDetailsClick}
             />
             <ResultsContainer 
                 handleAddToTrip={handleAddToTrip} 
