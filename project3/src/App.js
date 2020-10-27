@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 import Header from './components/Header';
 import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
@@ -55,7 +55,22 @@ function App(props) {
               />
             } 
           />
-          <Route path='/results' render={()=><ResultsPage results={searchResults} currentTripSelections={currentTripSelections} setCurrentTripSelections={setCurrentTripSelections}/>} />
+          <Route 
+            path='/results' 
+            render={()=> {
+              return <div>
+              {Object.keys(searchResults).length !== 0 && searchResults !== null ?
+                <ResultsPage 
+                  results={searchResults} 
+                  currentTripSelections={currentTripSelections} 
+                  setCurrentTripSelections={setCurrentTripSelections}
+                />
+              :
+                <Redirect to="/" />
+              }
+              </div>
+            }} 
+          />
         </div>
       : 'Map API loading...' }
         <Footer />

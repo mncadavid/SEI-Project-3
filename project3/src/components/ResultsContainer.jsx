@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Route} from 'react-router-dom';
+import {Link, Route, Redirect} from 'react-router-dom';
 import PlaceCardContainer from './PlaceCardContainer';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
