@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
-import { AppBar, Typography, Tabs, Tab } from '@material-ui/core';
+import { AppBar, Typography, Tabs, Tab, Box } from '@material-ui/core';
 import classStyles from './Style/classStyle';
 
 function a11yProps(index) {
@@ -20,7 +20,8 @@ function TripContainer(props) {
         console.log(tabProps)
     
         return (
-            <div
+            <Box
+                className={classStyles().tripCardContainer}
                 role='tabpanel'
                 hidden={value !== index}
                 id={`simple-tabpanel-${index}`}
@@ -37,7 +38,7 @@ function TripContainer(props) {
                         />
                     })
                 )}
-            </div>
+            </Box>
         )
     }
 
@@ -55,7 +56,7 @@ function TripContainer(props) {
 
     return(
         <Paper elevation={3} className={styles.tripPane}>
-            <AppBar position='static'>
+            <AppBar position='sticky'>
                 <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
                 <Tabs 
                     value={value} 
