@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
-import {Route,Link} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Header from './components/Header';
 import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
@@ -16,7 +16,6 @@ function App(props) {
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
-    console.log(!existingScript)
 
     if (!existingScript) {
       const script = document.createElement('script');
@@ -79,6 +78,7 @@ function App(props) {
         <Route path='/results' render={()=><ResultsPage results={searchResults} />} />
       </div>
         <Footer />
+        <div id='map' style={{display: 'none'}}></div>
     </div>
   );
 }

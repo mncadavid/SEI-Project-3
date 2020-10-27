@@ -6,7 +6,7 @@ function PlaceCardContainer(props){
         <Box className="place-card-container">
             {props.results.map(place => {
                 return <div>
-                    <PlaceCard place={place} handleDetailsClick={props.handleDetailsClick} handleAddToTrip={props.handleAddToTrip}/>
+                    <PlaceCard key={place.name} place={place} handleDetailsClick={props.handleDetailsClick} handleAddToTrip={props.handleAddToTrip}/>
                     </div>
             })}
         </Box>
