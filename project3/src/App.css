@@ -59,6 +59,10 @@
 .price-level{
   display: flex;
 }
-.carousel-image{
-  max-height: 400px;
+.Carousel-root-18{
+  min-height: 400px;
+}
+.CarouselItem{
+  max-height: 300px;
+  min-height: 350px;
 }
