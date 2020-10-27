@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, {keyframes} from 'styled-components';
 import { zoomIn } from 'react-animations';
+import Icon from'@material-ui/core/Icon';
 const slideAnimation = keyframes`${zoomIn}`;
 
 
@@ -48,16 +49,86 @@ function DetailedPlaceCard(props){
             props.closeDetailsCard(e);
         }
     }
+
+    let [photos, setPhotos] = useState({
+        received: false,
+        srcs: null
+    })
+
+    let [details, setDetails] = useState({
+        received: false,
+        placeDetails: null
+    })
+
+    const getPhoto = (place) => {
+        if(!photos.received){
+
+            let photos = place.photos;
+            if(photos.length === 0){
+                setPhotos({
+                    received: true,
+                    src: null
+                })
+                return
+            }
+            let urls = []; 
+            for(let i = 0; i< photos.length; i++){
+                let url = photos[i].getUrl({maxWidth: 500, maxHeight: 500});
+                urls.push(url);
+            }
+            setPhotos({
+                received: true,
+                srcs: urls
+            })
+        }
+    }
+
+    const getDetails = (place) => {
+        if(!details.received){
+            /*global google*/
+            let request = {
+                placeId: `${place.place_id}`
+              };
+            let map = document.querySelector('#map');
+            new google.maps.places.PlacesService(map).getDetails(request, callback)
+              
+            function callback(place, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    console.log(place);
+                    setDetails({
+                        received: true,
+                        placeDetails: place
+                    })
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+        getPhoto(props.place);
+        getDetails(props.place);
+    })
     
+    let dollars = new Array(props.place.price_level).fill("$");
     return(
         <ModalBackground onClick={(e) => localCloseCard(e)}>
             <DetailedCard>
                 <button className="close" onClick={(e) => props.closeDetailsCard(e)}>X</button>
                 <h2>{props.place.name}</h2>
+                {details.placeDetails !== null &&
+                    <div className="conditional-content">
+                        <p>{details.placeDetails.formatted_address}</p>
+                        <p>{details.placeDetails.formatted_phone_number}</p>
+                        <a target="_blank" href={details.placeDetails.website}>Website</a> 
+                    </div> 
+                    }
                 <h3>&#9733;{props.place.rating}</h3>
-                <h4>{props.place.price_level}</h4>
+                <div className="price-level">
+                    {dollars.map(dollar => <Icon>attach_money</Icon>)}
+                </div>
                 {/* <p>{props.place.opening_hours.open_now && "Open Now"}</p> */}
-                <img src={props.place.photos[0].photo_reference} alt={props.place.name}></img>
+                {photos.received && photos.srcs.map(src => {
+                        return <img key={src} src={src} alt={props.place.name}></img>})}
             </DetailedCard>
         </ModalBackground>
     )
