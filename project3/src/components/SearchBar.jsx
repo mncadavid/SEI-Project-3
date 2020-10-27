@@ -45,7 +45,7 @@ function SearchBar(props) {
     const handleClick = (e) => {
         e.preventDefault();
         props.setSearchResults(queriedSearchResults);
-        history.push('/results');
+        history.push('/results/restaurants');
     }
 
     return (
