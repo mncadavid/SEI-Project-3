@@ -10,8 +10,9 @@ import SearchBar from './components/SearchBar';
 import classStyles from './components/Style/classStyle';
 
 function App(props) {
-  const [searchResults,setSearchResults] = useState({})
-  const [mapLoaded,setMapLoaded] = useState(false)
+  const [searchResults,setSearchResults] = useState({});
+  const [mapLoaded,setMapLoaded] = useState(false);
+  const [currentTripSelections,setCurrentTripSelections] = useState([]);
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -54,7 +55,7 @@ function App(props) {
               />
             } 
           />
-          <Route path='/results' render={()=><ResultsPage results={searchResults} />} />
+          <Route path='/results' render={()=><ResultsPage results={searchResults} currentTripSelections={currentTripSelections} setCurrentTripSelections={setCurrentTripSelections}/>} />
         </div>
       : 'Map API loading...' }
         <Footer />

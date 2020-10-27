@@ -19,8 +19,16 @@ function ResultsPage(props){
 
     return(
         <div className="results-page">
-            <TripContainer place={newPlace} />
-            <ResultsContainer handleAddToTrip={handleAddToTrip} handleDetailsClick={handleDetailsClick} results={props.results}/>
+            <TripContainer 
+                place={newPlace} 
+                currentTripSelections={props.currentTripSelections}
+                setCurrentTripSelections={props.setCurrentTripSelections}
+            />
+            <ResultsContainer 
+                handleAddToTrip={handleAddToTrip} 
+                handleDetailsClick={handleDetailsClick} 
+                results={props.results}
+            />
             {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
         </div>
     )
