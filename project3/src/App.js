@@ -62,18 +62,18 @@ function App(props) {
           <Route 
             path='/results' 
             render={()=> {
-              return <div>
-              {Object.keys(searchResults).length !== 0 && searchResults !== null ?
-                <ResultsPage 
-                  results={searchResults} 
-                  currentTripSelections={currentTripSelections} 
-                  setCurrentTripSelections={setCurrentTripSelections}
-                  currentSearchPlace={currentSearchPlace}
-                />
-              :
-                <Redirect to="/" />
-              }
-              </div>
+              return <>
+                {Object.keys(searchResults).length !== 0 && searchResults !== null ?
+                  <ResultsPage 
+                    results={searchResults} 
+                    currentTripSelections={currentTripSelections} 
+                    setCurrentTripSelections={setCurrentTripSelections}
+                    currentSearchPlace={currentSearchPlace}
+                  />
+                :
+                  <Redirect to="/" />
+                }
+              </>
             }} 
           />
         </div>

@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
-import { Typography,Paper } from '@material-ui/core';
+
+import classStyles from './Style/classStyle'
 
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
@@ -14,27 +15,24 @@ function ResultsPage(props){
         setDetails({clicked: false, place: null});
     }
 
+    const styles = classStyles();
+
     return(
-        <>
-            <Paper>
-                <Typography variant='h4'>{props.currentSearchPlace.formatted_address}</Typography>
-            </Paper>
-            <div className="results-page">
-                <TripContainer 
-                    currentTripSelections={props.currentTripSelections}
-                    setCurrentTripSelections={props.setCurrentTripSelections}
-                    handleDetailsClick={handleDetailsClick}
-                />
-                <ResultsContainer 
-                    setCurrentTripSelections={props.setCurrentTripSelections}
-                    currentTripSelections={props.currentTripSelections}
-                    handleDetailsClick={handleDetailsClick} 
-                    results={props.results}
-                    currentSearchPlace={props.currentSearchPlace}
-                />
-                {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
-            </div>
-        </>
+        <div className={styles.resultsPage}>
+            <TripContainer 
+                currentTripSelections={props.currentTripSelections}
+                setCurrentTripSelections={props.setCurrentTripSelections}
+                handleDetailsClick={handleDetailsClick}
+            />
+            <ResultsContainer 
+                setCurrentTripSelections={props.setCurrentTripSelections}
+                currentTripSelections={props.currentTripSelections}
+                handleDetailsClick={handleDetailsClick} 
+                results={props.results}
+                currentSearchPlace={props.currentSearchPlace}
+            />
+            {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
+        </div>
     )
 }
 

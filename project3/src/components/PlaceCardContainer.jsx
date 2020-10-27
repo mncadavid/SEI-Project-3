@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PlaceCard from './PlaceCard';
 import Box from '@material-ui/core/Box';
+import classStyles from './Style/classStyle';
 
 function PlaceCardContainer(props){
 
@@ -16,8 +17,10 @@ function PlaceCardContainer(props){
         props.setCurrentTripSelections([...allLocationData])
     }
 
+    const styles = classStyles();
+
     return(
-        <Box className="place-card-container">
+        <Box className={styles.placeCardContainer}>
             {props.results.map(place => {
                 return <PlaceCard 
                         key={place.place_id} 

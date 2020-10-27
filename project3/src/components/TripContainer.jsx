@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
-import { AppBar, Typography, Tabs, Tab } from '@material-ui/core';
+import { AppBar, Typography, Tabs, Tab, Box } from '@material-ui/core';
+import classStyles from './Style/classStyle';
 
 function a11yProps(index) {
     return {
@@ -16,7 +17,8 @@ function TripContainer(props) {
         const { children, value, index, ...other} = tabProps;
     
         return (
-            <div
+            <Box
+                className={classStyles().tripCardContainer}
                 role='tabpanel'
                 hidden={value !== index}
                 id={`simple-tabpanel-${index}`}
@@ -33,7 +35,7 @@ function TripContainer(props) {
                         />
                     })
                 )}
-            </div>
+            </Box>
         )
     }
 
@@ -41,16 +43,18 @@ function TripContainer(props) {
         alert("Remove button connected")
     }
 
-    const [value,setValue] = useState(0);
+    const [value,setValue] = useState(props.currentTripSelections.length-1);
 
     const handleChange = (event,value) => {
         setValue(value);
     }
 
+    const styles = classStyles();
+
     return(
-        <Paper elevation={3} className="trip-container">
-            <AppBar position='static'>
-                <Typography variant='h6'>My Trip</Typography>
+        <Paper elevation={3} className={styles.tripPane}>
+            <AppBar position='sticky'>
+                <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
                 <Tabs 
                     value={value} 
                     onChange={handleChange} 
