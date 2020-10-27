@@ -4,14 +4,22 @@ import PlaceCardContainer from './PlaceCardContainer';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
+import { Typography } from '@material-ui/core';
+import classStyles from './Style/classStyle';
 
 
  function ResultsContainer(props){
     const [currentTab, setCurrentTab] = useState(0);
+    
+    const styles = classStyles();
+
     return(
-        <Paper elevation={3} >
+        <Paper elevation={3} className={styles.selectionPane}>
+            <Typography className={styles.centerTitle} variant='h6'>{props.currentSearchPlace.formatted_address}</Typography>
             <nav className="nav-bar">
-                <Tabs>
+                <Tabs
+                    centered
+                >
                     <Link 
                         className="nav-link" 
                         to="/results/restaurants" 

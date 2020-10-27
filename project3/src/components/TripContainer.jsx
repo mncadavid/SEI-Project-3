@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
 import { AppBar, Typography, Tabs, Tab } from '@material-ui/core';
+import classStyles from './Style/classStyle';
 
 function a11yProps(index) {
     return {
@@ -50,10 +51,12 @@ function TripContainer(props) {
         setValue(value);
     }
 
+    const styles = classStyles();
+
     return(
-        <Paper elevation={3} className="trip-container">
+        <Paper elevation={3} className={styles.tripPane}>
             <AppBar position='static'>
-                <Typography variant='h6'>My Trip</Typography>
+                <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
                 <Tabs 
                     value={value} 
                     onChange={handleChange} 

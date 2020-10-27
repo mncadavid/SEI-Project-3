@@ -34,6 +34,22 @@ const classStyles = makeStyles((theme) => ({
     },
     searchBox: {
         width: '30ch'
+    },
+    resultsPage: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '80vw',
+        minWidth: '50rem',
+        height: '80vh',
+    },
+    centerTitle: {
+        textAlign: 'center'
+    },
+    selectionPane: {
+        width: '60%'
+    },
+    tripPane: {
+        width: '38%'
     }
 }));
 
