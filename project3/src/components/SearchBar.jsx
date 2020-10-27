@@ -15,6 +15,7 @@ function SearchBar(props) {
 
     const history = useHistory();
 
+
     useEffect(()=>{
         const autocomplete = new window.google.maps.places.Autocomplete(document.querySelector('#searchBox'));
         
@@ -26,6 +27,8 @@ function SearchBar(props) {
         const place = autocompleteObj.getPlace();
         setPlace(place);
     
+        if (place.geometry !== undefined){
+            console.log(place.geometry);
         typeArray.forEach(type => {
           const options = {
               radius: 10000, 
@@ -34,7 +37,7 @@ function SearchBar(props) {
           }
     
           new window.google.maps.places.PlacesService(mapObj).nearbySearch(options, (results,status) => updateSearchResults(results,status,type))
-        })
+        })}
         
     }
 
@@ -63,7 +66,7 @@ function SearchBar(props) {
                 variant="outlined"
                 type='text' 
                 id='searchBox'
-                name='searchCriteria' 
+                name='searchCriteria'
                 />
                 <Button 
                     variant="contained" 
