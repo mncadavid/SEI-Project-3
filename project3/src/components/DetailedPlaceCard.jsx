@@ -147,7 +147,7 @@ function DetailedPlaceCard(props){
                 {/* <p>{props.place.opening_hours.open_now && "Open Now"}</p> */}
                 <Carousel>
                 {photos.received && photos.srcs.map(src => {
-                        return <img className="carousel-image" key={src} src={src} alt={props.place.name}></img>})}
+                        return <img className="carousel-image" referrerPolicy="no-referrer" key={src} src={src} alt={props.place.name}></img>})}
                 </Carousel>
             </DetailedCard>
         </ModalBackground>
