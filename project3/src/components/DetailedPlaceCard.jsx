@@ -93,7 +93,7 @@ function DetailedPlaceCard(props){
             new google.maps.places.PlacesService(map).getDetails(request, callback)
               
             function callback(place, status) {
-                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
                     console.log(place);
                     setDetails({
                         received: true,
@@ -119,7 +119,7 @@ function DetailedPlaceCard(props){
                     <div className="conditional-content">
                         <p>{details.placeDetails.formatted_address}</p>
                         <p>{details.placeDetails.formatted_phone_number}</p>
-                        <a target="_blank" href={details.placeDetails.website}>Website</a> 
+                        <a target="_blank"rel="noreferrer" href={details.placeDetails.website}>Website</a> 
                     </div> 
                     }
                 <h3>&#9733;{props.place.rating}</h3>
