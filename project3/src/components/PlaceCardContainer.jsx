@@ -19,15 +19,13 @@ function PlaceCardContainer(props){
     return(
         <Box className="place-card-container">
             {props.results.map(place => {
-                return <div>
-                    <PlaceCard 
-                        key={place.name} 
+                return <PlaceCard 
+                        key={place.place_id} 
                         place={place} 
                         disabled={currentLocationData.selections.includes(place)}
                         handleDetailsClick={props.handleDetailsClick} 
                         handleAddToTrip={()=>handleAddToTrip(place)}
                     />
-                </div>
             })}
         </Box>
     )

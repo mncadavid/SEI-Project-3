@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link, Route, Redirect} from 'react-router-dom';
+import React, { useState } from 'react';
+import {Link, Route} from 'react-router-dom';
 import PlaceCardContainer from './PlaceCardContainer';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 
 
  function ResultsContainer(props){
+    const [currentTab, setCurrentTab] = useState(0);
     return(
         <Paper elevation={3} >
             <nav className="nav-bar">
@@ -16,21 +17,24 @@ import Paper from '@material-ui/core/Paper';
                         to="/results/restaurants" 
                         style={{textDecoration: 'none'}}
                     >
-                        <Tab label="Restaurants"/>  
+                        <Tab label="Restaurants"
+                          onClick={() => setCurrentTab(0)}/>  
                     </Link>
                     <Link 
                         className="nav-link" 
                         to="/results/parks" 
                         style={{textDecoration: 'none'}}
                     >
-                        <Tab label="Parks"/>
+                        <Tab label="Parks"
+                          onClick={() => setCurrentTab(1)}/>
                     </Link>
                     <Link 
                         className="nav-link" 
                         to="/results/museums" 
                         style={{textDecoration: 'none'}}
                     >
-                        <Tab label="Museums"/>
+                        <Tab label="Museums"
+                          onClick={() => setCurrentTab(2)}/>
                     </Link>
                 </Tabs>
             </nav>
@@ -49,6 +53,7 @@ import Paper from '@material-ui/core/Paper';
             />
             <Route 
                 path="/results/parks" 
+
                 render={routerProps => (
                     <PlaceCardContainer 
                         setCurrentTripSelections={props.setCurrentTripSelections} 

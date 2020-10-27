@@ -94,7 +94,6 @@ function DetailedPlaceCard(props){
               
             function callback(place, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    console.log(place);
                     setDetails({
                         received: true,
                         placeDetails: place
