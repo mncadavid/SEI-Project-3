@@ -32,3 +32,17 @@
 .price-level{
   display: flex;
 }
+.Carousel-root-18{
+  min-height: 400px;
+  width: 500px;
+}
+.CarouselItem{
+  max-height: 300px;
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-image{
+  margin: 0 auto;
+}

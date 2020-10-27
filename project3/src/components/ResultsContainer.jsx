@@ -10,7 +10,6 @@ function a11yProps(index) {
     }
 }
 
-
 function ResultsContainer(props){
     const [value,setValue] = useState(0);
 

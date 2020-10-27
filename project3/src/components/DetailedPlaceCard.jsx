@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, {keyframes} from 'styled-components';
 import { zoomIn } from 'react-animations';
 import Icon from'@material-ui/core/Icon';
+import Carousel from 'react-material-ui-carousel';
 const slideAnimation = keyframes`${zoomIn}`;
 
 
@@ -34,6 +35,8 @@ const DetailedCard = styled.div`
     animation: ${slideAnimation} .5s;
     border-radius: 10px;
     box-shadow: 1px 1px 10px 1px black;
+    width: 500px;
+    height: 700px;
     
     .close{
         position: absolute;
@@ -60,28 +63,28 @@ function DetailedPlaceCard(props){
         placeDetails: null
     })
 
-    const getPhoto = (place) => {
-        if(!photos.received){
+    // const getPhoto = (place) => {
+    //     if(!photos.received){
 
-            let photos = place.photos;
-            if(photos.length === 0){
-                setPhotos({
-                    received: true,
-                    src: null
-                })
-                return
-            }
-            let urls = []; 
-            for(let i = 0; i< photos.length; i++){
-                let url = photos[i].getUrl({maxWidth: 500, maxHeight: 500});
-                urls.push(url);
-            }
-            setPhotos({
-                received: true,
-                srcs: urls
-            })
-        }
-    }
+    //         let photos = place.photos;
+    //         if(photos.length === 0){
+    //             setPhotos({
+    //                 received: true,
+    //                 src: null
+    //             })
+    //             return
+    //         }
+    //         let urls = []; 
+    //         for(let i = 0; i< Math.min(photos.length,10); i++){
+    //             let url = photos[i].getUrl({maxWidth: 500, maxHeight: 500});
+    //             urls.push(url);
+    //         }
+    //         setPhotos({
+    //             received: true,
+    //             srcs: urls
+    //         })
+    //     }
+    // }
 
     const getDetails = (place) => {
         if(!details.received){
@@ -98,14 +101,30 @@ function DetailedPlaceCard(props){
                         received: true,
                         placeDetails: place
                     })
+                    if(place.photos.length === 0){
+                        setPhotos({
+                            received: true,
+                            src: null
+                        })
+                        return
+                    }
+                    let urls = []; 
+                    for(let i = 0; i< Math.min(place.photos.length,10); i++){
+                        let url = place.photos[i].getUrl({maxWidth: 500, maxHeight: 450});
+                        urls.push(url);
+                    }
+                    setPhotos({
+                        received: true,
+                        srcs: urls
+                    })
                 }
             }
         }
     }
 
     useEffect(() => {
-        getPhoto(props.place);
         getDetails(props.place);
+        // getPhoto(props.place);
     })
     
     let dollars = new Array(props.place.price_level).fill("$");
@@ -126,8 +145,10 @@ function DetailedPlaceCard(props){
                     {dollars.map(dollar => <Icon>attach_money</Icon>)}
                 </div>
                 {/* <p>{props.place.opening_hours.open_now && "Open Now"}</p> */}
+                <Carousel>
                 {photos.received && photos.srcs.map(src => {
-                        return <img key={src} src={src} alt={props.place.name}></img>})}
+                        return <img className="carousel-image" referrerPolicy="no-referrer" key={src} src={src} alt={props.place.name}></img>})}
+                </Carousel>
             </DetailedCard>
         </ModalBackground>
     )

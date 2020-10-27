@@ -13,11 +13,8 @@ function a11yProps(index) {
 
 function TripContainer(props) {
 
-    console.log(props);
-
     const TabPanel = (tabProps) => {
         const { children, value, index, ...other} = tabProps;
-        console.log(tabProps)
     
         return (
             <Box
@@ -66,12 +63,12 @@ function TripContainer(props) {
                     scrollable='auto'
                 >
                     {props.currentTripSelections.map((trip,index) => {
-                        return <Tab label={trip.placeName} {...a11yProps(index)} />
+                        return <Tab key={index} label={trip.placeName} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
             {props.currentTripSelections.map((trip,index) => {
-                return <TabPanel value={value} {...a11yProps(index)} index={index}/>
+                return <TabPanel key={index} value={value} {...a11yProps(index)} index={index}/>
             })}
                 {/* <h3>Planned Trip</h3>
                 <div>
