@@ -13,6 +13,7 @@ function App(props) {
   const [searchResults,setSearchResults] = useState({});
   const [mapLoaded,setMapLoaded] = useState(false);
   const [currentTripSelections,setCurrentTripSelections] = useState([]);
+  const [currentSearchPlace,setCurrentSearchPlace] = useState({});
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -52,10 +53,21 @@ function App(props) {
             render={()=>
               <SearchBar 
                 setSearchResults={setSearchResults}
+                setCurrentSearchPlace={setCurrentSearchPlace}
               />
             } 
           />
-          <Route path='/results' render={()=><ResultsPage results={searchResults} currentTripSelections={currentTripSelections} setCurrentTripSelections={setCurrentTripSelections}/>} />
+          <Route 
+            path='/results' 
+            render={()=>
+              <ResultsPage 
+                results={searchResults} 
+                currentTripSelections={currentTripSelections} 
+                setCurrentTripSelections={setCurrentTripSelections}
+                currentSearchPlace={currentSearchPlace}
+              />
+            } 
+          />
         </div>
       : 'Map API loading...' }
         <Footer />

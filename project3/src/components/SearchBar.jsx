@@ -22,6 +22,7 @@ function SearchBar(props) {
     const findNearby = (mapObj,autocompleteObj,typeArray) => {
         setQueriedSearchResults({})
         const place = autocompleteObj.getPlace();
+        props.setCurrentSearchPlace(place);
     
         typeArray.forEach(type => {
           const options = {
