@@ -10,7 +10,9 @@ function SearchBar(props) {
 
     const map = document.querySelector('#map');
 
-    const [queriedSearchResults,setQueriedSearchResults] = useState({})
+    const [queriedSearchResults,setQueriedSearchResults] = useState({});
+    const [place,setPlace] = useState({});
+
     const history = useHistory();
 
     useEffect(()=>{
@@ -22,7 +24,7 @@ function SearchBar(props) {
     const findNearby = (mapObj,autocompleteObj,typeArray) => {
         setQueriedSearchResults({})
         const place = autocompleteObj.getPlace();
-        props.setCurrentSearchPlace(place);
+        setPlace(place);
     
         typeArray.forEach(type => {
           const options = {
@@ -46,6 +48,8 @@ function SearchBar(props) {
     const handleClick = (e) => {
         e.preventDefault();
         props.setSearchResults(queriedSearchResults);
+        props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.vicinity, selections: []}])
+        props.setCurrentSearchPlace(place);
         history.push('/results/restaurants');
     }
 

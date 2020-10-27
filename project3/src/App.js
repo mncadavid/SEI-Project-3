@@ -54,6 +54,8 @@ function App(props) {
               <SearchBar 
                 setSearchResults={setSearchResults}
                 setCurrentSearchPlace={setCurrentSearchPlace}
+                setCurrentTripSelections={setCurrentTripSelections}
+                currentTripSelections={currentTripSelections} 
               />
             } 
           />

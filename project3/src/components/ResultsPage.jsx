@@ -13,12 +13,6 @@ function ResultsPage(props){
         e.preventDefault();
         setDetails({clicked: false, place: null});
     }
-    const [newPlace, setNew] = useState(null);
-    const handleAddToTrip = (place) => {
-        setNew(place)
-    }
-
-    console.log(props);
 
     return(
         <>
@@ -27,14 +21,15 @@ function ResultsPage(props){
             </Paper>
             <div className="results-page">
                 <TripContainer 
-                    place={newPlace} 
                     currentTripSelections={props.currentTripSelections}
                     setCurrentTripSelections={props.setCurrentTripSelections}
                 />
                 <ResultsContainer 
-                    handleAddToTrip={handleAddToTrip} 
+                    setCurrentTripSelections={props.setCurrentTripSelections}
+                    currentTripSelections={props.currentTripSelections}
                     handleDetailsClick={handleDetailsClick} 
                     results={props.results}
+                    currentSearchPlace={props.currentSearchPlace}
                 />
                 {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
             </div>
