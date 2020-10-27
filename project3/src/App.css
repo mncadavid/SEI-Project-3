@@ -59,3 +59,6 @@
 .price-level{
   display: flex;
 }
+.carousel-image{
+  max-height: 400px;
+}
