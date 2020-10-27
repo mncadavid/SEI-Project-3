@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
     return(
         <Paper elevation={3} >
             <nav className="nav-bar">
-                <Tabs>
+                <Tabs value={currentTab}>
                     <Link 
                         className="nav-link" 
                         to="/results/restaurants" 
