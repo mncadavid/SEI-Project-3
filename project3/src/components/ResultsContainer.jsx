@@ -17,9 +17,35 @@ import Paper from '@material-ui/core/Paper';
                 </Tabs>
             </nav>
             <Route path="/results/restaurants" 
-                render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.restaurant} handleDetailsClick={props.handleDetailsClick}/>)} />
-            <Route path="/results/parks" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.park}/>)} />
-            <Route path="/results/museums" render={routerProps => (<PlaceCardContainer handleAddToTrip={props.handleAddToTrip} results={props.results.museum}/>)} />
+                render={routerProps => 
+                    (<PlaceCardContainer 
+                        handleAddToTrip={props.handleAddToTrip} 
+                        results={props.results.restaurant} 
+                        handleDetailsClick={props.handleDetailsClick}
+                        currentTripSelections={props.currentTripSelections}
+                    />)
+                } 
+            />
+            <Route 
+                path="/results/parks" 
+                render={routerProps => 
+                    (<PlaceCardContainer 
+                        handleAddToTrip={props.handleAddToTrip} 
+                        results={props.results.park}
+                        handleDetailsClick={props.handleDetailsClick}
+                        currentTripSelections={props.currentTripSelections}
+                    />)} 
+            />
+            <Route 
+                path="/results/museums" 
+                render={routerProps => 
+                    (<PlaceCardContainer 
+                        handleAddToTrip={props.handleAddToTrip} 
+                        results={props.results.museum}
+                        handleDetailsClick={props.handleDetailsClick}
+                        currentTripSelections={props.currentTripSelections}
+                    />)} 
+            />
         </Paper>
     )
 }
