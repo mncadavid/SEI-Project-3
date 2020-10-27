@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
+import { Typography,Paper } from '@material-ui/core';
 
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
@@ -12,27 +13,28 @@ function ResultsPage(props){
         e.preventDefault();
         setDetails({clicked: false, place: null});
     }
-    const [newPlace, setNew] = useState(null);
-    const handleAddToTrip = (place) => {
-        setNew(place)
-    }
 
     return(
-        <div className="results-page">
-            <TripContainer 
-                place={newPlace} 
-                currentTripSelections={props.currentTripSelections}
-                setCurrentTripSelections={props.setCurrentTripSelections}
-                handleDetailsClick={handleDetailsClick}
-            />
-            <ResultsContainer 
-                handleAddToTrip={handleAddToTrip} 
-                handleDetailsClick={handleDetailsClick} 
-                results={props.results}
-                currentTripSelections={props.currentTripSelections}
-            />
-            {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
-        </div>
+        <>
+            <Paper>
+                <Typography variant='h4'>{props.currentSearchPlace.formatted_address}</Typography>
+            </Paper>
+            <div className="results-page">
+                <TripContainer 
+                    currentTripSelections={props.currentTripSelections}
+                    setCurrentTripSelections={props.setCurrentTripSelections}
+                    handleDetailsClick={handleDetailsClick}
+                />
+                <ResultsContainer 
+                    setCurrentTripSelections={props.setCurrentTripSelections}
+                    currentTripSelections={props.currentTripSelections}
+                    handleDetailsClick={handleDetailsClick} 
+                    results={props.results}
+                    currentSearchPlace={props.currentSearchPlace}
+                />
+                {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
+            </div>
+        </>
     )
 }
 
