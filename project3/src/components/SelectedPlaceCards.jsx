@@ -6,9 +6,9 @@ const SelectedPlaceCards = (props) => {
 
     return(
         <Card variant="outlined" className="selected-place-card">
-            <img src={props.selected.icon} alt='something that needs something' />
-            <p>{props.selected.name}</p>
-            <Button onClick={() => props.handleRemove(props.selected.id)} variant="contained" color="primary">Remove</Button>
+            <img src={props.selection.icon} alt='something that needs something' />
+            <p>{props.selection.name}</p>
+            <Button onClick={() => props.handleRemove(props.selection.id)} variant="contained" color="primary">Remove</Button>
         </Card>
     )
 }
