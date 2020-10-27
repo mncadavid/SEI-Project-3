@@ -32,6 +32,7 @@ function TripContainer(props) {
                             selection={selection} 
                             key={id} 
                             handleRemove={handleRemove}
+                            handleDetailsClick={props.handleDetailsClick}
                         />
                     })
                 )}
