@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
-
+import Modal from '@material-ui/core/Modal';
 import classStyles from './Style/classStyle'
 
 function ResultsPage(props){
@@ -31,7 +31,10 @@ function ResultsPage(props){
                 results={props.results}
                 currentSearchPlace={props.currentSearchPlace}
             />
-            {details.clicked && <DetailedPlaceCard place={details.place} closeDetailsCard={closeDetailsCard}/>}
+            {details.clicked && 
+                <Modal open={details.clicked} 
+                    onClose={(e)=>closeDetailsCard(e)}>
+                        <DetailedPlaceCard open={details.clicked} place={details.place} closeDetailsCard={closeDetailsCard}/></Modal>}
         </div>
     )
 }
