@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import {purple, green} from '@material-ui/core/colors/purple';
+import {purple, green} from '@material-ui/core/colors';
 const theme = createMuiTheme({
   palette: {
     primary: {

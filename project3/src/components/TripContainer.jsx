@@ -6,7 +6,6 @@ import classStyles from './Style/classStyle';
 import SaveIcon from '@material-ui/icons/Save';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import {Link} from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
 
 
 function a11yProps(index) {
@@ -17,7 +16,6 @@ function a11yProps(index) {
 }
 
 function TripContainer(props) {
-    const history = useHistory();
 
     const TabPanel = (tabProps) => {
         const { children, value, index, ...other} = tabProps;

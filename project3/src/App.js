@@ -106,11 +106,8 @@ function App(props) {
                     currentTripSelections={currentTripSelections} 
                     setCurrentTripSelections={setCurrentTripSelections}
                     currentSearchPlace={currentSearchPlace}
-<<<<<<< HEAD
                     currentUser={currentUser}
-=======
                     handleSaveData={handleSaveData}
->>>>>>> main
                   />
                 :
                   <Redirect to="/" />
