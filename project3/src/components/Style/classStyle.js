@@ -76,7 +76,8 @@ const classStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '10px 25px'
+        padding: '10px 25px',
+        backgroundColor: 'lightGrey'
       }
 }));
 
