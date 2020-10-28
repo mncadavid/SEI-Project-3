@@ -49,7 +49,6 @@ function SearchBar(props) {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log(place);
         props.setSearchResults(queriedSearchResults);
         if(props.currentTripSelections.length === 0){
             props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.name, placeAddress: place.formatted_address, selections: []}])
