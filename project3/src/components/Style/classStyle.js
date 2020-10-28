@@ -71,7 +71,19 @@ const classStyles = makeStyles((theme) => ({
         minHeight: '135px',
         justifyContent: 'space-between',
         padding: '10px 10px'
-      }
+    },
+    tripBarHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '50%',
+        alignItems: 'center',
+        paddingTop: '10px'
+    },
+    tripAppBar: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    }
 }));
 
 export default classStyles;
