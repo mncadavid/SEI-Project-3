@@ -3,6 +3,9 @@ import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
 import { AppBar, Typography, Tabs, Tab, Box, Button } from '@material-ui/core';
 import classStyles from './Style/classStyle';
+import SaveIcon from '@material-ui/icons/Save';
+import AddLocationIcon from '@material-ui/icons/AddLocation';
+import {Link} from 'react-router-dom';
 
 function a11yProps(index) {
     return {
@@ -51,7 +54,8 @@ function TripContainer(props) {
             <AppBar position='sticky' className={styles.tripAppBar}>
                 <Box className={styles.tripBarHeader}>
                     <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
-                    <Button variant='contained' onClick={props.saveData}>Save Changes</Button>
+                    <Button onClick={props.saveData} disabled={!props.currentUser}><SaveIcon/></Button>
+                    <Link to="/"><AddLocationIcon color="action"/></Link>
                 </Box>
                 <Tabs 
                     value={value} 
@@ -68,19 +72,6 @@ function TripContainer(props) {
             {props.currentTripSelections.map((trip,index) => {
                 return <TabPanel key={index} value={value} {...a11yProps(index)} index={index}/>
             })}
-                {/* <h3>Planned Trip</h3>
-                <div>
-                    {props.currentTripSelections.map((selection, id) => {
-                        return (
-                            <SelectedPlaceCards 
-                                selection={selection} 
-                                key={id} 
-                                handleRemove={handleRemove}
-                                handleDetailsClick={props.handleDetailsClick}
-                            />
-                        )
-                    })}
-                </div> */}
         </Paper>
     )
 }

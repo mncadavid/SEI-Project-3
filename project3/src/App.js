@@ -97,6 +97,7 @@ function App(props) {
                     currentTripSelections={currentTripSelections} 
                     setCurrentTripSelections={setCurrentTripSelections}
                     currentSearchPlace={currentSearchPlace}
+                    currentUser={currentUser}
                   />
                 :
                   <Redirect to="/" />

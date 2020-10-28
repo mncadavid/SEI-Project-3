@@ -55,6 +55,7 @@ function ResultsPage(props){
                 handleDetailsClick={handleDetailsClick}
                 handleRemoveFromTrip={handleRemoveFromTrip}
                 currentSearchPlace={props.currentSearchPlace}
+                currentUser={props.currentUser}
             />
             <ResultsContainer 
                 handleDetailsClick={handleDetailsClick} 
