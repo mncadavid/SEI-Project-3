@@ -6,6 +6,8 @@ import classStyles from './Style/classStyle';
 import SaveIcon from '@material-ui/icons/Save';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
+
 
 function a11yProps(index) {
     return {
@@ -15,6 +17,7 @@ function a11yProps(index) {
 }
 
 function TripContainer(props) {
+    const history = useHistory();
 
     const TabPanel = (tabProps) => {
         const { children, value, index, ...other} = tabProps;
@@ -54,7 +57,7 @@ function TripContainer(props) {
             <AppBar position='sticky' className={styles.tripAppBar}>
                 <Box className={styles.tripBarHeader}>
                     <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
-                    <Button onClick={props.saveData} disabled={!props.currentUser}><SaveIcon/></Button>
+                    <Button onClick={props.handleSaveData} disabled={!props.currentUser}><SaveIcon/></Button>
                     <Link to="/"><AddLocationIcon color="secondary"/></Link>
                 </Box>
                 <Tabs 

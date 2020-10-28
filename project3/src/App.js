@@ -65,15 +65,24 @@ function App(props) {
   const handleLogout = () => {
     firebase.auth().signOut()
     .then(resp => {
-      setCurrentUser(null)
+      setCurrentUser(null);
+      setCurrentTripSelections([]);
     })
+  }
+
+  const handleSaveData = () => {
+    const uid = firebase.auth().currentUser.uid;
+    firebase.database().ref('trips/'+uid).set(currentTripSelections)
   }
 
   const styles = classStyles();
 
   return (
     <div className={styles.mainWrapper}>
-      <Header currentUser={currentUser} handleLogout={handleLogout}/>
+      <Header 
+        currentUser={currentUser} 
+        handleLogout={handleLogout}
+      />
       {mapLoaded ?
         <div className={styles.homePageWrapper}>
           <Route 
@@ -97,7 +106,11 @@ function App(props) {
                     currentTripSelections={currentTripSelections} 
                     setCurrentTripSelections={setCurrentTripSelections}
                     currentSearchPlace={currentSearchPlace}
+<<<<<<< HEAD
                     currentUser={currentUser}
+=======
+                    handleSaveData={handleSaveData}
+>>>>>>> main
                   />
                 :
                   <Redirect to="/" />
@@ -107,7 +120,7 @@ function App(props) {
           />
           <Route
             exact path='/login'
-            render={()=><LogIn setCurrentUser={setCurrentUser}/>}
+            render={()=><LogIn setCurrentUser={setCurrentUser} setCurrentTripSelections={setCurrentTripSelections}/>}
           />
           <Route
             exact path='/signup'

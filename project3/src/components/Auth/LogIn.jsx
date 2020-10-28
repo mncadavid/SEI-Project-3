@@ -27,13 +27,13 @@ function LogIn(props) {
         /*global firebase*/
         firebase.auth().signInWithEmailAndPassword(values.email,values.password)
         .then(resp=>{
-            console.log(resp);
             setErrorMessage(null);
             props.setCurrentUser(resp.user)
+            const tripData = firebase.database().ref('trips/'+resp.user.uid).once('value')
+            .then(snapshot=>props.setCurrentTripSelections(snapshot.val()))
             handleClose();
         })
         .catch(err=>{
-            console.log(err);
             setErrorMessage(err.message);
         })
 
