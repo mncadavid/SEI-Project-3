@@ -100,7 +100,7 @@ const classStyles = makeStyles((theme) => ({
     tripBarHeader: {
         display: 'flex',
         justifyContent: 'space-between',
-        width: '50%',
+        width: '80%',
         alignItems: 'center',
         paddingTop: '10px'
     },

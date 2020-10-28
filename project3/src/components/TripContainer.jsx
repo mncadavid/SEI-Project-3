@@ -3,6 +3,7 @@ import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
 import { AppBar, Typography, Tabs, Tab, Box, Button } from '@material-ui/core';
 import classStyles from './Style/classStyle';
+import {useHistory} from 'react-router-dom';
 
 function a11yProps(index) {
     return {
@@ -12,6 +13,7 @@ function a11yProps(index) {
 }
 
 function TripContainer(props) {
+    const history = useHistory();
 
     const TabPanel = (tabProps) => {
         const { children, value, index, ...other} = tabProps;
@@ -44,6 +46,10 @@ function TripContainer(props) {
         setValue(value);
     }
 
+    const handleAdd = () => {
+        history.push('/')
+    }
+
     const styles = classStyles();
 
     return(
@@ -51,7 +57,8 @@ function TripContainer(props) {
             <AppBar position='sticky' className={styles.tripAppBar}>
                 <Box className={styles.tripBarHeader}>
                     <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
-                    <Button variant='contained' onClick={props.saveData}>Save Changes</Button>
+                    <Button variant='contained' onClick={props.handleSaveData}>Save Changes</Button>
+                    <Button variant='contained' onClick={handleAdd}>Add A Destination</Button>
                 </Box>
                 <Tabs 
                     value={value} 
