@@ -55,7 +55,7 @@ function TripContainer(props) {
                 <Box className={styles.tripBarHeader}>
                     <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
                     <Button onClick={props.saveData} disabled={!props.currentUser}><SaveIcon/></Button>
-                    <Link to="/"><AddLocationIcon color="action"/></Link>
+                    <Link to="/"><AddLocationIcon color="secondary"/></Link>
                 </Box>
                 <Tabs 
                     value={value} 
