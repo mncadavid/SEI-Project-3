@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const classStyles = makeStyles((theme) => ({
     // root: {
     //   flexGrow: 1
@@ -139,7 +140,52 @@ const classStyles = makeStyles((theme) => ({
     },
     placeName: {
         margin: '5px'
-    }
+    },
+    conditionalContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    priceLevel: {
+        display: 'flex'
+    },
+    carouselImage: {
+        margin: '0 auto'
+    },
+    detailedCard: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'nowrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+        border: 'solid black 1px',
+        minHeight: '50px',
+        margin: '5px auto',
+        background: 'white',
+        position: 'relative',
+        borderRadius: '10px',
+        boxShadow: '1px 1px 10px 1px black',
+        width: '500px',
+        height: '700px '
+    },
+    close: {
+        position: 'absolute',
+        top: '0',
+        right: '0'
+    },
+    placeCard:{
+        display: 'flex',
+        alignItems: 'center'
+    },
+    placeCardInner: {
+        width: '50%'
+    },
+    rating: {
+        width: '15%',
+        paddingLeft: '20px'
+    },
+
 }));
 
 export default classStyles;

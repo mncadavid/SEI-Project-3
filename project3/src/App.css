@@ -1,36 +1,6 @@
-.results-container{
-  display: flex;
-  flex-direction: column;
-}
-.place-card{
-  display: flex;
-  align-items: center;
-}
-.rating{
-  width: 15%;
-  padding-left: 20px;
-}
-.place-card-inner{
-  width: 50%;
-}
-.details-card{
-  height: 100vh;
-  width: 100vw;
-  z-index: 1;
-}
 #map {
     width: 40%;
     height: 60vh;
-}
-
-.conditional-content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.price-level{
-  display: flex;
 }
 .Carousel-root-18{
   min-height: 400px;
@@ -42,7 +12,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.carousel-image{
-  margin: 0 auto;
 }

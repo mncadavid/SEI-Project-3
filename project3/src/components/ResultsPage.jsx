@@ -3,7 +3,9 @@ import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
 import Modal from '@material-ui/core/Modal';
-import classStyles from './Style/classStyle'
+import Fade from '@material-ui/core/Fade';
+import classStyles from './Style/classStyle';
+import { Backdrop } from '@material-ui/core';
 
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
@@ -62,9 +64,11 @@ function ResultsPage(props){
                 displayPlaceName={props.currentSearchPlace.name}
             />
             {details.clicked && 
-                <Modal open={details.clicked} 
-                    onClose={(e)=>closeDetailsCard(e)}>
-                        <DetailedPlaceCard open={details.clicked} place={details.place} closeDetailsCard={closeDetailsCard}/></Modal>}
+                <Modal open={details.clicked}
+                    onClose={(e)=>closeDetailsCard(e)} closeAfterTransition
+                    BackdropComponent={Backdrop} BackdropProps={{timeout: 2000}}>
+                        <Fade in={details.clicked}>
+                        <DetailedPlaceCard open={details.clicked} place={details.place} closeDetailsCard={closeDetailsCard}/></Fade></Modal>}
         </div>
     )
 }
