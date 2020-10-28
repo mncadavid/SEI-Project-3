@@ -2,8 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const classStyles = makeStyles((theme) => ({
     // root: {
-    //   flexGrow: 1,
+    //   flexGrow: 1
     // },
+    header: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -71,7 +76,28 @@ const classStyles = makeStyles((theme) => ({
         minHeight: '135px',
         justifyContent: 'space-between',
         padding: '10px 10px'
-      }
+    },
+    loginModal: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    loginBox: {
+        background: 'white',
+        border: '1px solid black',
+        borderRadius: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px'
+    },
+    loginForm: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 }));
 
 export default classStyles;

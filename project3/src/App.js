@@ -5,6 +5,8 @@ import Header from './components/Header';
 import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
+import LogIn from './components/Auth/LogIn';
+import SignUp from './components/Auth/SignUp';
 
 // import Container from '@material-ui/core/Container';
 import classStyles from './components/Style/classStyle';
@@ -25,17 +27,19 @@ function App(props) {
       document.body.appendChild(script);
 
       script.onload = () => {
-        new window.google.maps.Map(
-          document.querySelector('#map'), 
-          {
-              center: {
-                  lat: 38.478320,
-                  lng: -97.866323
-              }, 
-              zoom: 4
-          }
-        );
-        setMapLoaded(true);
+        if(!mapLoaded) {
+          new window.google.maps.Map(
+            document.querySelector('#map'), 
+            {
+                center: {
+                    lat: 38.478320,
+                    lng: -97.866323
+                }, 
+                zoom: 4
+            }
+          );
+          setMapLoaded(true);
+        }
       }
     }
 
@@ -76,7 +80,7 @@ function App(props) {
             } 
           />
           <Route 
-            path='/results' 
+            exact path='/results' 
             render={()=> {
               return <>
                 {Object.keys(searchResults).length !== 0 && searchResults !== null ?
@@ -91,6 +95,10 @@ function App(props) {
                 }
               </>
             }} 
+          />
+          <Route
+            exact path='/login'
+            component={LogIn}
           />
         </div>
       : 'Map API loading...' }
