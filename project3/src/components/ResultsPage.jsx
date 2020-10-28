@@ -52,13 +52,14 @@ function ResultsPage(props){
                 setCurrentTripSelections={props.setCurrentTripSelections}
                 handleDetailsClick={handleDetailsClick}
                 handleRemoveFromTrip={handleRemoveFromTrip}
+                currentSearchPlace={props.currentSearchPlace}
             />
             <ResultsContainer 
                 handleDetailsClick={handleDetailsClick} 
                 results={props.results}
                 handleAddToTrip={handleAddToTrip}
                 isDisabled={isDisabled}
-                displayPlaceName={props.currentSearchPlace.formatted_address}
+                displayPlaceName={props.currentSearchPlace.name}
             />
             {details.clicked && 
                 <Modal open={details.clicked} 

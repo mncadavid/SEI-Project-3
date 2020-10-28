@@ -38,8 +38,9 @@ function TripContainer(props) {
             </Box>
         )
     }
-
-    const [value,setValue] = useState(props.currentTripSelections.length-1);
+console.log(props.currentSearchPlace);
+console.log(props.currentTripSelections);
+    const [value,setValue] = useState(props.currentTripSelections.findIndex(location => location.placeAddress === props.currentSearchPlace.formatted_address));
 
     const handleChange = (event,value) => {
         setValue(value);
