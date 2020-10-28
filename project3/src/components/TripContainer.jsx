@@ -49,7 +49,7 @@ function TripContainer(props) {
 
     return(
         <Paper elevation={3} className={styles.tripPane}>
-            <AppBar position='static'>
+            <AppBar position='sticky'>
                 <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
                 <Tabs 
                     value={value} 
