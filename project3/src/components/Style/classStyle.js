@@ -71,6 +71,12 @@ const classStyles = makeStyles((theme) => ({
         minHeight: '135px',
         justifyContent: 'space-between',
         padding: '10px 10px'
+    },
+    footer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '10px 25px'
       }
 }));
 
