@@ -22,7 +22,11 @@ function ResultsPage(props){
     }
 
     const handleAddToTrip = (place) => {
-        currentLocationData.selections.push(place);
+        currentLocationData.selections.push({
+            name: place.name,
+            place_id: place.place_id,
+            icon: place.icon
+        });
 
         const allLocationData = props.currentTripSelections;
         allLocationData[currentLocationIndex] = currentLocationData;
@@ -55,6 +59,7 @@ function ResultsPage(props){
                 handleDetailsClick={handleDetailsClick}
                 handleRemoveFromTrip={handleRemoveFromTrip}
                 currentSearchPlace={props.currentSearchPlace}
+                handleSaveData={props.handleSaveData}
             />
             <ResultsContainer 
                 handleDetailsClick={handleDetailsClick} 
