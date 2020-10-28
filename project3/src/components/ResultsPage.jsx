@@ -6,7 +6,8 @@ import Modal from '@material-ui/core/Modal';
 import classStyles from './Style/classStyle'
 
 function ResultsPage(props){
-    const [details, setDetails] = useState({clicked: false, place: null});const [currentLocationData,] = useState(props.currentTripSelections.find(location => location.placeName === props.currentSearchPlace.vicinity))
+    const [details, setDetails] = useState({clicked: false, place: null});
+    const [currentLocationData,] = useState(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
     const [currentLocationIndex,] = useState(props.currentTripSelections.indexOf(currentLocationData))
     
     const handleDetailsClick = (place) => {
@@ -39,7 +40,7 @@ function ResultsPage(props){
     }
 
     const isDisabled = (place) => {
-        return currentLocationData.selections.includes(place);
+        return currentLocationData.selections.some(location => location.place_id === place.place_id);
     }
 
     const styles = classStyles();
