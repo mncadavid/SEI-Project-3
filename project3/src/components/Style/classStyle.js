@@ -78,7 +78,15 @@ const classStyles = makeStyles((theme) => ({
         alignItems: 'center',
         padding: '10px 25px',
         backgroundColor: 'lightgrey'
+    },
+    infoButton: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    placeName: {
+        margin: '5px'
     }
+
 }));
 
 export default classStyles;
