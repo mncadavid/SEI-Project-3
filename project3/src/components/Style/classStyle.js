@@ -126,6 +126,20 @@ const classStyles = makeStyles((theme) => ({
         marginTop: '10px !important',
         marginBottom: '15px !important'
     }
+    footer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '10px 25px',
+        backgroundColor: 'lightgrey'
+    },
+    infoButton: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    placeName: {
+        margin: '5px'
+    }
 }));
 
 export default classStyles;

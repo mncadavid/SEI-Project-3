@@ -6,14 +6,20 @@ import classStyles from './Style/classStyle';
 
 const SelectedPlaceCards = (props) => {
     const styles = classStyles();
+    const classes = classStyles();
 
     return(
         <Card variant="outlined" className={styles.selectedPlaceCard}>
-            <img src={props.place.icon} alt='something that needs something' />
-            <p>{props.place.name}</p>
-            <Icon color="primary"
-                onClick={() => props.handleDetailsClick(props.place)}>zoom_in</Icon>
-            <Button onClick={props.handleRemoveFromTrip} variant="contained" color="primary">Remove</Button>
+
+            <img src={props.place.icon} alt='{props.place.name}' />
+            <div className={classes.placeName}>
+                <p>{props.place.name}</p>
+            </div>
+            <div className={classes.infoButton}>
+                <Icon color="primary"
+                    onClick={() => props.handleDetailsClick(props.place)}>zoom_in</Icon>
+                <Button onClick={props.handleRemoveFromTrip} variant="contained" color="primary">Remove</Button>
+            </div>
         </Card>
     )
 }

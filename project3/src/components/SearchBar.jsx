@@ -28,7 +28,6 @@ function SearchBar(props) {
         setPlace(place);
     
         if (place.geometry !== undefined){
-            // console.log(place.geometry);
         typeArray.forEach(type => {
           const options = {
               radius: 10000, 
@@ -51,7 +50,16 @@ function SearchBar(props) {
     const handleClick = (e) => {
         e.preventDefault();
         props.setSearchResults(queriedSearchResults);
-        props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.vicinity, selections: []}])
+        if(props.currentTripSelections.length === 0){
+            props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.name, placeAddress: place.formatted_address, selections: []}])
+        }
+        else{
+            if(props.currentTripSelections.some(selection => selection.placeAddress === place.formatted_address)){
+            }
+            else{
+                props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.name, placeAddress: place.formatted_address, selections: []}])
+            }
+        }
         props.setCurrentSearchPlace(place);
         history.push('/results');
     }
