@@ -96,6 +96,17 @@ const classStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+    },
+    tripBarHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '50%',
+        alignItems: 'center',
+        paddingTop: '10px'
+    },
+    tripAppBar: {
+        display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center'
     }
 }));

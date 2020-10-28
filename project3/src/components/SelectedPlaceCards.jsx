@@ -9,11 +9,11 @@ const SelectedPlaceCards = (props) => {
 
     return(
         <Card variant="outlined" className={styles.selectedPlaceCard}>
-            <img src={props.selection.icon} alt='something that needs something' />
-            <p>{props.selection.name}</p>
+            <img src={props.place.icon} alt='something that needs something' />
+            <p>{props.place.name}</p>
             <Icon color="primary"
-                onClick={() => props.handleDetailsClick(props.selection)}>zoom_in</Icon>
-            <Button onClick={() => props.handleRemove(props.selection.id)} variant="contained" color="primary">Remove</Button>
+                onClick={() => props.handleDetailsClick(props.place)}>zoom_in</Icon>
+            <Button onClick={props.handleRemoveFromTrip} variant="contained" color="primary">Remove</Button>
         </Card>
     )
 }

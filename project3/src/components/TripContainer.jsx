@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
-import { AppBar, Typography, Tabs, Tab, Box } from '@material-ui/core';
+import { AppBar, Typography, Tabs, Tab, Box, Button } from '@material-ui/core';
 import classStyles from './Style/classStyle';
 
 function a11yProps(index) {
@@ -26,21 +26,17 @@ function TripContainer(props) {
                 {...other}
             >
                 {value === index && (
-                    props.currentTripSelections[index].selections.map((selection,id) => {
+                    props.currentTripSelections[index].selections.map((place,id) => {
                         return <SelectedPlaceCards 
-                            selection={selection} 
+                            place={place} 
                             key={id} 
-                            handleRemove={handleRemove}
+                            handleRemoveFromTrip={()=>props.handleRemoveFromTrip(place)}
                             handleDetailsClick={props.handleDetailsClick}
                         />
                     })
                 )}
             </Box>
         )
-    }
-
-    const handleRemove = (id) => {
-        alert("Remove button connected")
     }
 
     const [value,setValue] = useState(props.currentTripSelections.length-1);
@@ -53,8 +49,11 @@ function TripContainer(props) {
 
     return(
         <Paper elevation={3} className={styles.tripPane}>
-            <AppBar position='static'>
-                <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
+            <AppBar position='sticky' className={styles.tripAppBar}>
+                <Box className={styles.tripBarHeader}>
+                    <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
+                    <Button variant='contained' onClick={props.saveData}>Save Changes</Button>
+                </Box>
                 <Tabs 
                     value={value} 
                     onChange={handleChange} 
