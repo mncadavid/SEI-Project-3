@@ -46,3 +46,10 @@
 .carousel-image{
   margin: 0 auto;
 }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+}
