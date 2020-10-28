@@ -125,7 +125,7 @@ const classStyles = makeStyles((theme) => ({
     submitButton: {
         marginTop: '10px !important',
         marginBottom: '15px !important'
-    }
+    },
     footer: {
         display: 'flex',
         justifyContent: 'space-between',
