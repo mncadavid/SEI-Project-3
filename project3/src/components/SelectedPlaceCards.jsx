@@ -9,7 +9,7 @@ const SelectedPlaceCards = (props) => {
 
     return(
         <Card variant="outlined" className={styles.selectedPlaceCard}>
-            <img src={props.place.icon} alt='something that needs something' />
+            <img src={props.place.icon} alt={props.place.name} />
             <p>{props.place.name}</p>
             <Icon color="primary"
                 onClick={() => props.handleDetailsClick(props.place)}>zoom_in</Icon>
