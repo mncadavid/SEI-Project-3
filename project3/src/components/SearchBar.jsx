@@ -61,7 +61,7 @@ function SearchBar(props) {
             }
         }
         props.setCurrentSearchPlace(place);
-        history.push('/results/restaurants');
+        history.push('/results');
     }
 
     return (

@@ -5,6 +5,8 @@ import Header from './components/Header';
 import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
+import LogIn from './components/Auth/LogIn';
+import SignUp from './components/Auth/SignUp';
 
 // import Container from '@material-ui/core/Container';
 import classStyles from './components/Style/classStyle';
@@ -14,6 +16,7 @@ function App(props) {
   const [mapLoaded,setMapLoaded] = useState(false);
   const [currentTripSelections,setCurrentTripSelections] = useState([]);
   const [currentSearchPlace,setCurrentSearchPlace] = useState({});
+  const [currentUser,setCurrentUser] = useState(null);
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -25,17 +28,19 @@ function App(props) {
       document.body.appendChild(script);
 
       script.onload = () => {
-        new window.google.maps.Map(
-          document.querySelector('#map'), 
-          {
-              center: {
-                  lat: 38.478320,
-                  lng: -97.866323
-              }, 
-              zoom: 4
-          }
-        );
-        setMapLoaded(true);
+        if(!mapLoaded) {
+          new window.google.maps.Map(
+            document.querySelector('#map'), 
+            {
+                center: {
+                    lat: 38.478320,
+                    lng: -97.866323
+                }, 
+                zoom: 4
+            }
+          );
+          setMapLoaded(true);
+        }
       }
     }
 
@@ -57,11 +62,18 @@ function App(props) {
     }
   })
 
+  const handleLogout = () => {
+    firebase.auth().signOut()
+    .then(resp => {
+      setCurrentUser(null)
+    })
+  }
+
   const styles = classStyles();
 
   return (
     <div className={styles.mainWrapper}>
-      <Header />
+      <Header currentUser={currentUser} handleLogout={handleLogout}/>
       {mapLoaded ?
         <div className={styles.homePageWrapper}>
           <Route 
@@ -76,7 +88,7 @@ function App(props) {
             } 
           />
           <Route 
-            path='/results' 
+            exact path='/results' 
             render={()=> {
               return <>
                 {Object.keys(searchResults).length !== 0 && searchResults !== null ?
@@ -91,6 +103,14 @@ function App(props) {
                 }
               </>
             }} 
+          />
+          <Route
+            exact path='/login'
+            render={()=><LogIn setCurrentUser={setCurrentUser}/>}
+          />
+          <Route
+            exact path='/signup'
+            render={()=><SignUp setCurrentUser={setCurrentUser}/>}
           />
         </div>
       : 'Map API loading...' }

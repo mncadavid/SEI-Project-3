@@ -3,8 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const classStyles = makeStyles((theme) => ({
     // root: {
-    //   flexGrow: 1,
+    //   flexGrow: 1
     // },
+    header: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -72,6 +77,55 @@ const classStyles = makeStyles((theme) => ({
         minHeight: '135px',
         justifyContent: 'space-between',
         padding: '10px 10px'
+    },
+    loginModal: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    loginBox: {
+        background: 'white',
+        border: '1px solid black',
+        borderRadius: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px'
+    },
+    loginForm: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
+    tripBarHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '50%',
+        alignItems: 'center',
+        paddingTop: '10px'
+    },
+    tripAppBar: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    formInput: {
+        margin: '10px 0 !important',
+        width: '35ch'
+    },
+    loginHeader: {
+        width: '80%',
+        background: theme.palette.primary.main,
+        borderRadius: '15px',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'white',
+        padding: '10px'
+    },
+    submitButton: {
+        marginTop: '10px !important',
+        marginBottom: '15px !important'
     },
     footer: {
         display: 'flex',
