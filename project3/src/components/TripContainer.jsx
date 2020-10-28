@@ -26,21 +26,17 @@ function TripContainer(props) {
                 {...other}
             >
                 {value === index && (
-                    props.currentTripSelections[index].selections.map((selection,id) => {
+                    props.currentTripSelections[index].selections.map((place,id) => {
                         return <SelectedPlaceCards 
-                            selection={selection} 
+                            place={place} 
                             key={id} 
-                            handleRemove={handleRemove}
+                            handleRemoveFromTrip={()=>props.handleRemoveFromTrip(place)}
                             handleDetailsClick={props.handleDetailsClick}
                         />
                     })
                 )}
             </Box>
         )
-    }
-
-    const handleRemove = (id) => {
-        alert("Remove button connected")
     }
 
     const [value,setValue] = useState(props.currentTripSelections.length-1);
