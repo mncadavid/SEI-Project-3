@@ -44,7 +44,7 @@ function ResultsContainer(props){
 
     return(
         <Paper elevation={3} className={styles.selectionPane}>
-            <AppBar position='static'>
+            <AppBar position='sticky'>
                 <Typography className={styles.centerTitle} variant='h6'>{props.displayPlaceName}</Typography>
                 <Tabs
                     value={value}
