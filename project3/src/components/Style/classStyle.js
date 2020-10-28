@@ -77,8 +77,8 @@ const classStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '10px 25px',
-        backgroundColor: 'lightGrey'
-      }
+        backgroundColor: 'lightgrey'
+    }
 }));
 
 export default classStyles;
