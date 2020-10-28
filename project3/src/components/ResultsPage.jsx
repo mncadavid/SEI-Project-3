@@ -9,6 +9,7 @@ import { Backdrop } from '@material-ui/core';
 
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
+    ///I think a conditional could go here to just choose the first saved location if they are logged in.
     const [currentLocationData,] = useState(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
     const [currentLocationIndex,] = useState(props.currentTripSelections.indexOf(currentLocationData))
     

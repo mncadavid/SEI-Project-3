@@ -32,6 +32,7 @@ function LogIn(props) {
             const tripData = firebase.database().ref('trips/'+resp.user.uid).once('value')
             .then(snapshot=>props.setCurrentTripSelections(snapshot.val()))
             handleClose();
+            history.push('/');
         })
         .catch(err=>{
             setErrorMessage(err.message);

@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
-import {Route, Redirect} from 'react-router-dom';
+import {Route, Redirect, useHistory} from 'react-router-dom';
 import Header from './components/Header';
 import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
@@ -8,10 +8,12 @@ import SearchBar from './components/SearchBar';
 import LogIn from './components/Auth/LogIn';
 import SignUp from './components/Auth/SignUp';
 
+
 // import Container from '@material-ui/core/Container';
 import classStyles from './components/Style/classStyle';
 
 function App(props) {
+  const history = useHistory();
   const [searchResults,setSearchResults] = useState({});
   const [mapLoaded,setMapLoaded] = useState(false);
   const [currentTripSelections,setCurrentTripSelections] = useState([]);
@@ -71,8 +73,13 @@ function App(props) {
   }
 
   const handleSaveData = () => {
-    const uid = firebase.auth().currentUser.uid;
-    firebase.database().ref('trips/'+uid).set(currentTripSelections)
+    if(currentUser !== null){
+      const uid = firebase.auth().currentUser.uid;
+      firebase.database().ref('trips/'+uid).set(currentTripSelections)
+    }
+    else{
+      history.push('/login');
+    }
   }
 
   const styles = classStyles();

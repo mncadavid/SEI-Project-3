@@ -50,7 +50,10 @@ function SearchBar(props) {
     const handleClick = (e) => {
         e.preventDefault();
         props.setSearchResults(queriedSearchResults);
-        if(props.currentTripSelections.length === 0){
+        if(props.currentTripSelections === null){
+            props.setCurrentTripSelections([{placeName: place.name, placeAddress: place.formatted_address, selections: []}]);
+        }
+        else if(props.currentTripSelections.length === 0){
             props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.name, placeAddress: place.formatted_address, selections: []}])
         }
         else{
@@ -63,6 +66,7 @@ function SearchBar(props) {
         props.setCurrentSearchPlace(place);
         history.push('/results');
     }
+    console.log(props.currentTripSelections);
 
     return (
         <>

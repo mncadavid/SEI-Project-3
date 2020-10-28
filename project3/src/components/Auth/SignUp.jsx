@@ -113,6 +113,7 @@ function SignUp(props) {
                         className={styles.submitButton}
                     >Sign Up</Button>
                 </form>
+                <Link to='/login'>Already a user? Log in!</Link>
             </Box>
         </Modal>
     )
