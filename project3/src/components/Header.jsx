@@ -27,7 +27,7 @@ function Header(props){
                     </IconButton> */}
                     <Link to='/' style={{textDecoration:'none'}}>
                         <Typography variant="h6" className={classes.title}>
-                            Project 3
+                            Quarantine N' Dream
                         </Typography>
                     </Link>
                     {!props.currentUser ?
