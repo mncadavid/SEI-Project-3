@@ -10,7 +10,8 @@ const SelectedPlaceCards = (props) => {
 
     return(
         <Card variant="outlined" className={styles.selectedPlaceCard}>
-            <img src={props.place.icon} alt='something that needs something' />
+
+            <img src={props.place.icon} alt='{props.place.name}' />
             <div className={classes.placeName}>
                 <p>{props.place.name}</p>
             </div>
