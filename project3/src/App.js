@@ -16,6 +16,7 @@ function App(props) {
   const [mapLoaded,setMapLoaded] = useState(false);
   const [currentTripSelections,setCurrentTripSelections] = useState([]);
   const [currentSearchPlace,setCurrentSearchPlace] = useState({});
+  const [currentUser,setCurrentUser] = useState(null);
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -61,11 +62,18 @@ function App(props) {
     }
   })
 
+  const handleLogout = () => {
+    firebase.auth().signOut()
+    .then(resp => {
+      setCurrentUser(null)
+    })
+  }
+
   const styles = classStyles();
 
   return (
     <div className={styles.mainWrapper}>
-      <Header />
+      <Header currentUser={currentUser} handleLogout={handleLogout}/>
       {mapLoaded ?
         <div className={styles.homePageWrapper}>
           <Route 
@@ -98,7 +106,11 @@ function App(props) {
           />
           <Route
             exact path='/login'
-            component={LogIn}
+            render={()=><LogIn setCurrentUser={setCurrentUser}/>}
+          />
+          <Route
+            exact path='/signup'
+            render={()=><SignUp setCurrentUser={setCurrentUser}/>}
           />
         </div>
       : 'Map API loading...' }

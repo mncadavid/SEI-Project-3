@@ -1,7 +1,6 @@
-import { Box, IconButton, InputAdornment, Modal, TextField,OutlinedInput } from '@material-ui/core';
-import { Visibility,VisibilityOff } from '@material-ui/icons';
+import { Box, Modal, TextField, Typography,Button } from '@material-ui/core';
 import React,{useState} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import classStyles from '../Style/classStyle';
 
 function LogIn(props) {
@@ -11,6 +10,7 @@ function LogIn(props) {
         password: '',
         showPassword: false
     })
+    const [errorMessage,setErrorMessage] = useState(null);
     const history = useHistory();
 
     const handleClose = () => {
@@ -22,6 +22,23 @@ function LogIn(props) {
         setValues({...values,[e.target.name]:e.target.value})
     }
 
+    const authenticateUser = (e) => {
+        e.preventDefault();
+        /*global firebase*/
+        firebase.auth().signInWithEmailAndPassword(values.email,values.password)
+        .then(resp=>{
+            console.log(resp);
+            setErrorMessage(null);
+            props.setCurrentUser(resp.user)
+            handleClose();
+        })
+        .catch(err=>{
+            console.log(err);
+            setErrorMessage(err.message);
+        })
+
+    }
+
     const styles = classStyles();
 
     return (
@@ -31,7 +48,10 @@ function LogIn(props) {
             className={styles.loginModal}
         >
             <Box className={styles.loginBox}>
-                <form className={styles.loginForm}>
+                <Box className={styles.loginHeader}>
+                    <Typography variant='h5'>User Login</Typography>
+                </Box>
+                <form className={styles.loginForm} onSubmit={(e)=>authenticateUser(e)}>
                     <TextField 
                         id='emailField' 
                         label='Email' 
@@ -39,6 +59,10 @@ function LogIn(props) {
                         value={values.email}
                         variant='outlined' 
                         onChange={(e)=>handleChange(e)}
+                        className={styles.formInput}
+                        error={!!errorMessage}
+                        helperText={errorMessage ? errorMessage : ''}
+                        autoFocus
                     />
                     <TextField 
                         id='passwordField' 
@@ -48,21 +72,20 @@ function LogIn(props) {
                         variant='outlined'
                         type={values.showPassword ? 'text' : 'password'}
                         onChange={(e)=>handleChange(e)}
-                        // endAdornment={
-                        //     <InputAdornment position='end'>
-                        //         <IconButton
-                        //             aria-label='toggle password visibility'
-                        //             onClick={setValues({...values,showPassword: !values.showPassword})}
-                        //             onMouseDown={(e)=>e.preventDefault()}
-                        //             edge='end'
-                        //         >
-                        //             {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                        //         </IconButton>
-                        //     </InputAdornment>
-                        // }
+                        className={styles.formInput}
+                        error={!!errorMessage}
+                        helperText={errorMessage ? errorMessage : ''}
                     />
-                    
+                    <Button 
+                        type='submit' 
+                        variant='contained' 
+                        color="primary"
+                        className={styles.submitButton}
+                    >Login</Button>
                 </form>
+                <Box>
+                    <Typography variant='body1'><Link to='/signup'>Not a user? Sign up here!</Link></Typography>
+                </Box>
             </Box>
         </Modal>
     )

@@ -108,6 +108,23 @@ const classStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
+    },
+    formInput: {
+        margin: '10px 0 !important',
+        width: '35ch'
+    },
+    loginHeader: {
+        width: '80%',
+        background: theme.palette.primary.main,
+        borderRadius: '15px',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'white',
+        padding: '10px'
+    },
+    submitButton: {
+        marginTop: '10px !important',
+        marginBottom: '15px !important'
     }
 }));
 

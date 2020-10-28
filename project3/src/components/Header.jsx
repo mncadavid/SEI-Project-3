@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Button} from '@material-ui/core';
 
-function Header(){
+function Header(props){
     const classes = classStyles();
     const history = useHistory();
 
@@ -30,7 +30,11 @@ function Header(){
                             Project 3
                         </Typography>
                     </Link>
-                    <Button color="inherit" onClick={handleClick}>Login</Button>
+                    {!props.currentUser ?
+                        <Button color="inherit" onClick={handleClick}>Login</Button>
+                    :
+                        <Button color="inherit" onClick={props.handleLogout}>Logout {props.currentUser.displayName}</Button>
+                    }   
                 </Toolbar>
             </AppBar>
         </div>

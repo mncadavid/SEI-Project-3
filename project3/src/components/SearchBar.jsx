@@ -28,7 +28,7 @@ function SearchBar(props) {
         setPlace(place);
     
         if (place.geometry !== undefined){
-            console.log(place.geometry);
+            // console.log(place.geometry);
         typeArray.forEach(type => {
           const options = {
               radius: 10000, 
@@ -53,7 +53,7 @@ function SearchBar(props) {
         props.setSearchResults(queriedSearchResults);
         props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.vicinity, selections: []}])
         props.setCurrentSearchPlace(place);
-        history.push('/results/restaurants');
+        history.push('/results');
     }
 
     return (
