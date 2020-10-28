@@ -25,11 +25,10 @@ function ResultsContainer(props){
             >
                 {value === index && (
                     <PlaceCardContainer 
-                        setCurrentTripSelections={props.setCurrentTripSelections}  
-                        currentTripSelections={props.currentTripSelections}
                         results={props.results[tabProps.type]}
                         handleDetailsClick={props.handleDetailsClick}
-                        currentSearchPlace={props.currentSearchPlace}
+                        handleAddToTrip={props.handleAddToTrip}
+                        isDisabled={props.isDisabled}
                     />
                 )}
             </div>
@@ -46,7 +45,7 @@ function ResultsContainer(props){
     return(
         <Paper elevation={3} className={styles.selectionPane}>
             <AppBar position='static'>
-                <Typography className={styles.centerTitle} variant='h6'>{props.currentSearchPlace.formatted_address}</Typography>
+                <Typography className={styles.centerTitle} variant='h6'>{props.displayPlaceName}</Typography>
                 <Tabs
                     value={value}
                     onChange={handleChange}
