@@ -1,10 +1,13 @@
 import React from 'react';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 
 function Footer(){
     return(
         <footer>
-            <p>&#169;2020</p>
+            <BottomNavigation>
+                <p>&#169;2020 Cadavid -- Martin -- Lagerhausen</p>
+            </BottomNavigation>
         </footer>
     )
 }
