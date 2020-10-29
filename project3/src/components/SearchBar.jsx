@@ -15,7 +15,7 @@ function SearchBar(props) {
 
     const history = useHistory();
 
-
+    // Used to auto complete your search results from google
     useEffect(()=>{
         const autocomplete = new window.google.maps.places.Autocomplete(document.querySelector('#searchBox'));
         
@@ -57,6 +57,7 @@ function SearchBar(props) {
         setQueriedSearchResults(currentState);
     }
 
+    // Pushes the searched location data for use later on
     const handleClick = (e) => {
         e.preventDefault();
         if(props.currentTripData.length === 0){

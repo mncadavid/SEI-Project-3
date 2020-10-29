@@ -76,7 +76,7 @@ function ResultsPage(props){
                 results={props.currentTripData[currentLocationIndex].results}
                 handleAddToTrip={handleAddToTrip}
                 isDisabled={isDisabled}
-                displayPlaceName={props.currentTripData[currentLocationIndex].name}
+                displayPlaceName={props.currentTripData[currentLocationIndex].placeName}
             />
             {details.clicked && 
                 <Modal open={details.clicked}
