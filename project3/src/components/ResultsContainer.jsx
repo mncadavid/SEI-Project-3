@@ -10,6 +10,8 @@ function a11yProps(index) {
     }
 }
 
+// ResultsContainer is displayed within the ResultsPage and has
+// selected location results that fall within the perameters of 10 mile radius.
 function ResultsContainer(props){
     const [value,setValue] = useState(0);
 
@@ -23,6 +25,7 @@ function ResultsContainer(props){
                 id={`scrollable-auto-tabpanel-${index}`}    
                 aria-labelledby={`scrollable-auto-tab-${index}`}
             >
+                {/* All the information is then passed into the PlaceCardContainer */}
                 {value === index && (
                     <PlaceCardContainer 
                         results={props.results[tabProps.type]}

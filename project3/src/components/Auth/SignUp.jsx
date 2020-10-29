@@ -1,6 +1,5 @@
 import { Box, TextField, Typography,Button } from '@material-ui/core';
 import React,{useState} from 'react';
-import { useHistory} from 'react-router-dom';
 import classStyles from '../Style/classStyle';
 
 function SignUp(props) {
@@ -11,8 +10,6 @@ function SignUp(props) {
         displayName: ''
     })
     const [errorMessage,setErrorMessage] = useState(null)
-
-    const history = useHistory();
 
     const handleChange = (e) => {
         setValues({...values,[e.target.name]:e.target.value})
@@ -102,9 +99,9 @@ function SignUp(props) {
                         className={styles.submitButton}
                     >Sign Up</Button>
                 </form>
-                <a onClick={() => {props.handleSignUpModal();props.handleLogInModal()}}>
+                <p className={styles.auth} onClick={() => {props.handleSignUpModal();props.handleLogInModal()}}>
                     Already a user? Log in!
-                </a>
+                </p>
             </Box>
     )
 }
