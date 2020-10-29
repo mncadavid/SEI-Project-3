@@ -54,7 +54,7 @@ function TripContainer(props) {
             <AppBar position='static' className={styles.tripAppBar}>
                 <Box className={styles.tripBarHeader}>
                     <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
-                    <Button onClick={props.handleSaveData} color="secondary"><SaveIcon/></Button>
+                    <Button onClick={()=>props.handleSaveData(props.currentUserTripIndex)} color="secondary"><SaveIcon/></Button>
                     <Link to="/"><AddLocationIcon color="secondary"/></Link>
                 </Box>
                 <Tabs 

@@ -181,6 +181,10 @@ const classStyles = makeStyles((theme) => ({
         width: '15%',
         paddingLeft: '20px'
     },
+    menuIconBox: {
+        display: 'flex',
+        alignItems: 'center'
+    }
 
 }));
 
