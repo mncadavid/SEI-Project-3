@@ -41,7 +41,6 @@ function ResultsContainer(props){
     }
 
     const styles = classStyles();
- 
     return(
         <Paper elevation={3} className={styles.selectionPane}>
             <AppBar position='sticky'>
