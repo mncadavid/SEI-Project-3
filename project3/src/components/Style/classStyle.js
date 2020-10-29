@@ -169,7 +169,8 @@ const classStyles = makeStyles((theme) => ({
         borderRadius: '10px',
         boxShadow: '1px 1px 10px 1px black',
         width: '500px',
-        height: '700px '
+        height: '700px ',
+        textAlign: 'center'
     },
     close: {
         position: 'absolute',

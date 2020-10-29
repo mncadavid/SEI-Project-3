@@ -22,7 +22,7 @@ function App(props) {
   const [tripName,setTripName] = useState('')
 
   const history=useHistory();
-  
+
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
 
@@ -66,7 +66,9 @@ function App(props) {
     if(!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-  })
+
+    setCurrentUser(firebase.auth().currentUser);
+  }, [mapLoaded])
 
   const handleUpdateTripName = (name) => {
     setTripName(name);
