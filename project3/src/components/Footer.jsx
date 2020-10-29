@@ -1,6 +1,7 @@
 import React from 'react';
 import classStyles from './Style/classStyle';
 
+// This is the footer where developer names are located and links to submitting issue tickets.
 function Footer(){
     const classes = classStyles();
 
