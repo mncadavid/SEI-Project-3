@@ -24,7 +24,7 @@ function LogIn(props) {
             setErrorMessage(null);
             props.setCurrentUser(resp.user)
             const tripData = firebase.database().ref('trips/'+resp.user.uid).once('value')
-            .then(snapshot=>props.setCurrentTripSelections(snapshot.val()))
+            .then(snapshot=>props.setCurrentUserData(snapshot.val()))
             props.handleLogInModal();
         })
         .catch(err=>{

@@ -46,9 +46,9 @@ function SearchBar(props) {
             return {
                 name: result.name,
                 place_id: result.place_id,
-                rating: result.rating,
-                price_level: result.price_level,
-                icon: result.icon,
+                rating: result.rating !== undefined ? result.rating : 0,
+                price_level: result.price_level !== undefined ? result.price_level : 0,
+                icon: result.icon !== undefined ? result.icon: "",
                 lat: result.geometry.location.lat(),
                 lng: result.geometry.location.lng()
             }
@@ -59,14 +59,6 @@ function SearchBar(props) {
 
     const handleClick = (e) => {
         e.preventDefault();
-<<<<<<< HEAD
-        props.setSearchResults(queriedSearchResults);
-        if(props.currentTripSelections === null){
-            props.setCurrentTripSelections([{placeName: place.name, placeAddress: place.formatted_address, selections: []}]);
-        }
-        else if(props.currentTripSelections.length === 0){
-            props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.name, placeAddress: place.formatted_address, selections: []}])
-=======
         if(props.currentTripData.length === 0){
             const tripData = [];
             tripData.push({
@@ -76,7 +68,6 @@ function SearchBar(props) {
                 results: queriedSearchResults
             })
             props.setCurrentTripData(tripData)
->>>>>>> origin/changingDataStructure
         }
         else{
             if(props.currentTripData.some(selection => selection.placeAddress === place.formatted_address)){
@@ -94,7 +85,6 @@ function SearchBar(props) {
         }
         history.push('/results');
     }
-    console.log(props.currentTripSelections);
 
     return (
         <>

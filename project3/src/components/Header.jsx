@@ -12,10 +12,6 @@ function Header(props){
     const classes = classStyles();
     const history = useHistory();
 
-    const handleClick = () => {
-        props.handleLogInModal();
-    }
-
     return(
         <div>
             <AppBar position="static">
@@ -29,9 +25,12 @@ function Header(props){
                         </Typography>
                     </Link>
                     {!props.currentUser ?
-                        <Button color="inherit" onClick={handleClick}>Login</Button>
+                        <Button color="inherit" onClick={props.handleLogInModal}>Login</Button>
                     :
-                        <Button color="inherit" onClick={props.handleLogout}>Logout {props.currentUser.displayName}</Button>
+                        <>
+                            <Button color="inherit" onClick={(e) => props.handleViewSavedTrip(e)}>View My Saved Trip</Button>
+                            <Button color="inherit" onClick={props.handleLogout}>Logout {props.currentUser.displayName}</Button>
+                        </>
                     }   
                 </Toolbar>
             </AppBar>

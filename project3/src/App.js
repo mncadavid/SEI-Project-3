@@ -19,7 +19,8 @@ function App(props) {
   const [currentUser,setCurrentUser] = useState(null);
   const [logInOpen, setLogInOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
-
+  const [currentUserData, setCurrentUserData] = useState(null);
+  const history=useHistory();
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
 
@@ -88,16 +89,20 @@ function App(props) {
   const handleSignUpModal = () => {
     setSignUpOpen(!signUpOpen);
   }
-
+  const handleViewSavedTrip = (e) => {
+    e.preventDefault();
+    if(currentUserData){
+    setCurrentTripData(currentUserData);}
+    history.push("/results");
+  }
   const styles = classStyles();
-  console.log(Object.keys(searchResults).length);
-  console.log(currentSearchPlace);
   return (
     <div className={styles.mainWrapper}>
       <Header 
         currentUser={currentUser} 
         handleLogout={handleLogout}
         handleLogInModal={handleLogInModal}
+        handleViewSavedTrip={handleViewSavedTrip}
       />
       {mapLoaded ?
         <div className={styles.homePageWrapper}>
@@ -127,16 +132,17 @@ function App(props) {
               </>
             }} 
           />
-          {logInOpen && <Modal open={logInOpen} onClose={(e)=>{handleLogInModal()}}>
+          {logInOpen && <Modal open={logInOpen} onClose={(e)=>{handleLogInModal()}} className={styles.loginModal}>
             <LogIn 
               setCurrentUser={setCurrentUser} 
               setCurrentTripData={setCurrentTripData}
               handleLogInModal={handleLogInModal} 
               handleSignUpModal={handleSignUpModal}
+              setCurrentUserData={setCurrentUserData}
             />
             </Modal>}
           {signUpOpen &&
-          <Modal open={signUpOpen} onClose={(e)=>{handleSignUpModal()}}>
+          <Modal open={signUpOpen} onClose={(e)=>{handleSignUpModal()}} className={styles.loginModal}>
             <SignUp open={signUpOpen} 
               setCurrentUser={setCurrentUser} 
               handleLogInModal={handleLogInModal}

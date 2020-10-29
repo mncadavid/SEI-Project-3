@@ -78,11 +78,11 @@ const classStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         padding: '10px 10px'
     },
-    // loginModal: {
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center'
-    // },
+    loginModal: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     loginBox: {
         background: 'white',
         border: '1px solid black',
@@ -91,7 +91,8 @@ const classStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '20px'
+        padding: '20px',
+        width: '50%'
     },
     loginForm: {
         display: 'flex',

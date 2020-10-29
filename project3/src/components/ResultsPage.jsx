@@ -57,7 +57,8 @@ function ResultsPage(props){
     }
 
     const styles = classStyles();
-    console.log("Here")
+   
+
     return(
         <div className={styles.resultsPage}>
             <TripContainer 
