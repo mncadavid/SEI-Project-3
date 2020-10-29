@@ -41,7 +41,7 @@ Quarantine N'Dream serves as a trip planner where you can organize places you wo
 
 ## App Flowchart
 
-![Flowchart]()
+![Flowchart](https://i.imgur.com/D9uIfZH.jpg)
 
 ## Wireframes
 
@@ -53,5 +53,8 @@ Results Page:
 
 ## App Screenshots
 
-
+![Search Page](https://i.imgur.com/Kpp43IQ.png)
+![Log In](https://i.imgur.com/x2nLHMT.png)
+![Results Page](https://i.imgur.com/y22BL8O.png)
+![Detail Card](https://i.imgur.com/WhiXdH9.png)
 
