@@ -75,15 +75,20 @@ function App(props) {
     })
   }
 
-  const handleSaveData = (index) => {
+  const handleSaveData = (index,tripName) => {
+    console.log(tripName);
     if(currentUser !== null){
       const uid = firebase.auth().currentUser.uid;
       const cloudData = currentUserData ? currentUserData : [];
       if(cloudData[index]) {
-        cloudData[index].data = currentTripData;
+        cloudData[index] = {
+          tripId: cloudData[index].tripId,
+          tripName: tripName,
+          data: currentTripData
+        }
       } else {
         cloudData.push({
-          tripName: 'My trip',
+          tripName: tripName,
           tripId: index ? index : 0,
           data: currentTripData
         })
@@ -151,6 +156,7 @@ function App(props) {
                     currentUser={currentUser}
                     handleSaveData={handleSaveData}
                     currentUserTripIndex={currentUserTripIndex}
+                    currentUserData={currentUserData}
                   />
                 :
                   <Redirect to="/" />

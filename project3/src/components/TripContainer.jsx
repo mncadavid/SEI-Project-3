@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
-import { AppBar, Typography, Tabs, Tab, Box, Button } from '@material-ui/core';
+import { AppBar, Typography, Tabs, Tab, Box, Button, TextField } from '@material-ui/core';
 import classStyles from './Style/classStyle';
 import SaveIcon from '@material-ui/icons/Save';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
@@ -53,8 +53,10 @@ function TripContainer(props) {
         <Paper elevation={3} className={styles.tripPane}>
             <AppBar position='static' className={styles.tripAppBar}>
                 <Box className={styles.tripBarHeader}>
-                    <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
-                    <Button onClick={()=>props.handleSaveData(props.currentUserTripIndex)} color="secondary"><SaveIcon/></Button>
+                    <form>
+                        <TextField label='Trip Name' value={props.tripName} margin='none' onChange={(e)=>props.handleUpdateTripName(e.target.value)} color='secondary' />
+                    </form>
+                    <Button onClick={()=>props.handleSaveData(props.currentUserTripIndex,props.tripName)} color="secondary"><SaveIcon/></Button>
                     <Link to="/"><AddLocationIcon color="secondary"/></Link>
                 </Box>
                 <Tabs 

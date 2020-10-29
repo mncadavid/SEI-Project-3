@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link,useHistory} from 'react-router-dom';
 import classStyles from './Style/classStyle';
-import {Button, Typography, Toolbar, AppBar, IconButton, Box, Menu, MenuItem, Divider, Icon} from '@material-ui/core';
+import {Button, Typography, Toolbar, AppBar, IconButton, Box, Menu, MenuItem, Divider, Icon, Badge} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu'
 
 function Header(props){
@@ -47,14 +47,17 @@ function Header(props){
                             <Box className={classes.menuIconBox}>
                                 {props.currentUserData ? <>
                                     <IconButton 
-                                        edge="start" 
-                                        className={classes.menuButton} 
-                                        color="inherit" 
-                                        aria-label="menu"
-                                        onClick={(e)=>handleMenuClick(e)}
+                                    edge="start" 
+                                    className={classes.menuButton} 
+                                    color="inherit" 
+                                    aria-label="menu"
+                                    onClick={(e)=>handleMenuClick(e)}
                                     >
-                                        <MenuIcon />
+                                        <Badge badgeContent={props.currentUserData.length} color='secondary'>
+                                            <MenuIcon /> 
+                                        </Badge>
                                     </IconButton>
+                                   
                                     <Typography variant='h6'>My Saved Trips</Typography>
                                     <Menu
                                         id='menu'

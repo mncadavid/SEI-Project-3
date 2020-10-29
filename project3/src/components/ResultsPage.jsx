@@ -9,7 +9,13 @@ import { Backdrop } from '@material-ui/core';
 
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
+    const [tripName,setTripName] = useState(
+        props.currentUserData[props.currentUserTripIndex] ? props.currentUserData[props.currentUserTripIndex].tripName : 'My Trip'
+    )
 
+    const handleUpdateTripName = (name) => {
+        setTripName(name);
+    }
     // let currentSearchPlace = props.currentSearchPlace;
     // useEffect(() => {if(JSON.stringify(currentSearchPlace) === '{}' || currentLocationData.placeAddress !== props.currentSearchPlace.formatted_address){
     //     setCurrentLocationData(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
@@ -70,6 +76,8 @@ function ResultsPage(props){
                 currentLocationIndex={currentLocationIndex}
                 setCurrentLocationIndex={setCurrentLocationIndex}
                 currentUserTripIndex={props.currentUserTripIndex}
+                tripName={tripName}
+                handleUpdateTripName={handleUpdateTripName}
             />
             <ResultsContainer 
                 handleDetailsClick={handleDetailsClick} 
