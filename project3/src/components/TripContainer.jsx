@@ -30,7 +30,7 @@ function TripContainer(props) {
                 {...other}
             >
                 {value === index && (
-                    props.currentTripSelections[index].selections.map((place,id) => {
+                    props.currentTripData[index].selections.map((place,id) => {
                         return <SelectedPlaceCards 
                             place={place} 
                             key={id} 
@@ -42,10 +42,9 @@ function TripContainer(props) {
             </Box>
         )
     }
-    const [value,setValue] = useState(props.currentTripSelections.findIndex(location => location.placeAddress === props.currentSearchPlace.formatted_address));
 
     const handleChange = (event,value) => {
-        setValue(value);
+        props.setCurrentLocationIndex(value);
     }
 
     const styles = classStyles();
@@ -59,19 +58,19 @@ function TripContainer(props) {
                     <Link to="/"><AddLocationIcon color="secondary"/></Link>
                 </Box>
                 <Tabs 
-                    value={value} 
+                    value={props.currentLocationIndex} 
                     onChange={handleChange} 
                     aria-label='Trip tabs'
                     variant='scrollable'
                     scrollable='auto'
                 >
-                    {props.currentTripSelections.map((trip,index) => {
+                    {props.currentTripData.map((trip,index) => {
                         return <Tab key={index} label={trip.placeName} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
-            {props.currentTripSelections.map((trip,index) => {
-                return <TabPanel key={index} value={value} {...a11yProps(index)} index={index}/>
+            {props.currentTripData.map((trip,index) => {
+                return <TabPanel key={index} value={props.currentLocationIndex} {...a11yProps(index)} index={index}/>
             })}
         </Paper>
     )

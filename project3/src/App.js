@@ -14,11 +14,8 @@ import Modal from '@material-ui/core/Modal';
 import classStyles from './components/Style/classStyle';
 
 function App(props) {
-  const history = useHistory();
-  const [searchResults,setSearchResults] = useState({});
   const [mapLoaded,setMapLoaded] = useState(false);
-  const [currentTripSelections,setCurrentTripSelections] = useState([]);
-  const [currentSearchPlace,setCurrentSearchPlace] = useState({});
+  const [currentTripData,setCurrentTripData] = useState([])
   const [currentUser,setCurrentUser] = useState(null);
   const [logInOpen, setLogInOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
@@ -71,14 +68,14 @@ function App(props) {
     firebase.auth().signOut()
     .then(resp => {
       setCurrentUser(null);
-      setCurrentTripSelections([]);
+      setCurrentTripData([]);
     })
   }
 
   const handleSaveData = () => {
     if(currentUser !== null){
       const uid = firebase.auth().currentUser.uid;
-      firebase.database().ref('trips/'+uid).set(currentTripSelections)
+      firebase.database().ref('trips/'+uid).set(currentTripData)
     }
     else{
       setLogInOpen(true);
@@ -108,10 +105,8 @@ function App(props) {
             exact path='/' 
             render={()=>
               <SearchBar 
-                setSearchResults={setSearchResults}
-                setCurrentSearchPlace={setCurrentSearchPlace}
-                setCurrentTripSelections={setCurrentTripSelections}
-                currentTripSelections={currentTripSelections} 
+                currentTripData={currentTripData}
+                setCurrentTripData={setCurrentTripData}
               />
             } 
           />
@@ -119,12 +114,10 @@ function App(props) {
             path='/results' 
             render={()=> {
               return <>
-                {(Object.keys(searchResults).length !== 0 && searchResults !== null) ?
+                {currentTripData.length !== 0 ?
                   <ResultsPage 
-                    results={searchResults} 
-                    currentTripSelections={currentTripSelections} 
-                    setCurrentTripSelections={setCurrentTripSelections}
-                    currentSearchPlace={currentSearchPlace}
+                    currentTripData={currentTripData}
+                    setCurrentTripData={setCurrentTripData}
                     currentUser={currentUser}
                     handleSaveData={handleSaveData}
                   />
@@ -137,7 +130,7 @@ function App(props) {
           {logInOpen && <Modal open={logInOpen} onClose={(e)=>{handleLogInModal()}}>
             <LogIn 
               setCurrentUser={setCurrentUser} 
-              setCurrentTripSelections={setCurrentTripSelections}
+              setCurrentTripData={setCurrentTripData}
               handleLogInModal={handleLogInModal} 
               handleSignUpModal={handleSignUpModal}
             />

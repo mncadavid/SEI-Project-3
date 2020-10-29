@@ -100,15 +100,10 @@ const classStyles = makeStyles((theme) => ({
     },
     tripBarHeader: {
         display: 'flex',
-        justifyContent: 'space-between',
-        width: '80%',
+        justifyContent: 'space-around',
+        width: '100%',
         alignItems: 'center',
         paddingTop: '10px'
-    },
-    tripAppBar: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
     },
     formInput: {
         margin: '10px 0 !important',

@@ -42,28 +42,56 @@ function SearchBar(props) {
 
     const updateSearchResults = (results,status,type) => {
         const currentState = queriedSearchResults;
-        currentState[type] = results;
+        currentState[type] = results.map(result => {
+            return {
+                name: result.name,
+                place_id: result.place_id,
+                rating: result.rating,
+                price_level: result.price_level,
+                icon: result.icon,
+                lat: result.geometry.location.lat(),
+                lng: result.geometry.location.lng()
+            }
+        });
     
         setQueriedSearchResults(currentState);
     }
 
     const handleClick = (e) => {
         e.preventDefault();
+<<<<<<< HEAD
         props.setSearchResults(queriedSearchResults);
         if(props.currentTripSelections === null){
             props.setCurrentTripSelections([{placeName: place.name, placeAddress: place.formatted_address, selections: []}]);
         }
         else if(props.currentTripSelections.length === 0){
             props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.name, placeAddress: place.formatted_address, selections: []}])
+=======
+        if(props.currentTripData.length === 0){
+            const tripData = [];
+            tripData.push({
+                placeName: place.name,
+                placeAddress: place.formatted_address,
+                selections: [],
+                results: queriedSearchResults
+            })
+            props.setCurrentTripData(tripData)
+>>>>>>> origin/changingDataStructure
         }
         else{
-            if(props.currentTripSelections.some(selection => selection.placeAddress === place.formatted_address)){
+            if(props.currentTripData.some(selection => selection.placeAddress === place.formatted_address)){
             }
             else{
-                props.setCurrentTripSelections([...props.currentTripSelections,{placeName: place.name, placeAddress: place.formatted_address, selections: []}])
+                const tripData = props.currentTripData;
+                tripData.push({
+                    placeName: place.name,
+                    placeAddress: place.formatted_address,
+                    selections: [],
+                    results: queriedSearchResults
+                })
+                props.setCurrentTripData(tripData)
             }
         }
-        props.setCurrentSearchPlace(place);
         history.push('/results');
     }
     console.log(props.currentTripSelections);
