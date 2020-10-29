@@ -52,7 +52,12 @@ function ResultsPage(props){
 
     // Limits you from selected an already selected place
     const isDisabled = (place) => {
-        return props.currentTripData[currentLocationIndex].selections.some(location => location.place_id === place.place_id);
+        if (props.currentTripData[currentLocationIndex].selections) {
+            return props.currentTripData[currentLocationIndex].selections.some(location => location.place_id === place.place_id);
+        } else {
+            return false;
+        }
+        
     }
 
     const styles = classStyles();

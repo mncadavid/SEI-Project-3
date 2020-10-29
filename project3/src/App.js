@@ -67,8 +67,18 @@ function App(props) {
       firebase.initializeApp(firebaseConfig);
     }
 
-    setCurrentUser(firebase.auth().currentUser);
-  }, [mapLoaded])
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user) {
+        setCurrentUser(user);
+        handleFindUserData(user);
+      }
+    })
+  },[mapLoaded])
+
+  const handleFindUserData = (user) => {
+    firebase.database().ref('trips/'+user.uid).once('value')
+    .then(snapshot=>setCurrentUserData(snapshot.val()))
+  }
 
   const handleUpdateTripName = (name) => {
     setTripName(name);
@@ -126,7 +136,7 @@ function App(props) {
     if(currentUserData){
       setCurrentTripData(currentUserData[index].data);
       setCurrentUserTripIndex(index);
-      setTripName(currentUserData[currentUserTripIndex].tripName)
+      setTripName(currentUserData[index].tripName)
     }
     history.push("/results");
   }
