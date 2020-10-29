@@ -90,7 +90,7 @@ const classStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         padding: '20px',
-        width: '50%'
+        width: '40ch'
     },
     loginForm: {
         display: 'flex',
