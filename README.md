@@ -15,7 +15,7 @@ Quarantine N'Dream serves as a trip planner where you can organize places you wo
 
 ## Stretch Goals
 - [x] Implement Google Firebase
-- [ ] User can create multiple trips
+- [x ] User can create multiple trips
 - [x] User can create multi-location trips
 - [x] Implementing auth so there can be multiple users
 - [ ] Add more place types
