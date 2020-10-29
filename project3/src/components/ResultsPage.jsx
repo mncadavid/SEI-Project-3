@@ -11,13 +11,10 @@ function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
     const [currentLocationData, setCurrentLocationData] = useState(props.currentTripSelections[0]);
     const [currentLocationIndex, setCurrentLocationIndex] = useState(0);
-    console.log(props.currentTripSelections);
-    console.log(props.currentSearchPlace);
     let currentSearchPlace = props.currentSearchPlace;
     useEffect(() => {if(JSON.stringify(currentSearchPlace) === '{}' || currentLocationData.placeAddress !== props.currentSearchPlace.formatted_address){
         setCurrentLocationData(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
         setCurrentLocationIndex(props.currentTripSelections.indexOf(currentLocationData));
-        console.log("Inconditional")
     }
     })
     const handleDetailsClick = (place) => {
