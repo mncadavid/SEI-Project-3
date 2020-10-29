@@ -52,7 +52,7 @@ function TripContainer(props) {
 
     return(
         <Paper elevation={3} className={styles.tripPane}>
-            <AppBar position='sticky' className={styles.tripAppBar}>
+            <AppBar position='static' className={styles.tripAppBar}>
                 <Box className={styles.tripBarHeader}>
                     <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
                     <Button onClick={props.handleSaveData} color="secondary"><SaveIcon/></Button>
