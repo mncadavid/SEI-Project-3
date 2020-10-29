@@ -98,6 +98,7 @@ function SearchBar(props) {
                 type='text' 
                 id='searchBox'
                 name='searchCriteria'
+                autoFocus
                 />
                 <Button 
                     variant="contained" 
