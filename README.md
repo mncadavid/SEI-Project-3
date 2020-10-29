@@ -1,4 +1,4 @@
-# SEI-Project-3 - Quarantine N'Dream
+# SEI-Project-3 : Quarantine N'Dream
 
 ## App Idea
 Quarantine N'Dream serves as a trip planner where you can organize places you would like to visit on your next trip.  The user inputs the location of their next trip and our app will provide a list of resaurants, museums, and parks nearby that they could visit. The user can then add places to their trip.  Trips can also include multiple destinations.  Any visitor to the app can create a trip, but they must be signed in to save trips.  A authorized user can save trips for viewing at a later time.  They can also create multiple trips.
