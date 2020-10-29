@@ -12,10 +12,11 @@ import SignUp from './components/Auth/SignUp';
 import classStyles from './components/Style/classStyle';
 
 function App(props) {
-  const [searchResults,setSearchResults] = useState({});
+  // const [currentSearchResults,setCurrentSearchResults] = useState({});
   const [mapLoaded,setMapLoaded] = useState(false);
-  const [currentTripSelections,setCurrentTripSelections] = useState([]);
-  const [currentSearchPlace,setCurrentSearchPlace] = useState({});
+  // const [currentTripSelections,setCurrentTripSelections] = useState([]);
+  // const [currentSearchPlaces,setCurrentSearchPlaces] = useState({});
+  const [currentTripData,setCurrentTripData] = useState([])
   const [currentUser,setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -66,13 +67,13 @@ function App(props) {
     firebase.auth().signOut()
     .then(resp => {
       setCurrentUser(null);
-      setCurrentTripSelections([]);
+      setCurrentTripData([]);
     })
   }
 
   const handleSaveData = () => {
     const uid = firebase.auth().currentUser.uid;
-    firebase.database().ref('trips/'+uid).set(currentTripSelections)
+    firebase.database().ref('trips/'+uid).set(currentTripData)
   }
 
   const styles = classStyles();
@@ -89,10 +90,8 @@ function App(props) {
             exact path='/' 
             render={()=>
               <SearchBar 
-                setSearchResults={setSearchResults}
-                setCurrentSearchPlace={setCurrentSearchPlace}
-                setCurrentTripSelections={setCurrentTripSelections}
-                currentTripSelections={currentTripSelections} 
+                currentTripData={currentTripData}
+                setCurrentTripData={setCurrentTripData}
               />
             } 
           />
@@ -100,12 +99,10 @@ function App(props) {
             exact path='/results' 
             render={()=> {
               return <>
-                {Object.keys(searchResults).length !== 0 && searchResults !== null ?
+                {currentTripData.length !== 0 ?
                   <ResultsPage 
-                    results={searchResults} 
-                    currentTripSelections={currentTripSelections} 
-                    setCurrentTripSelections={setCurrentTripSelections}
-                    currentSearchPlace={currentSearchPlace}
+                    currentTripData={currentTripData}
+                    setCurrentTripData={setCurrentTripData}
                     handleSaveData={handleSaveData}
                   />
                 :
@@ -116,7 +113,11 @@ function App(props) {
           />
           <Route
             exact path='/login'
-            render={()=><LogIn setCurrentUser={setCurrentUser} setCurrentTripSelections={setCurrentTripSelections}/>}
+            render={()=>
+              <LogIn 
+                setCurrentUser={setCurrentUser} 
+                setCurrentTripData={setCurrentTripData}
+              />}
           />
           <Route
             exact path='/signup'

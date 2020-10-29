@@ -28,7 +28,7 @@ function TripContainer(props) {
                 {...other}
             >
                 {value === index && (
-                    props.currentTripSelections[index].selections.map((place,id) => {
+                    props.currentTripData[index].selections.map((place,id) => {
                         return <SelectedPlaceCards 
                             place={place} 
                             key={id} 
@@ -40,10 +40,9 @@ function TripContainer(props) {
             </Box>
         )
     }
-    const [value,setValue] = useState(props.currentTripSelections.findIndex(location => location.placeAddress === props.currentSearchPlace.formatted_address));
 
     const handleChange = (event,value) => {
-        setValue(value);
+        props.setCurrentLocationIndex(value);
     }
 
     const handleAdd = () => {
@@ -61,33 +60,20 @@ function TripContainer(props) {
                     <Button variant='contained' onClick={handleAdd}>Add A Destination</Button>
                 </Box>
                 <Tabs 
-                    value={value} 
+                    value={props.currentLocationIndex} 
                     onChange={handleChange} 
                     aria-label='Trip tabs'
                     variant='scrollable'
                     scrollable='auto'
                 >
-                    {props.currentTripSelections.map((trip,index) => {
+                    {props.currentTripData.map((trip,index) => {
                         return <Tab key={index} label={trip.placeName} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
-            {props.currentTripSelections.map((trip,index) => {
-                return <TabPanel key={index} value={value} {...a11yProps(index)} index={index}/>
+            {props.currentTripData.map((trip,index) => {
+                return <TabPanel key={index} value={props.currentLocationIndex} {...a11yProps(index)} index={index}/>
             })}
-                {/* <h3>Planned Trip</h3>
-                <div>
-                    {props.currentTripSelections.map((selection, id) => {
-                        return (
-                            <SelectedPlaceCards 
-                                selection={selection} 
-                                key={id} 
-                                handleRemove={handleRemove}
-                                handleDetailsClick={props.handleDetailsClick}
-                            />
-                        )
-                    })}
-                </div> */}
         </Paper>
     )
 }
