@@ -3,7 +3,10 @@ import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
 import { AppBar, Typography, Tabs, Tab, Box, Button } from '@material-ui/core';
 import classStyles from './Style/classStyle';
-import {useHistory} from 'react-router-dom';
+import SaveIcon from '@material-ui/icons/Save';
+import AddLocationIcon from '@material-ui/icons/AddLocation';
+import {Link} from 'react-router-dom';
+
 
 function a11yProps(index) {
     return {
@@ -13,7 +16,6 @@ function a11yProps(index) {
 }
 
 function TripContainer(props) {
-    const history = useHistory();
 
     const TabPanel = (tabProps) => {
         const { children, value, index, ...other} = tabProps;
@@ -28,7 +30,7 @@ function TripContainer(props) {
                 {...other}
             >
                 {value === index && (
-                    props.currentTripSelections[index].selections.map((place,id) => {
+                    props.currentTripData[index].selections.map((place,id) => {
                         return <SelectedPlaceCards 
                             place={place} 
                             key={id} 
@@ -40,54 +42,36 @@ function TripContainer(props) {
             </Box>
         )
     }
-    const [value,setValue] = useState(props.currentTripSelections.findIndex(location => location.placeAddress === props.currentSearchPlace.formatted_address));
 
     const handleChange = (event,value) => {
-        setValue(value);
-    }
-
-    const handleAdd = () => {
-        history.push('/')
+        props.setCurrentLocationIndex(value);
     }
 
     const styles = classStyles();
 
     return(
         <Paper elevation={3} className={styles.tripPane}>
-            <AppBar position='sticky' className={styles.tripAppBar}>
+            <AppBar position='static' className={styles.tripAppBar}>
                 <Box className={styles.tripBarHeader}>
                     <Typography variant='h6' className={styles.centerTitle}>My Trip</Typography>
-                    <Button variant='contained' onClick={props.handleSaveData}>Save Changes</Button>
-                    <Button variant='contained' onClick={handleAdd}>Add A Destination</Button>
+                    <Button onClick={props.handleSaveData} color="secondary"><SaveIcon/></Button>
+                    <Link to="/"><AddLocationIcon color="secondary"/></Link>
                 </Box>
                 <Tabs 
-                    value={value} 
+                    value={props.currentLocationIndex} 
                     onChange={handleChange} 
                     aria-label='Trip tabs'
                     variant='scrollable'
                     scrollable='auto'
                 >
-                    {props.currentTripSelections.map((trip,index) => {
+                    {props.currentTripData.map((trip,index) => {
                         return <Tab key={index} label={trip.placeName} {...a11yProps(index)} />
                     })}
                 </Tabs>
             </AppBar>
-            {props.currentTripSelections.map((trip,index) => {
-                return <TabPanel key={index} value={value} {...a11yProps(index)} index={index}/>
+            {props.currentTripData.map((trip,index) => {
+                return <TabPanel key={index} value={props.currentLocationIndex} {...a11yProps(index)} index={index}/>
             })}
-                {/* <h3>Planned Trip</h3>
-                <div>
-                    {props.currentTripSelections.map((selection, id) => {
-                        return (
-                            <SelectedPlaceCards 
-                                selection={selection} 
-                                key={id} 
-                                handleRemove={handleRemove}
-                                handleDetailsClick={props.handleDetailsClick}
-                            />
-                        )
-                    })}
-                </div> */}
         </Paper>
     )
 }

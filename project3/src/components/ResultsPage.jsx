@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
@@ -9,9 +9,16 @@ import { Backdrop } from '@material-ui/core';
 
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
-    const [currentLocationData,] = useState(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
-    const [currentLocationIndex,] = useState(props.currentTripSelections.indexOf(currentLocationData))
-    
+
+    // let currentSearchPlace = props.currentSearchPlace;
+    // useEffect(() => {if(JSON.stringify(currentSearchPlace) === '{}' || currentLocationData.placeAddress !== props.currentSearchPlace.formatted_address){
+    //     setCurrentLocationData(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
+    //     setCurrentLocationIndex(props.currentTripSelections.indexOf(currentLocationData));
+    // }
+    // })
+    const [currentLocationIndex,setCurrentLocationIndex] = useState(props.currentTripData.length-1)
+    // const [currentLocationData,] = useState(props.currentTripData[currentLocationIndex])
+
     const handleDetailsClick = (place) => {
         setDetails({clicked: true, place: place})
     }
@@ -22,51 +29,53 @@ function ResultsPage(props){
     }
 
     const handleAddToTrip = (place) => {
-        currentLocationData.selections.push({
+        props.currentTripData[currentLocationIndex].selections.push({
             name: place.name,
             place_id: place.place_id,
             icon: place.icon
         });
 
-        const allLocationData = props.currentTripSelections;
-        allLocationData[currentLocationIndex] = currentLocationData;
-        props.setCurrentTripSelections([...allLocationData])
+        const allLocationData = props.currentTripData;
+        allLocationData[currentLocationIndex] = props.currentTripData[currentLocationIndex];
+        props.setCurrentTripData([...allLocationData])
     }
 
     const handleRemoveFromTrip = (place) => {
-        props.currentTripSelections.forEach((trip,i) => {
+        props.currentTripData.forEach((trip,i) => {
             if(trip.selections.some(selection => selection.place_id === place.place_id)) {
                 const index = trip.selections.indexOf(place);
-                const modifiedSelections = props.currentTripSelections;
+                const modifiedSelections = props.currentTripData;
                 modifiedSelections[i].selections.splice(index,1);
-                props.setCurrentTripSelections([...modifiedSelections]);
+                props.setCurrentTripData([...modifiedSelections]);
                 return;
             }
         })
     }
 
     const isDisabled = (place) => {
-        return currentLocationData.selections.some(location => location.place_id === place.place_id);
+        return props.currentTripData[currentLocationIndex].selections.some(location => location.place_id === place.place_id);
     }
 
     const styles = classStyles();
+   
 
     return(
         <div className={styles.resultsPage}>
             <TripContainer 
-                currentTripSelections={props.currentTripSelections}
-                setCurrentTripSelections={props.setCurrentTripSelections}
+                currentTripData={props.currentTripData}
                 handleDetailsClick={handleDetailsClick}
                 handleRemoveFromTrip={handleRemoveFromTrip}
-                currentSearchPlace={props.currentSearchPlace}
+                currentUser={props.currentUser}
                 handleSaveData={props.handleSaveData}
+                currentLocationIndex={currentLocationIndex}
+                setCurrentLocationIndex={setCurrentLocationIndex}
             />
             <ResultsContainer 
                 handleDetailsClick={handleDetailsClick} 
-                results={props.results}
+                results={props.currentTripData[currentLocationIndex].results}
                 handleAddToTrip={handleAddToTrip}
                 isDisabled={isDisabled}
-                displayPlaceName={props.currentSearchPlace.name}
+                displayPlaceName={props.currentTripData[currentLocationIndex].name}
             />
             {details.clicked && 
                 <Modal open={details.clicked}

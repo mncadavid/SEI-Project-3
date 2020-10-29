@@ -1,23 +1,26 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
-import {Route, Redirect} from 'react-router-dom';
+import {Route, Redirect, useHistory} from 'react-router-dom';
 import Header from './components/Header';
 import ResultsPage from './components/ResultsPage';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import LogIn from './components/Auth/LogIn';
 import SignUp from './components/Auth/SignUp';
+import Modal from '@material-ui/core/Modal';
+
 
 // import Container from '@material-ui/core/Container';
 import classStyles from './components/Style/classStyle';
 
 function App(props) {
-  const [searchResults,setSearchResults] = useState({});
   const [mapLoaded,setMapLoaded] = useState(false);
-  const [currentTripSelections,setCurrentTripSelections] = useState([]);
-  const [currentSearchPlace,setCurrentSearchPlace] = useState({});
+  const [currentTripData,setCurrentTripData] = useState([])
   const [currentUser,setCurrentUser] = useState(null);
-
+  const [logInOpen, setLogInOpen] = useState(false);
+  const [signUpOpen, setSignUpOpen] = useState(false);
+  const [currentUserData, setCurrentUserData] = useState(null);
+  const history=useHistory();
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
 
@@ -66,22 +69,40 @@ function App(props) {
     firebase.auth().signOut()
     .then(resp => {
       setCurrentUser(null);
-      setCurrentTripSelections([]);
+      setCurrentTripData([]);
     })
   }
 
   const handleSaveData = () => {
-    const uid = firebase.auth().currentUser.uid;
-    firebase.database().ref('trips/'+uid).set(currentTripSelections)
+    if(currentUser !== null){
+      const uid = firebase.auth().currentUser.uid;
+      firebase.database().ref('trips/'+uid).set(currentTripData)
+    }
+    else{
+      setLogInOpen(true);
+    }
   }
 
+  const handleLogInModal = () => {
+    setLogInOpen(!logInOpen);
+  }
+  const handleSignUpModal = () => {
+    setSignUpOpen(!signUpOpen);
+  }
+  const handleViewSavedTrip = (e) => {
+    e.preventDefault();
+    if(currentUserData){
+    setCurrentTripData(currentUserData);}
+    history.push("/results");
+  }
   const styles = classStyles();
-
   return (
     <div className={styles.mainWrapper}>
       <Header 
         currentUser={currentUser} 
         handleLogout={handleLogout}
+        handleLogInModal={handleLogInModal}
+        handleViewSavedTrip={handleViewSavedTrip}
       />
       {mapLoaded ?
         <div className={styles.homePageWrapper}>
@@ -89,23 +110,20 @@ function App(props) {
             exact path='/' 
             render={()=>
               <SearchBar 
-                setSearchResults={setSearchResults}
-                setCurrentSearchPlace={setCurrentSearchPlace}
-                setCurrentTripSelections={setCurrentTripSelections}
-                currentTripSelections={currentTripSelections} 
+                currentTripData={currentTripData}
+                setCurrentTripData={setCurrentTripData}
               />
             } 
           />
           <Route 
-            exact path='/results' 
+            path='/results' 
             render={()=> {
               return <>
-                {Object.keys(searchResults).length !== 0 && searchResults !== null ?
+                {currentTripData.length !== 0 ?
                   <ResultsPage 
-                    results={searchResults} 
-                    currentTripSelections={currentTripSelections} 
-                    setCurrentTripSelections={setCurrentTripSelections}
-                    currentSearchPlace={currentSearchPlace}
+                    currentTripData={currentTripData}
+                    setCurrentTripData={setCurrentTripData}
+                    currentUser={currentUser}
                     handleSaveData={handleSaveData}
                   />
                 :
@@ -114,14 +132,24 @@ function App(props) {
               </>
             }} 
           />
-          <Route
-            exact path='/login'
-            render={()=><LogIn setCurrentUser={setCurrentUser} setCurrentTripSelections={setCurrentTripSelections}/>}
-          />
-          <Route
-            exact path='/signup'
-            render={()=><SignUp setCurrentUser={setCurrentUser}/>}
-          />
+          {logInOpen && <Modal open={logInOpen} onClose={(e)=>{handleLogInModal()}} className={styles.loginModal}>
+            <LogIn 
+              setCurrentUser={setCurrentUser} 
+              setCurrentTripData={setCurrentTripData}
+              handleLogInModal={handleLogInModal} 
+              handleSignUpModal={handleSignUpModal}
+              setCurrentUserData={setCurrentUserData}
+            />
+            </Modal>}
+          {signUpOpen &&
+          <Modal open={signUpOpen} onClose={(e)=>{handleSignUpModal()}} className={styles.loginModal}>
+            <SignUp open={signUpOpen} 
+              setCurrentUser={setCurrentUser} 
+              handleLogInModal={handleLogInModal}
+              handleSignUpModal={handleSignUpModal}
+            />
+          </Modal>
+          }
         </div>
       : 'Map API loading...' }
         <Footer />
