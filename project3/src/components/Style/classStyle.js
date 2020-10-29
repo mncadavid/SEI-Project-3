@@ -191,8 +191,11 @@ const classStyles = makeStyles((theme) => ({
     auth: {
         textDecoration: 'underline',
         cursor: 'pointer'
+    },
+    menuIconBox: {
+        display: 'flex',
+        alignItems: 'center'
     }
-
 }));
 
 export default classStyles;

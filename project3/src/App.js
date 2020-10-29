@@ -20,6 +20,9 @@ function App(props) {
   const [logInOpen, setLogInOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [currentUserData, setCurrentUserData] = useState(null);
+  const [currentUserTripIndex,setCurrentUserTripIndex] = useState(null);
+  const [tripName,setTripName] = useState('')
+
   const history=useHistory();
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -66,6 +69,10 @@ function App(props) {
     }
   })
 
+  const handleUpdateTripName = (name) => {
+    setTripName(name);
+  }
+
   // Handles logout function with firebase database
   const handleLogout = () => {
     firebase.auth().signOut()
@@ -76,10 +83,26 @@ function App(props) {
   }
 
   // Handles saving data for trip with firebase database
-  const handleSaveData = () => {
+  const handleSaveData = (index,tripName) => {
     if(currentUser !== null){
       const uid = firebase.auth().currentUser.uid;
-      firebase.database().ref('trips/'+uid).set(currentTripData)
+      const cloudData = currentUserData ? currentUserData : [];
+      if(cloudData[index]) {
+        cloudData[index] = {
+          tripId: cloudData[index].tripId,
+          tripName: tripName,
+          data: currentTripData
+        }
+      } else {
+        cloudData.push({
+          tripName: tripName,
+          tripId: cloudData.length,
+          data: currentTripData
+        })
+        setCurrentUserTripIndex(cloudData.length-1)
+      }
+      firebase.database().ref('trips/'+uid).set(cloudData)
+      setCurrentUserData(cloudData);
     }
     else{
       setLogInOpen(true);
@@ -97,12 +120,22 @@ function App(props) {
   }
 
   // Handles save trip for logged in users
-  const handleViewSavedTrip = (e) => {
+  const handleViewSavedTrip = (e,index) => {
     e.preventDefault();
     if(currentUserData){
-    setCurrentTripData(currentUserData);}
+      setCurrentTripData(currentUserData[index].data);
+      setCurrentUserTripIndex(index);
+      setTripName(currentUserData[currentUserTripIndex].tripName)
+    }
     history.push("/results");
   }
+
+  const resetForNewTrip = () => {
+    setCurrentTripData([]);
+    setCurrentUserTripIndex(currentUserTripIndex+1);
+    setTripName('');
+  }
+
   const styles = classStyles();
   return (
     <div className={styles.mainWrapper}>
@@ -111,6 +144,8 @@ function App(props) {
         handleLogout={handleLogout}
         handleLogInModal={handleLogInModal}
         handleViewSavedTrip={handleViewSavedTrip}
+        currentUserData={currentUserData}
+        resetForNewTrip={resetForNewTrip}
       />
       {mapLoaded ?
         <div className={styles.homePageWrapper}>
@@ -133,6 +168,10 @@ function App(props) {
                     setCurrentTripData={setCurrentTripData}
                     currentUser={currentUser}
                     handleSaveData={handleSaveData}
+                    currentUserTripIndex={currentUserTripIndex}
+                    currentUserData={currentUserData}
+                    tripName={tripName}
+                    handleUpdateTripName={handleUpdateTripName}
                   />
                 :
                   <Redirect to="/" />
