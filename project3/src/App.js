@@ -21,6 +21,7 @@ function App(props) {
   const [signUpOpen, setSignUpOpen] = useState(false);
   const [currentUserData, setCurrentUserData] = useState(null);
   const [currentUserTripIndex,setCurrentUserTripIndex] = useState(null);
+  const [tripName,setTripName] = useState('')
 
   const history=useHistory();
   useEffect(() => {
@@ -67,6 +68,10 @@ function App(props) {
     }
   })
 
+  const handleUpdateTripName = (name) => {
+    setTripName(name);
+  }
+
   const handleLogout = () => {
     firebase.auth().signOut()
     .then(resp => {
@@ -76,7 +81,7 @@ function App(props) {
   }
 
   const handleSaveData = (index,tripName) => {
-    console.log(tripName);
+    console.log(index);
     if(currentUser !== null){
       const uid = firebase.auth().currentUser.uid;
       const cloudData = currentUserData ? currentUserData : [];
@@ -89,9 +94,10 @@ function App(props) {
       } else {
         cloudData.push({
           tripName: tripName,
-          tripId: index ? index : 0,
+          tripId: cloudData.length,
           data: currentTripData
         })
+        setCurrentUserTripIndex(cloudData.length-1)
       }
       firebase.database().ref('trips/'+uid).set(cloudData)
       setCurrentUserData(cloudData);
@@ -114,6 +120,7 @@ function App(props) {
     if(currentUserData){
       setCurrentTripData(currentUserData[index].data);
       setCurrentUserTripIndex(index);
+      setTripName(currentUserData[currentUserTripIndex].tripName)
     }
     history.push("/results");
   }
@@ -121,6 +128,7 @@ function App(props) {
   const resetForNewTrip = () => {
     setCurrentTripData([]);
     setCurrentUserTripIndex(currentUserTripIndex+1);
+    setTripName('');
   }
 
   const styles = classStyles();
@@ -157,6 +165,8 @@ function App(props) {
                     handleSaveData={handleSaveData}
                     currentUserTripIndex={currentUserTripIndex}
                     currentUserData={currentUserData}
+                    tripName={tripName}
+                    handleUpdateTripName={handleUpdateTripName}
                   />
                 :
                   <Redirect to="/" />
