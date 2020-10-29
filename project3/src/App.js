@@ -9,8 +9,6 @@ import LogIn from './components/Auth/LogIn';
 import SignUp from './components/Auth/SignUp';
 import Modal from '@material-ui/core/Modal';
 
-
-// import Container from '@material-ui/core/Container';
 import classStyles from './components/Style/classStyle';
 
 function App(props) {
@@ -24,6 +22,7 @@ function App(props) {
   const [tripName,setTripName] = useState('')
 
   const history=useHistory();
+
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
 
@@ -67,7 +66,9 @@ function App(props) {
     if(!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-  })
+
+    setCurrentUser(firebase.auth().currentUser);
+  }, [mapLoaded])
 
   const handleUpdateTripName = (name) => {
     setTripName(name);

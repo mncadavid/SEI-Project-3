@@ -8,7 +8,7 @@ function Footer(){
     return(
         <footer className={classes.footer}>
                 <p>&#169;2020 Quarantine N' Dream</p>
-                <p>Cadavid Berns -- Martin -- Lagerhausen </p>
+                <p>Cadavid Berns | Martin | Lagerhausen </p>
                 <div>
 
                 {/* Fun easter eggs */}
