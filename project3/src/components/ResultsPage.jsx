@@ -70,6 +70,9 @@ function ResultsPage(props){
                 handleSaveData={props.handleSaveData}
                 currentLocationIndex={currentLocationIndex}
                 setCurrentLocationIndex={setCurrentLocationIndex}
+                currentUserTripIndex={props.currentUserTripIndex}
+                tripName={props.tripName}
+                handleUpdateTripName={props.handleUpdateTripName}
             />
             <ResultsContainer 
                 handleDetailsClick={handleDetailsClick} 
