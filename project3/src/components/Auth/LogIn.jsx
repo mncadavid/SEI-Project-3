@@ -44,8 +44,8 @@ function LogIn(props) {
                         variant='outlined' 
                         onChange={(e)=>handleChange(e)}
                         className={styles.formInput}
-                        error={!!errorMessage}
-                        helperText={errorMessage ? errorMessage : ''}
+                        error={!!errorMessage && errorMessage.toUpperCase().includes('user'.toUpperCase())}
+                        helperText={errorMessage && errorMessage.toUpperCase().includes('user'.toUpperCase()) ? errorMessage : ''}
                         autoFocus
                     />
                     <TextField 
@@ -57,8 +57,8 @@ function LogIn(props) {
                         type={values.showPassword ? 'text' : 'password'}
                         onChange={(e)=>handleChange(e)}
                         className={styles.formInput}
-                        error={!!errorMessage}
-                        helperText={errorMessage ? errorMessage : ''}
+                        error={!!errorMessage && errorMessage.toUpperCase().includes('password'.toUpperCase())}
+                        helperText={errorMessage && errorMessage.toUpperCase().includes('password'.toUpperCase()) ? errorMessage : ''}
                     />
                     <Button 
                         type='submit' 
