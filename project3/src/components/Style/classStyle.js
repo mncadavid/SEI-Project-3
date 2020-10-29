@@ -1,10 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-
+// Styles/Layouts used in the application
 const classStyles = makeStyles((theme) => ({
-    // root: {
-    //   flexGrow: 1
-    // },
+
     header: {
         display: 'flex',
         flexDirection: 'row',
@@ -128,14 +126,22 @@ const classStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '10px 25px',
-        backgroundColor: 'lightgrey'
+        color: 'white',
+        backgroundColor: theme.palette.secondary.main
     },
-    infoButton: {
+    issueButton: {
+        color: 'white',
+    },
+    infoButtonRemove: {
         display: 'flex',
         alignItems: 'center',
     },
+    infoButton:{
+        margin: '10px'
+    },
     placeName: {
-        margin: '5px'
+        margin: '5px',
+        textAlign: 'center'
     },
     conditionalContent: {
         display: 'flex',
@@ -172,7 +178,8 @@ const classStyles = makeStyles((theme) => ({
     },
     placeCard:{
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '10px'
     },
     placeCardInner: {
         width: '50%'
@@ -181,6 +188,10 @@ const classStyles = makeStyles((theme) => ({
         width: '15%',
         paddingLeft: '20px'
     },
+    auth: {
+        textDecoration: 'underline',
+        cursor: 'pointer'
+    }
 
 }));
 

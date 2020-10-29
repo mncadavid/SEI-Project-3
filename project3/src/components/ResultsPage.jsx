@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
@@ -7,27 +7,24 @@ import Fade from '@material-ui/core/Fade';
 import classStyles from './Style/classStyle';
 import { Backdrop } from '@material-ui/core';
 
+// This ResultsPage is the page of all 'truth'
+// A lot of functions and data get passed from this jsx file
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
-
-    // let currentSearchPlace = props.currentSearchPlace;
-    // useEffect(() => {if(JSON.stringify(currentSearchPlace) === '{}' || currentLocationData.placeAddress !== props.currentSearchPlace.formatted_address){
-    //     setCurrentLocationData(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
-    //     setCurrentLocationIndex(props.currentTripSelections.indexOf(currentLocationData));
-    // }
-    // })
     const [currentLocationIndex,setCurrentLocationIndex] = useState(props.currentTripData.length-1)
-    // const [currentLocationData,] = useState(props.currentTripData[currentLocationIndex])
 
+    // Opens more details on the clicked destination
     const handleDetailsClick = (place) => {
         setDetails({clicked: true, place: place})
     }
 
+    // Closes the more details on the clicked destination
     const closeDetailsCard = (e) => {
         e.preventDefault();
         setDetails({clicked: false, place: null});
     }
 
+    // Adds clicked destination to the planned trip container
     const handleAddToTrip = (place) => {
         props.currentTripData[currentLocationIndex].selections.push({
             name: place.name,
@@ -40,6 +37,7 @@ function ResultsPage(props){
         props.setCurrentTripData([...allLocationData])
     }
 
+    // Removes selected destination from planned trip container
     const handleRemoveFromTrip = (place) => {
         props.currentTripData.forEach((trip,i) => {
             if(trip.selections.some(selection => selection.place_id === place.place_id)) {
@@ -52,6 +50,7 @@ function ResultsPage(props){
         })
     }
 
+    // Limits you from selected an already selected place
     const isDisabled = (place) => {
         return props.currentTripData[currentLocationIndex].selections.some(location => location.place_id === place.place_id);
     }
@@ -60,6 +59,8 @@ function ResultsPage(props){
    
 
     return(
+        // Passing all of the data/functions thru to TripContainer/ResultsContainer
+
         <div className={styles.resultsPage}>
             <TripContainer 
                 currentTripData={props.currentTripData}
@@ -75,7 +76,7 @@ function ResultsPage(props){
                 results={props.currentTripData[currentLocationIndex].results}
                 handleAddToTrip={handleAddToTrip}
                 isDisabled={isDisabled}
-                displayPlaceName={props.currentTripData[currentLocationIndex].name}
+                displayPlaceName={props.currentTripData[currentLocationIndex].placeName}
             />
             {details.clicked && 
                 <Modal open={details.clicked}
