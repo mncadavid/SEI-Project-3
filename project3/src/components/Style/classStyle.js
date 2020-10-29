@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-
+// Styles/Layouts used in the application
 const classStyles = makeStyles((theme) => ({
-    
+
     header: {
         display: 'flex',
         flexDirection: 'row',
@@ -126,7 +126,12 @@ const classStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '10px 25px',
-        backgroundColor: 'lightgrey'
+        color: 'white',
+        backgroundColor: theme.palette.secondary.main
+    },
+    issueButton: {
+        textDecoration: 'none',
+        color: 'white'
     },
     infoButton: {
         display: 'flex',
