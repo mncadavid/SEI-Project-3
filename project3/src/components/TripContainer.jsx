@@ -6,6 +6,7 @@ import classStyles from './Style/classStyle';
 import SaveIcon from '@material-ui/icons/Save';
 import AddLocationIcon from '@material-ui/icons/AddLocation';
 import {Link} from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 function a11yProps(index) {
@@ -56,8 +57,8 @@ function TripContainer(props) {
                     <form>
                         <TextField label='Trip Name' value={props.tripName} margin='none' onChange={(e)=>props.handleUpdateTripName(e.target.value)} color='secondary' />
                     </form>
-                    <Button onClick={()=>props.handleSaveData(props.currentUserTripIndex,props.tripName)} color="secondary"><SaveIcon/></Button>
-                    <Link to="/"><AddLocationIcon color="secondary"/></Link>
+                    <Tooltip title="Save Trip" aria-label="save trip"><Button onClick={()=>props.handleSaveData(props.currentUserTripIndex,props.tripName)} color="secondary"><SaveIcon/></Button></Tooltip>
+                    <Tooltip title="Add a Location" aria-label="add a location"><Link to="/"><AddLocationIcon color="secondary"/></Link></Tooltip>
                 </Box>
                 <Tabs 
                     value={props.currentLocationIndex} 
