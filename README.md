@@ -39,6 +39,10 @@ Quarantine N'Dream serves as a trip planner where you can organize places you wo
 * Tricky method of making API calls
 * Understanding which data should be passed and where based on use case (e.g, authorized vs unauthorized user, new vs existing trip)
 
+## App Flowchart
+
+![Flowchart]()
+
 ## Wireframes
 
 Homepage:
