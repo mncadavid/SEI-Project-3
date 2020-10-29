@@ -18,6 +18,11 @@ function SignUp(props) {
     const addUser = (e) => {
         e.preventDefault();
 
+        if (values.password !== values.confirmPassword) {
+            setErrorMessage('Passwords must match');
+            return;
+        }
+
         /*global firebase*/
         firebase.auth().createUserWithEmailAndPassword(values.email,values.password)
         .then(resp =>{
@@ -53,8 +58,6 @@ function SignUp(props) {
                         variant='outlined'
                         onChange={(e)=>handleChange(e)}
                         className={styles.formInput}
-                        error={!!errorMessage}
-                        helperText={errorMessage ? errorMessage : ''}
                         autoFocus
                     />
                     <TextField 
@@ -65,8 +68,8 @@ function SignUp(props) {
                         variant='outlined' 
                         onChange={(e)=>handleChange(e)}
                         className={styles.formInput}
-                        error={!!errorMessage}
-                        helperText={errorMessage ? errorMessage : ''}
+                        error={!!errorMessage && errorMessage.toUpperCase().includes('email'.toUpperCase())}
+                        helperText={errorMessage && errorMessage.toUpperCase().includes('email'.toUpperCase()) ? errorMessage : ''}
                     />
                     <TextField 
                         id='passwordField' 
@@ -77,8 +80,8 @@ function SignUp(props) {
                         type={values.showPassword ? 'text' : 'password'}
                         onChange={(e)=>handleChange(e)}
                         className={styles.formInput}
-                        error={!!errorMessage}
-                        helperText={errorMessage ? errorMessage : ''}
+                        error={!!errorMessage && errorMessage.toUpperCase().includes('password'.toUpperCase())}
+                        helperText={errorMessage && errorMessage.toUpperCase().includes('password'.toUpperCase()) ? errorMessage : ''}
                     />
                     <TextField 
                         id='confirmPasswordField' 
@@ -89,8 +92,8 @@ function SignUp(props) {
                         type={values.showPassword ? 'text' : 'password'}
                         onChange={(e)=>handleChange(e)}
                         className={styles.formInput}
-                        error={!!errorMessage}
-                        helperText={errorMessage ? errorMessage : ''}
+                        error={!!errorMessage && errorMessage.toUpperCase().includes('password'.toUpperCase())}
+                        helperText={errorMessage && errorMessage.toUpperCase().includes('password'.toUpperCase()) ? errorMessage : ''}
                     />
                     <Button 
                         type='submit' 

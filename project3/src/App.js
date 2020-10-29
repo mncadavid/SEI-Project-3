@@ -12,6 +12,8 @@ import Modal from '@material-ui/core/Modal';
 import classStyles from './components/Style/classStyle';
 
 function App(props) {
+
+  // Lots of state variables to hold all the locally required data for the app to function. 
   const [mapLoaded,setMapLoaded] = useState(false);
   const [currentTripData,setCurrentTripData] = useState([])
   const [currentUser,setCurrentUser] = useState(null);
@@ -67,6 +69,7 @@ function App(props) {
       firebase.initializeApp(firebaseConfig);
     }
 
+    // Observer set on authentication. Serves to update the local state whenever there is a login/logout change in the auth server. Very useful. Much good.
     firebase.auth().onAuthStateChanged((user)=>{
       if(user) {
         setCurrentUser(user);
@@ -74,12 +77,15 @@ function App(props) {
       }
     })
   },[mapLoaded])
+  // mapLoaded dependency set in order to avoid running useEffect a billion times and make you pull out your RAM and use it to start a fire. 
 
+  // This function pings the firebase server and updates the local state with user data
   const handleFindUserData = (user) => {
     firebase.database().ref('trips/'+user.uid).once('value')
     .then(snapshot=>setCurrentUserData(snapshot.val()))
   }
 
+  // Keeping track of trip name
   const handleUpdateTripName = (name) => {
     setTripName(name);
   }
@@ -141,6 +147,7 @@ function App(props) {
     history.push("/results");
   }
 
+  // Resets local data to prep state for a new trip
   const resetForNewTrip = () => {
     setCurrentTripData([]);
     setCurrentUserTripIndex(currentUserTripIndex+1);
@@ -190,6 +197,7 @@ function App(props) {
               </>
             }} 
           />
+          {/* Only open the results page if there is data to display*/}
           {logInOpen && <Modal open={logInOpen} onClose={(e)=>{handleLogInModal()}} className={styles.loginModal}>
             <LogIn 
               setCurrentUser={setCurrentUser} 
