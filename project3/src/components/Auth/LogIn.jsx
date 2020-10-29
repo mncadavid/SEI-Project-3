@@ -1,6 +1,5 @@
-import { Box, Modal, TextField, Typography,Button } from '@material-ui/core';
+import { Box, TextField, Typography,Button } from '@material-ui/core';
 import React,{useState} from 'react';
-import { useHistory, Link } from 'react-router-dom';
 import classStyles from '../Style/classStyle';
 
 function LogIn(props) {
@@ -10,7 +9,6 @@ function LogIn(props) {
         showPassword: false
     })
     const [errorMessage,setErrorMessage] = useState(null);
-    const history = useHistory();
 
     const handleChange = (e) => {
         setValues({...values,[e.target.name]:e.target.value})
@@ -23,7 +21,7 @@ function LogIn(props) {
         .then(resp=>{
             setErrorMessage(null);
             props.setCurrentUser(resp.user)
-            const tripData = firebase.database().ref('trips/'+resp.user.uid).once('value')
+            firebase.database().ref('trips/'+resp.user.uid).once('value')
             .then(snapshot=>props.setCurrentUserData(snapshot.val()))
             props.handleLogInModal();
         })

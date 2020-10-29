@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import SelectedPlaceCards from './SelectedPlaceCards';
 import Paper from '@material-ui/core/Paper';
 import { AppBar, Typography, Tabs, Tab, Box, Button } from '@material-ui/core';

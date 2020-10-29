@@ -4,12 +4,12 @@ import Icon from '@material-ui/core/Icon';
 import Card from '@material-ui/core/Card';
 import classStyles from './Style/classStyle';
 
+// SelectedPlaceCards are displayed from within the TripContainer
 const SelectedPlaceCards = (props) => {
-    const styles = classStyles();
     const classes = classStyles();
 
     return(
-        <Card variant="outlined" className={styles.selectedPlaceCard}>
+        <Card variant="outlined" className={classes.selectedPlaceCard}>
 
             <img src={props.place.icon} alt='{props.place.name}' />
             <div className={classes.placeName}>

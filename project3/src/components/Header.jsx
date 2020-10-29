@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link,useHistory} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import classStyles from './Style/classStyle';
 
@@ -8,10 +8,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {Button} from '@material-ui/core';
 
-// This is the header where you are able to sign in/out, look at trips(if logged in), and return to the homepage
+// This is the header where you are able to sign in/out, 
+// look at trips(if logged in), and return to the homepage
 function Header(props){
     const classes = classStyles();
-    const history = useHistory();
 
     return(
         <div>
@@ -33,7 +33,7 @@ function Header(props){
                             <Button color="inherit" onClick={props.handleLogout}>Logout {props.currentUser.displayName}</Button>
                         </>
                     }   
-                    
+
                 </Toolbar>
             </AppBar>
         </div>
