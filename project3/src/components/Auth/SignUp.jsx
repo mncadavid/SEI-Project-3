@@ -1,10 +1,9 @@
-import { Box, Modal, TextField, Typography,Button } from '@material-ui/core';
+import { Box, TextField, Typography,Button } from '@material-ui/core';
 import React,{useState} from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import classStyles from '../Style/classStyle';
 
 function SignUp(props) {
-    const [open,setOpen] = useState(true)
     const [values,setValues] = useState({
         email: '',
         password: '',
@@ -18,11 +17,6 @@ function SignUp(props) {
     const handleChange = (e) => {
         setValues({...values,[e.target.name]:e.target.value})
     }
-
-    const handleClose = () => {
-        setOpen(false);
-        history.go(-2);
-    } 
 
     const addUser = (e) => {
         e.preventDefault();
@@ -38,7 +32,7 @@ function SignUp(props) {
             .catch(err=>console.log(err))
 
             props.setCurrentUser({...resp.user,displayName:values.displayName})
-            history.go(-2);
+            props.handleSignUpModal();
         })
         .catch(err=>{
             console.log(err);
@@ -49,11 +43,6 @@ function SignUp(props) {
     const styles = classStyles();
 
     return (
-        <Modal
-            open={open}
-            onClose={handleClose}
-            className={styles.loginModal}
-        >
             <Box className={styles.loginBox}>
                 <Box className={styles.loginHeader}>
                     <Typography variant='h5'>New User Signup</Typography>
@@ -113,9 +102,10 @@ function SignUp(props) {
                         className={styles.submitButton}
                     >Sign Up</Button>
                 </form>
-                <Link to='/login'>Already a user? Log in!</Link>
+                <a onClick={() => {props.handleSignUpModal();props.handleLogInModal()}}>
+                    Already a user? Log in!
+                </a>
             </Box>
-        </Modal>
     )
 }
 

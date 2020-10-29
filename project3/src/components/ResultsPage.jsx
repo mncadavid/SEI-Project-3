@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
@@ -9,10 +9,17 @@ import { Backdrop } from '@material-ui/core';
 
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
-    ///I think a conditional could go here to just choose the first saved location if they are logged in.
-    const [currentLocationData,] = useState(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
-    const [currentLocationIndex,] = useState(props.currentTripSelections.indexOf(currentLocationData))
-    
+    const [currentLocationData, setCurrentLocationData] = useState(props.currentTripSelections[0]);
+    const [currentLocationIndex, setCurrentLocationIndex] = useState(0);
+    console.log(props.currentTripSelections);
+    console.log(props.currentSearchPlace);
+    let currentSearchPlace = props.currentSearchPlace;
+    useEffect(() => {if(JSON.stringify(currentSearchPlace) === '{}' || currentLocationData.placeAddress !== props.currentSearchPlace.formatted_address){
+        setCurrentLocationData(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
+        setCurrentLocationIndex(props.currentTripSelections.indexOf(currentLocationData));
+        console.log("Inconditional")
+    }
+    })
     const handleDetailsClick = (place) => {
         setDetails({clicked: true, place: place})
     }
@@ -51,7 +58,7 @@ function ResultsPage(props){
     }
 
     const styles = classStyles();
-
+    console.log("Here")
     return(
         <div className={styles.resultsPage}>
             <TripContainer 

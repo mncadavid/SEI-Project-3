@@ -13,7 +13,7 @@ function Header(props){
     const history = useHistory();
 
     const handleClick = () => {
-        history.push('/login')
+        props.handleLogInModal();
     }
 
     return(

@@ -4,7 +4,6 @@ import { useHistory, Link } from 'react-router-dom';
 import classStyles from '../Style/classStyle';
 
 function LogIn(props) {
-    const [open,setOpen] = useState(true);
     const [values,setValues] = useState({
         email: '',
         password: '',
@@ -12,11 +11,6 @@ function LogIn(props) {
     })
     const [errorMessage,setErrorMessage] = useState(null);
     const history = useHistory();
-
-    const handleClose = () => {
-        setOpen(false);
-        history.goBack();
-    }   
 
     const handleChange = (e) => {
         setValues({...values,[e.target.name]:e.target.value})
@@ -31,8 +25,7 @@ function LogIn(props) {
             props.setCurrentUser(resp.user)
             const tripData = firebase.database().ref('trips/'+resp.user.uid).once('value')
             .then(snapshot=>props.setCurrentTripSelections(snapshot.val()))
-            handleClose();
-            history.push('/');
+            props.handleLogInModal();
         })
         .catch(err=>{
             setErrorMessage(err.message);
@@ -43,11 +36,6 @@ function LogIn(props) {
     const styles = classStyles();
 
     return (
-        <Modal
-            open={open}
-            onClose={handleClose}
-            className={styles.loginModal}
-        >
             <Box className={styles.loginBox}>
                 <Box className={styles.loginHeader}>
                     <Typography variant='h5'>User Login</Typography>
@@ -85,10 +73,13 @@ function LogIn(props) {
                     >Login</Button>
                 </form>
                 <Box>
-                    <Typography variant='body1'><Link to='/signup'>Not a user? Sign up here!</Link></Typography>
+                    <Typography variant='body1'>
+                        <a onClick={() => {props.handleLogInModal();props.handleSignUpModal()}}>
+                            Not a user? Sign up here!
+                        </a>
+                    </Typography>
                 </Box>
             </Box>
-        </Modal>
     )
 }
 

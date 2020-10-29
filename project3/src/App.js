@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import LogIn from './components/Auth/LogIn';
 import SignUp from './components/Auth/SignUp';
+import Modal from '@material-ui/core/Modal';
 
 
 // import Container from '@material-ui/core/Container';
@@ -19,6 +20,8 @@ function App(props) {
   const [currentTripSelections,setCurrentTripSelections] = useState([]);
   const [currentSearchPlace,setCurrentSearchPlace] = useState({});
   const [currentUser,setCurrentUser] = useState(null);
+  const [logInOpen, setLogInOpen] = useState(false);
+  const [signUpOpen, setSignUpOpen] = useState(false);
 
   useEffect(() => {
     const existingScript = document.querySelector('#googleMaps');
@@ -78,17 +81,26 @@ function App(props) {
       firebase.database().ref('trips/'+uid).set(currentTripSelections)
     }
     else{
-      history.push('/login');
+      setLogInOpen(true);
     }
   }
 
-  const styles = classStyles();
+  const handleLogInModal = () => {
+    setLogInOpen(!logInOpen);
+  }
+  const handleSignUpModal = () => {
+    setSignUpOpen(!signUpOpen);
+  }
 
+  const styles = classStyles();
+  console.log(Object.keys(searchResults).length);
+  console.log(currentSearchPlace);
   return (
     <div className={styles.mainWrapper}>
       <Header 
         currentUser={currentUser} 
         handleLogout={handleLogout}
+        handleLogInModal={handleLogInModal}
       />
       {mapLoaded ?
         <div className={styles.homePageWrapper}>
@@ -104,10 +116,10 @@ function App(props) {
             } 
           />
           <Route 
-            exact path='/results' 
+            path='/results' 
             render={()=> {
               return <>
-                {Object.keys(searchResults).length !== 0 && searchResults !== null ?
+                {(Object.keys(searchResults).length !== 0 && searchResults !== null) ?
                   <ResultsPage 
                     results={searchResults} 
                     currentTripSelections={currentTripSelections} 
@@ -122,14 +134,23 @@ function App(props) {
               </>
             }} 
           />
-          <Route
-            exact path='/login'
-            render={()=><LogIn setCurrentUser={setCurrentUser} setCurrentTripSelections={setCurrentTripSelections}/>}
-          />
-          <Route
-            exact path='/signup'
-            render={()=><SignUp setCurrentUser={setCurrentUser}/>}
-          />
+          {logInOpen && <Modal open={logInOpen} onClose={(e)=>{handleLogInModal()}}>
+            <LogIn 
+              setCurrentUser={setCurrentUser} 
+              setCurrentTripSelections={setCurrentTripSelections}
+              handleLogInModal={handleLogInModal} 
+              handleSignUpModal={handleSignUpModal}
+            />
+            </Modal>}
+          {signUpOpen &&
+          <Modal open={signUpOpen} onClose={(e)=>{handleSignUpModal()}}>
+            <SignUp open={signUpOpen} 
+              setCurrentUser={setCurrentUser} 
+              handleLogInModal={handleLogInModal}
+              handleSignUpModal={handleSignUpModal}
+            />
+          </Modal>
+          }
         </div>
       : 'Map API loading...' }
         <Footer />
