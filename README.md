@@ -10,7 +10,7 @@ Quarantine N'Dream serves as a trip planner where you can organize places you wo
 - [x] User can add/remove places in the trip
 - [x] User can select between restaurant, park and museum categories
 - [x] App deployed on Surge
-- [ ] Use React Router to move between Restaurant/Park/Museum displays
+- [x] Use React Router to move between pages
 
 
 ## Stretch Goals
