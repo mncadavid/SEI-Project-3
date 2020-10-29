@@ -15,8 +15,8 @@ const SelectedPlaceCards = (props) => {
             <div className={classes.placeName}>
                 <p>{props.place.name}</p>
             </div>
-            <div className={classes.infoButton}>
-                <Icon color="primary"
+            <div className={classes.infoButtonRemove}>
+                <Icon color="primary" className={classes.infoButton}
                     onClick={() => props.handleDetailsClick(props.place)}>zoom_in</Icon>
                 <Button onClick={props.handleRemoveFromTrip} variant="contained" color="primary">Remove</Button>
             </div>

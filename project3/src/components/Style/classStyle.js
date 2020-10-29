@@ -132,12 +132,16 @@ const classStyles = makeStyles((theme) => ({
     issueButton: {
         color: 'white',
     },
-    infoButton: {
+    infoButtonRemove: {
         display: 'flex',
         alignItems: 'center',
     },
+    infoButton:{
+        margin: '10px'
+    },
     placeName: {
-        margin: '5px'
+        margin: '5px',
+        textAlign: 'center'
     },
     conditionalContent: {
         display: 'flex',
@@ -174,7 +178,8 @@ const classStyles = makeStyles((theme) => ({
     },
     placeCard:{
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '10px'
     },
     placeCardInner: {
         width: '50%'
