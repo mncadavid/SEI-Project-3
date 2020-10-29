@@ -1,6 +1,6 @@
-import { Box, TextField, Typography,Button } from '@material-ui/core';
+import { Box, Modal, TextField, Typography,Button } from '@material-ui/core';
 import React,{useState} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import classStyles from '../Style/classStyle';
 
 function LogIn(props) {

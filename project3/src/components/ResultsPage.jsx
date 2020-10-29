@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
@@ -8,7 +8,6 @@ import classStyles from './Style/classStyle';
 import { Backdrop } from '@material-ui/core';
 
 function ResultsPage(props){
-
     const [details, setDetails] = useState({clicked: false, place: null});
     const [currentLocationIndex,setCurrentLocationIndex] = useState(props.currentTripData.length-1)
 
