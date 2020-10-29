@@ -130,8 +130,7 @@ const classStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main
     },
     issueButton: {
-        textDecoration: 'none',
-        color: 'white'
+        color: 'white',
     },
     infoButton: {
         display: 'flex',
@@ -184,6 +183,10 @@ const classStyles = makeStyles((theme) => ({
         width: '15%',
         paddingLeft: '20px'
     },
+    auth: {
+        textDecoration: 'underline',
+        cursor: 'pointer'
+    }
 
 }));
 

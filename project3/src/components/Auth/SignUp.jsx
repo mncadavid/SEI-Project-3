@@ -99,9 +99,9 @@ function SignUp(props) {
                         className={styles.submitButton}
                     >Sign Up</Button>
                 </form>
-                <a onClick={() => {props.handleSignUpModal();props.handleLogInModal()}}>
+                <p className={styles.auth} onClick={() => {props.handleSignUpModal();props.handleLogInModal()}}>
                     Already a user? Log in!
-                </a>
+                </p>
             </Box>
     )
 }

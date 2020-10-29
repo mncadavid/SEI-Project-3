@@ -8,7 +8,7 @@ import classStyles from './Style/classStyle';
 import { Backdrop } from '@material-ui/core';
 
 // This ResultsPage is the page of all 'truth'
-// A lot of functions and data get passed thru this jsx file
+// A lot of functions and data get passed from this jsx file
 function ResultsPage(props){
     const [details, setDetails] = useState({clicked: false, place: null});
     const [currentLocationIndex,setCurrentLocationIndex] = useState(props.currentTripData.length-1)
@@ -49,7 +49,7 @@ function ResultsPage(props){
             }
         })
     }
-    
+
     // Limits you from selected an already selected place
     const isDisabled = (place) => {
         return props.currentTripData[currentLocationIndex].selections.some(location => location.place_id === place.place_id);

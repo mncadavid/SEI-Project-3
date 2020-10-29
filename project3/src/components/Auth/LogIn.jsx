@@ -71,10 +71,8 @@ function LogIn(props) {
                     >Login</Button>
                 </form>
                 <Box>
-                    <Typography variant='body1'>
-                        <a onClick={() => {props.handleLogInModal();props.handleSignUpModal()}}>
+                    <Typography variant='body1' className={styles.auth} onClick={() => {props.handleLogInModal();props.handleSignUpModal()}}>
                             Not a user? Sign up here!
-                        </a>
                     </Typography>
                 </Box>
             </Box>
