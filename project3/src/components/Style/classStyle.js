@@ -2,9 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const classStyles = makeStyles((theme) => ({
-    // root: {
-    //   flexGrow: 1
-    // },
+    
     header: {
         display: 'flex',
         flexDirection: 'row',

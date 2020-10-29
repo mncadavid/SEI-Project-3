@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import ResultsContainer from './ResultsContainer';
 import DetailedPlaceCard from './DetailedPlaceCard';
 import TripContainer from './TripContainer';
@@ -8,16 +8,9 @@ import classStyles from './Style/classStyle';
 import { Backdrop } from '@material-ui/core';
 
 function ResultsPage(props){
-    const [details, setDetails] = useState({clicked: false, place: null});
 
-    // let currentSearchPlace = props.currentSearchPlace;
-    // useEffect(() => {if(JSON.stringify(currentSearchPlace) === '{}' || currentLocationData.placeAddress !== props.currentSearchPlace.formatted_address){
-    //     setCurrentLocationData(props.currentTripSelections.find(location => location.placeAddress === props.currentSearchPlace.formatted_address))
-    //     setCurrentLocationIndex(props.currentTripSelections.indexOf(currentLocationData));
-    // }
-    // })
+    const [details, setDetails] = useState({clicked: false, place: null});
     const [currentLocationIndex,setCurrentLocationIndex] = useState(props.currentTripData.length-1)
-    // const [currentLocationData,] = useState(props.currentTripData[currentLocationIndex])
 
     const handleDetailsClick = (place) => {
         setDetails({clicked: true, place: place})
