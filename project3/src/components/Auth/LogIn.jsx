@@ -20,9 +20,6 @@ function LogIn(props) {
         firebase.auth().signInWithEmailAndPassword(values.email,values.password)
         .then(resp=>{
             setErrorMessage(null);
-            props.setCurrentUser(resp.user)
-            firebase.database().ref('trips/'+resp.user.uid).once('value')
-            .then(snapshot=>props.setCurrentUserData(snapshot.val()))
             props.handleLogInModal();
         })
         .catch(err=>{

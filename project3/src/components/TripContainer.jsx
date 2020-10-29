@@ -29,7 +29,7 @@ function TripContainer(props) {
                 aria-labelledby={`simple-tab-${index}`}
                 {...other}
             >
-                {value === index && (
+                {(value === index && props.currentTripData[index].selections) && (
                     props.currentTripData[index].selections.map((place,id) => {
                         return <SelectedPlaceCards 
                             place={place} 
