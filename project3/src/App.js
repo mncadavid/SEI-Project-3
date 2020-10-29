@@ -47,6 +47,7 @@ function App(props) {
       }
     }
 
+    // Firebase data
     var firebaseConfig = {
       apiKey: process.env.REACT_APP_API_KEY,
       authDomain: "sei-project-3-293415.firebaseapp.com",
@@ -65,6 +66,7 @@ function App(props) {
     }
   })
 
+  // Handles logout function with firebase database
   const handleLogout = () => {
     firebase.auth().signOut()
     .then(resp => {
@@ -73,6 +75,7 @@ function App(props) {
     })
   }
 
+  // Handles saving data for trip with firebase database
   const handleSaveData = () => {
     if(currentUser !== null){
       const uid = firebase.auth().currentUser.uid;
@@ -83,12 +86,17 @@ function App(props) {
     }
   }
 
+  // Handles log in propmt page
   const handleLogInModal = () => {
     setLogInOpen(!logInOpen);
   }
+
+  // Handles sign up prompt page
   const handleSignUpModal = () => {
     setSignUpOpen(!signUpOpen);
   }
+
+  // Handles save trip for logged in users
   const handleViewSavedTrip = (e) => {
     e.preventDefault();
     if(currentUserData){
